@@ -9,12 +9,14 @@ module.exports = {
   theme: {
     container: {
       center: true,
+      padding: {
+        DEFAULT: "1.5rem",
+      },
     },
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      boxShadow: {
+        innerShadowDark: "inset 0px 0px 0px 1px rgb(39,39,42)",
+        innerShadowLight: "inset 0px 0px 0px 1px rgb(229, 229, 229)",
       },
     },
   },
