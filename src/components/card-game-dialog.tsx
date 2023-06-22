@@ -1,4 +1,8 @@
 import { Game } from "@/types";
+import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Button, buttonsVariants } from "./shared/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -7,9 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./shared/ui/dialog";
-import { ArrowUpRight } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 
 type CardGameDialogProps = Game;
 
@@ -27,14 +28,10 @@ export function CardGameDialog({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button
-          type="button"
-          aria-label={`view details for game ${title}`}
-          className="focus-state z-10 flex h-10 w-fit items-center gap-2 rounded-lg bg-neutral-100 px-4 py-2 text-sm font-medium text-neutral-900 shadow-innerShadowLight ring-amber-500 ring-offset-neutral-300 transition-colors hover:bg-neutral-100 dark:bg-neutral-950 dark:text-neutral-100 dark:shadow-innerShadowDark dark:ring-offset-neutral-900 dark:hover:bg-neutral-800"
-        >
+        <Button aria-label={`view details for game ${title}`}>
           view details
           <ArrowUpRight size={18} />
-        </button>
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="w-full p-0 lg:max-w-[800px]">
@@ -50,10 +47,14 @@ export function CardGameDialog({
         </div>
 
         <div className="px-6 pb-6 pt-2">
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-col items-start justify-between gap-4">
             <DialogHeader>
               <DialogTitle className="inline text-start">
-                <Link target="_blank" href={game_url} className="underline">
+                <Link
+                  target="_blank"
+                  href={game_url}
+                  className="hover:underline focus-visible:underline focus-visible:outline-none"
+                >
                   {title}
                 </Link>
               </DialogTitle>
@@ -63,7 +64,7 @@ export function CardGameDialog({
             </DialogHeader>
 
             <Link
-              className="focus-state z-50 flex h-10 w-fit shrink-0 items-center gap-2 rounded-lg bg-neutral-100 px-4 py-2 text-sm font-medium text-neutral-900 shadow-innerShadowLight ring-amber-500 ring-offset-neutral-300 transition-colors hover:bg-neutral-100 dark:bg-neutral-950 dark:text-neutral-100 dark:shadow-innerShadowDark dark:ring-offset-neutral-900 dark:hover:bg-neutral-900"
+              className={buttonsVariants({ variant: "neutral" })}
               href={freetogame_profile_url}
             >
               Get all infos
@@ -73,25 +74,23 @@ export function CardGameDialog({
 
           <div className="mt-8 grid grid-flow-row place-items-start items-center gap-3 last:flex-auto md:gap-3 lg:grid-flow-col">
             <div className="flex items-center justify-between gap-3 text-sm font-medium dark:text-white">
-              <span className="inline-block rounded-md bg-green-200 px-4 py-2 text-neutral-900 dark:bg-green-600 dark:text-white">
+              <Button variant="green" size="md">
                 Available for
-              </span>
+              </Button>
               <span className="flex-1 text-right">{platform}</span>
             </div>
 
             <div className="flex items-center justify-between gap-3 text-sm font-medium dark:text-white">
-              <span className="inline-block rounded-md bg-blue-500 px-4 py-2 text-white dark:bg-blue-600">
-                Release
-              </span>
+              <Button variant="blue">Release</Button>
               <span className="flex-1 text-right text-neutral-900 dark:text-neutral-100">
                 {release_date}
               </span>
             </div>
 
             <div className="flex items-center justify-between gap-3 text-sm font-medium dark:text-white">
-              <span className="inline-block rounded-md bg-red-500 px-4 py-2 text-white dark:bg-red-600">
+              <Button variant="red" size="md">
                 Genre
-              </span>
+              </Button>
               <span className="flex-1 text-right text-neutral-900 dark:text-neutral-100">
                 {genre}
               </span>
