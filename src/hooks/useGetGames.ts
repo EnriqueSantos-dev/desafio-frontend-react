@@ -8,5 +8,6 @@ export const useGetGames = (): UseQueryResult<Games, ApiError> => {
     queryKey: ["games"] as const,
     queryFn: getAllGames,
     retry: false,
+    refetchOnWindowFocus: false,
   });
 };
