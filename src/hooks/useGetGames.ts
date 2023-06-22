@@ -9,5 +9,6 @@ export const useGetGames = (): UseQueryResult<Games, ApiError> => {
     queryFn: getAllGames,
     retry: false,
     refetchOnWindowFocus: false,
+    staleTime: Infinity, // cache forever
   });
 };
