@@ -50,7 +50,10 @@ export function ContainerInputs() {
 
   return (
     <div className="container border-b border-neutral-200 py-3 dark:border-neutral-800">
-      <form className="flex items-end gap-3 lg:w-2/4" onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col items-end gap-3 md:flex-row lg:w-2/4"
+        onSubmit={handleSubmit}
+      >
         <fieldset className="flex w-full flex-col gap-2">
           <label
             htmlFor="search"
@@ -76,7 +79,10 @@ export function ContainerInputs() {
             defaultValue={defaultGenreValue}
             onValueChange={(value) => handleChangeValue("genre", value)}
           >
-            <SelectTrigger className="w-52" disabled={isDisableSelectGenre}>
+            <SelectTrigger
+              className="w-full md:w-72"
+              disabled={isDisableSelectGenre}
+            >
               <SelectValue placeholder="Select a genre" />
 
               <SelectIcon asChild>

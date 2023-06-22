@@ -1,8 +1,7 @@
 "use client";
 
-import useTheme from "@/hooks/useTheme";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Fragment, ReactNode } from "react";
+import { ReactNode } from "react";
 import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient();
