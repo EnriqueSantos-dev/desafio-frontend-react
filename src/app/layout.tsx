@@ -4,18 +4,12 @@ import { socialLinks } from "@/constants/links";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { seoConfig } from "@/config/site";
 
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
 export const metadata: Metadata = {
-  title: "Teste Frontend - Vaga React",
-  description:
-    "Teste para vaga de estágio em desenvolvimento frontend com ReactJS/NextJS.",
-  authors: {
-    name: "Enrique Santos de Oliveira",
-    url: socialLinks.github,
-  },
-  robots: "index, follow",
+  ...seoConfig,
 };
 
 export default function RootLayout({
