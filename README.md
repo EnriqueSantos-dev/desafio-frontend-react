@@ -35,3 +35,15 @@ Todo o projeto foi feito na versão mais atual do NextJS, usando o App Router e 
 - Otimização com o Memo do React e gerenciamento de estados através da url.
 - Interceptando requests e padronizando mensagens de erro com os interceptors do Axios.
 - Derived states: aproveitando o benefício do re-render do react para criar variáveis que derivam de estados.
+
+## Screenshots do projeto
+
+Dark mode desktop:
+
+![dsf-1-dark-mode](https://github.com/EnriqueSantos-dev/desafio-frontend-react/assets/97238331/1d26a165-e5b9-46b4-9c59-b1f8730db41e)
+
+Dark mode mobile:
+
+![dsf-2-dark-mode](https://github.com/EnriqueSantos-dev/desafio-frontend-react/assets/97238331/6cd1f44e-48a7-43a2-9324-a67b9d431786)
+
+
