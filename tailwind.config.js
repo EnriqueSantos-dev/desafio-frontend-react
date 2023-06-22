@@ -15,7 +15,7 @@ module.exports = {
     },
     extend: {
       boxShadow: {
-        innerShadowDark: "inset 0px 0px 0px 1px rgb(39,39,42)",
+        innerShadowDark: "inset 0px 0px 0px 1px rgb(28,28,28)",
         innerShadowLight: "inset 0px 0px 0px 1px rgb(229, 229, 229)",
       },
     },
