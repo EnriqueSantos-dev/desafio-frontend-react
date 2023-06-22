@@ -1,34 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Projeto de Estágio Frontend React
 
-## Getting Started
+Completei o desafio concluindo todos os requisitos funcionais, porém eu fui além e adicionei mais recursos e funcionalidades no sistema, abaixo estão os requisitos funcionais que eu completei e em seguida a demo do projeto e as novas funcionalidades.
 
-First, run the development server:
+## Link para acessar o projeto hospedado na vercel
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+[https://desafio-frontend-react.vercel.app/](https://desafio-frontend-react.vercel.app)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Requisitos funcionais
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [✅] O projeto deve ser feito usando React ou Next.JS
+- [✅] Obter a lista de jogos em `/data`
+- [✅] Apresentar um loader enquanto os dados são obtidos
+- [✅] Apresentar os jogos em três colunas (no computador)
+- [✅] Em cada card apresentar o título e imagem pelo ao menos
+- [✅] Lidar com a responsividade, para que fique bem apresentado no computador, tablets ou celular
+- [✅] Quando a API retornar o `status code` 500, 502, 503, 504, 507, 508 ou 509 apresentar ao usuário `O servidor fahou em responder, tente recarregar a página`
+- [✅] Caso a API retorne outros erros, apresentar `O servidor não conseguirá responder por agora, tente voltar novamente mais tarde`
+- [✅] Ao realizar uma chamada, não esperar mais que 5 segundos pelo retorno. Se os dados demorarem mais de 5 segundos para retornar apresentar `O servidor demorou para responder, tente mais tarde`
+- [✅] Sempre que apresentar uma mensagem para o usuário, ou tiver os dados em mãos para apresentar, ocultar o loader
+- [✅] Incluir um campo de busca, que permite localizar jogos pelo título, com busca case insensitive
+- [✅] Uma vez que tenha os dados em mãos, veja quais `genre` foram retornados e permita ao usuário selecionar um deles, e então filtre para exibir apenas jogos do gênero selecionado
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Framework e linguagem usados
 
-## Learn More
+Todo o projeto foi feito na versão mais atual do NextJS, usando o App Router e usando sempre Typescript para manter o código mais conciso e sujeito a menos bugs no decorrer do desenvolvimento.
 
-To learn more about Next.js, take a look at the following resources:
+## Diferencias e recursos adicionais do projeto.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Suporte a dark mode
+- Busca de dados com React-Query
+- Custom Hooks
+- Acessibilidade com Radix-ui
+- SEO com o NextJS
+- Otimização com o Memo do React e gerenciamento de estados através da url.
+- Interceptando requests e padronizando mensagens de erro com os interceptors do Axios.
+- Derived states: aproveitando o benefício do re-render do react para criar variáveis que derivam de estados.
