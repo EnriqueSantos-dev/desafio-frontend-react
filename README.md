@@ -27,14 +27,14 @@ Todo o projeto foi feito na versão mais atual do NextJS, usando o App Router e 
 
 ## Diferencias e recursos adicionais do projeto.
 
-- Suporte a dark mode
-- Busca de dados com React-Query
-- Custom Hooks
-- Acessibilidade com Radix-ui
-- SEO com o NextJS
-- Otimização com o Memo do React e gerenciamento de estados através da url.
-- Interceptando requests e padronizando mensagens de erro com os interceptors do Axios.
-- Derived states: aproveitando o benefício do re-render do react para criar variáveis que derivam de estados.
+- [✅] Suporte a dark mode
+- [✅] Busca de dados com React-Query
+- [✅] Custom Hooks
+- [✅] Acessibilidade com Radix-ui
+- [✅] SEO com o NextJS
+- [✅] Otimização com o Memo do React e gerenciamento de estados através da url.
+- [✅] Interceptando requests e padronizando mensagens de erro com os interceptors do Axios.
+- [✅] Derived states: aproveitando o benefício do re-render do react para criar variáveis que derivam de estados.
 
 ## Screenshots do projeto
 
@@ -45,5 +45,3 @@ Dark mode desktop:
 Dark mode mobile:
 
 ![dsf-2-dark-mode](https://github.com/EnriqueSantos-dev/desafio-frontend-react/assets/97238331/6cd1f44e-48a7-43a2-9324-a67b9d431786)
-
-
