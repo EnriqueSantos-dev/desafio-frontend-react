@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .focus-state {
+    @apply focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-2;
+  }
+}
