@@ -23,30 +23,31 @@ export const seoConfig: Metadata = {
     "challenge",
   ],
   openGraph: {
-    url: "https://desafio-frontend-react.vercel.app/",
+    type: "website",
+    url: "https://desafio-frontend-react.vercel.app",
     title: "Challenge Frontend React - Enrique Santos",
+    siteName: "Pick Your Game",
     description:
       "Pick your favorite movie, filter results and see details and more...",
     images: [
       {
         url: "https://desafio-frontend-react.vercel.app/facebook-img.png",
-        alt: "Challenge Frontend React - Enrique Santos - Facebook Image",
+        width: 1200,
+        height: 630,
+        alt: "Pick Your Game",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    site: "https://desafio-frontend-react.vercel.app",
     creator: "@Enrique_S_D_O",
-    creatorId: "https://twitter.com/Enrique_S_D_O",
-    siteId: "https://twitter.com/Enrique_S_D_O",
     title: "Challenge Frontend React - Enrique Santos",
     description:
       "Pick your favorite movie, filter results and see details and more...",
     images: [
       {
-        url: "https://desafio-frontend-react.vercel.app/images/twitter-image.png",
-        alt: "Challenge Frontend React - Enrique Santos - Twitter Image",
+        url: "https://desafio-frontend-react.vercel.app/twitter-image.png",
+        alt: "Pick Your Game",
       },
     ],
   },
