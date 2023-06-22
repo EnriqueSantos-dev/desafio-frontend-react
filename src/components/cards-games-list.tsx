@@ -47,7 +47,7 @@ export function CardsGamesList() {
 
   return (
     <section>
-      <div className="xs:grid-cols-1 grid items-stretch justify-center gap-4 sm:grid-cols-[80%] md:grid-cols-2 lg:grid-cols-[repeat(3,minmax(200px,380px))]">
+      <div className="grid grid-cols-1 items-stretch justify-center gap-4 sm:grid-cols-[80%] md:grid-cols-2 lg:grid-cols-[repeat(3,minmax(200px,380px))]">
         {!error &&
           filteredGames &&
           filteredGames.map((game) => <CardGame key={game.id} {...game} />)}
