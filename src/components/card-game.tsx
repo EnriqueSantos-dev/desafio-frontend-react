@@ -2,6 +2,7 @@ import { Game } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
+import { CardGameDialog } from "./card-game-dialog";
 
 type CardGameProps = Game;
 
@@ -12,6 +13,7 @@ export function CardGameComponent({
   game_url,
   short_description,
   platform,
+  ...props
 }: CardGameProps) {
   return (
     <div className="grid grid-flow-row gap-4 overflow-hidden rounded-xl border-2 border-neutral-200 dark:border-neutral-800">
@@ -27,10 +29,20 @@ export function CardGameComponent({
       </div>
 
       <div className="flex h-max flex-col px-4 pb-4">
-        <div className="border-b border-neutral-200 py-1 dark:border-neutral-800">
-          <h2 className="line-clamp-1 inline-block text-ellipsis text-lg font-bold text-neutral-900 hover:underline dark:text-neutral-100">
+        <div className="flex flex-col justify-between gap-2 border-b border-neutral-200 pb-2 pt-1 dark:border-neutral-800">
+          <h2 className="line-clamp-1 text-ellipsis text-lg font-bold text-neutral-900 hover:underline dark:text-neutral-100">
             <Link href={game_url}>{title}</Link>
           </h2>
+
+          <CardGameDialog
+            {...props}
+            thumbnail={thumbnail}
+            short_description={short_description}
+            title={title}
+            release_date={release_date}
+            game_url={game_url}
+            platform={platform}
+          />
         </div>
 
         <p
