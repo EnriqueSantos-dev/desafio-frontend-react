@@ -19,6 +19,11 @@ api.interceptors.response.use(
       return Promise.reject(error);
     }
 
+    if (error.code === AxiosError.ECONNABORTED) {
+      error.message = getErrorMessage("timeout_error");
+      return Promise.reject(error);
+    }
+
     const hasStatusCode = error.response?.status;
 
     if (!hasStatusCode) {
@@ -33,11 +38,7 @@ api.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    if (error.code === AxiosError.ETIMEDOUT) {
-      error.message = getErrorMessage("timeout_error");
-      return Promise.reject(error);
-    }
-
+    error.message = getErrorMessage("generic_error");
     return Promise.reject(error);
   }
 );
