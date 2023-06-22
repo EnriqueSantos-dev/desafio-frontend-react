@@ -64,10 +64,26 @@ export function CardsGamesList() {
             <p className="text-3xl font-bold">Let&apos; go, reload page.</p>
             <Image
               src="/error-img.png"
-              alt="404"
+              alt="indicates error on get games"
+              width={400}
+              height={400}
+              className="inline-block drop-shadow-errorShadow"
+            />
+          </div>
+        </div>
+      )}
+
+      {!error && !isLoading && filteredGames.length === 0 && (
+        <div className="grid place-items-center">
+          <div className="flex flex-col items-center gap-20 dark:text-neutral-100">
+            <p className="text-3xl font-bold">Game not found</p>
+
+            <Image
+              src="/not-found-games.svg"
               width={300}
               height={300}
-              className="inline-block drop-shadow-errorShadow"
+              alt="indicates that it did not find the resources"
+              className="drop-shadow-errorShadow"
             />
           </div>
         </div>
