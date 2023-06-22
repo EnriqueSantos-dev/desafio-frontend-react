@@ -67,6 +67,7 @@ export function CardsGamesList() {
               alt="indicates error on get games"
               width={400}
               height={400}
+              priority
               className="inline-block drop-shadow-errorShadow"
             />
           </div>
@@ -82,6 +83,7 @@ export function CardsGamesList() {
               src="/not-found-games.svg"
               width={300}
               height={300}
+              priority
               alt="indicates that it did not find the resources"
               className="drop-shadow-errorShadow"
             />
