@@ -13,6 +13,7 @@ export function Providers({ children }: { children: ReactNode }) {
       <Toaster
         position="top-right"
         toastOptions={{
+          duration: 5000,
           className:
             "bg-neutral-200 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100",
         }}
