@@ -17,17 +17,16 @@ import { TextInput } from "./shared/ui/text-input";
 type SearchParamsKeys = "search" | "genre";
 
 const updateSearchParams = (key: SearchParamsKeys, value: string) => {
-  const searchParams = new URLSearchParams(window.location.search);
+  const newSearchParams = new URLSearchParams(window.location.search);
 
-  if (searchParams.has(key) && value === "") {
-    searchParams.delete(key);
-    return searchParams.toString();
+  if (newSearchParams.has(key) && value === "") {
+    newSearchParams.delete(key);
+    return newSearchParams.toString();
   }
 
-  searchParams.set(key, value);
-  return searchParams.toString();
+  newSearchParams.set(key, value);
+  return newSearchParams.toString();
 };
-
 export function ContainerInputs() {
   const { data: games, isLoading } = useGetGames();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -75,9 +74,7 @@ export function ContainerInputs() {
         {genres && genres.size > 0 && (
           <Select
             defaultValue={defaultGenreValue}
-            onValueChange={(value) =>
-              handleChangeValue("genre", value.toLowerCase())
-            }
+            onValueChange={(value) => handleChangeValue("genre", value)}
           >
             <SelectTrigger className="w-52" disabled={isDisableSelectGenre}>
               <SelectValue placeholder="Select a genre" />
