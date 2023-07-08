@@ -1,10 +1,10 @@
 "use client";
 
-import { AlertExpiredSession } from "@/components/alert-expired-session";
-import { AuthContextProvider } from "@/contexts/auth-context";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
+
+import { AuthContextProvider } from "@/contexts/auth-context";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +20,6 @@ export function Providers({
   return (
     <QueryClientProvider client={queryClient}>
       <AuthContextProvider values={{ hasCookieSession, hasSession }}>
-        <AlertExpiredSession />
         <Toaster
           position="top-right"
           toastOptions={{
