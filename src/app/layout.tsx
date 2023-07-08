@@ -2,6 +2,7 @@ import "./globals.css";
 
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { cookies } from "next/headers";
 
 import { Header } from "@/components/header";
 import { Providers } from "@/components/providers";
@@ -21,12 +22,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const cookieSession = cookies().get("session");
   const session = await getAuthSession();
 
   return (
     <html lang="en">
       <body className={`${inter.className} bg-neutral-50 dark:bg-neutral-900`}>
-        <Providers hasSession={!!session}>
+        <Providers
+          hasSession={!!session}
+          hasCookieSession={!!cookieSession?.value}
+        >
           <Header />
           {children}
         </Providers>
