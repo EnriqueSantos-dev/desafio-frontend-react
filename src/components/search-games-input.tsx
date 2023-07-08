@@ -66,7 +66,7 @@ export function SearchGamesInput({
               /
             </TooltipTrigger>
             <TooltipContent>
-              <p>Press Slash to start search</p>
+              <p>Press Slash to start searching</p>
               <TooltipArrow />
             </TooltipContent>
           </Tooltip>
