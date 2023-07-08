@@ -9,7 +9,7 @@ import {
   TooltipTrigger,
   TooltipContent,
   TooltipArrow,
-} from "@radix-ui/react-tooltip";
+} from "@/components/shared/ui/tooltip";
 
 type SearchGamesInputProps = {
   id?: string;
