@@ -1,5 +1,10 @@
 "use client";
 
+import { FormEvent } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+import { ChevronDown } from "lucide-react";
+
 import {
   Select,
   SelectContent,
@@ -8,11 +13,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/shared/ui/select";
+import { SearchGamesInput } from "@/components/search-games-input";
+
 import { useGetGames } from "@/hooks/useGetGames";
-import { ListFilter } from "lucide-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, useRef } from "react";
-import { TextInput } from "./shared/ui/text-input";
 
 type SearchParamsKeys = "search" | "genre";
 
@@ -27,9 +30,9 @@ const updateSearchParams = (key: SearchParamsKeys, value: string) => {
   newSearchParams.set(key, value);
   return newSearchParams.toString();
 };
+
 export function ContainerInputs() {
   const { data: games, isLoading } = useGetGames();
-  const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -61,15 +64,10 @@ export function ContainerInputs() {
           >
             Search
           </label>
-          <TextInput
+          <SearchGamesInput
             id="search"
-            type="search"
-            placeholder="search your favorite game..."
-            ref={inputRef}
+            onValueChange={(value) => handleChangeValue("search", value)}
             defaultValue={defaultSearchValue}
-            onChange={(ev) =>
-              handleChangeValue("search", ev.target.value.toLowerCase())
-            }
             disabled={isDisableSearchInput}
           />
         </fieldset>
@@ -80,13 +78,16 @@ export function ContainerInputs() {
             onValueChange={(value) => handleChangeValue("genre", value)}
           >
             <SelectTrigger
-              className="w-full md:w-72"
+              className="group w-full md:w-72"
               disabled={isDisableSelectGenre}
             >
               <SelectValue placeholder="Select a genre" />
 
               <SelectIcon asChild>
-                <ListFilter size={16} />
+                <ChevronDown
+                  size={16}
+                  className="transition-transform group-data-[state=open]:rotate-180"
+                />
               </SelectIcon>
             </SelectTrigger>
 
