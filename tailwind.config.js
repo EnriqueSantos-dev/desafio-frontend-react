@@ -22,8 +22,12 @@ module.exports = {
     },
     animation: {
       heartbeat: "heartbeat 1s ease-in-out infinite",
+      hearTranslateUp: "hearTranslateUp 1s ease-in-out",
     },
     keyframes: {
+      hearTranslateUp: {
+        to: { transform: "translateY(-100px)", opacity: 0 },
+      },
       heartbeat: {
         "0%": {
           transform: { scale: "1" },
