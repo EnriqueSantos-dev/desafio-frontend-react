@@ -15,19 +15,27 @@ import {
 
 import { useLogout } from "@/hooks/useLogout";
 import { useAlertExpiredSessionStore } from "@/hooks/useAlertExpiredSessionStore";
+import { useRouter } from "next/navigation";
 
 export function AlertExpiredSession() {
   const [isMounted, setIsMounted] = useState(false);
   const { isExpired } = useAlertExpiredSessionStore();
-  const { mutate, isLoading } = useLogout();
+  const mutation = useLogout();
+  const router = useRouter();
 
   const onRedirectUser = () => {
-    mutate({});
+    mutation.mutate({});
   };
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (mutation.isSuccess) {
+      router.push("/auth/login");
+    }
+  }, [mutation.isSuccess, router]);
 
   if (!isMounted) return null;
 
@@ -51,11 +59,13 @@ export function AlertExpiredSession() {
             variant="blue"
             size="md"
             className="w-full"
-            disabled={isLoading}
+            disabled={mutation.isLoading}
             onClick={onRedirectUser}
           >
-            {isLoading && <Loader size={20} className="mr-2 animate-spin" />}
-            {!isLoading && "Login"}
+            {mutation.isLoading && (
+              <Loader size={20} className="mr-2 animate-spin" />
+            )}
+            {!mutation.isLoading && "Login"}
           </Button>
         </div>
       </DialogContent>
