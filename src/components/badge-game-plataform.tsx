@@ -10,7 +10,7 @@ type Platforms = "PC (Windows)" | "Web Browser";
 
 const iconsForPlatforms: Record<Platforms, string> = {
   "PC (Windows)": "/windows-logo.svg",
-  "Web Browser": "/chorme.svg",
+  "Web Browser": "/chrome.svg",
 };
 
 type BadgeGamePlatformProps = {
