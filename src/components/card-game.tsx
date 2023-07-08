@@ -59,14 +59,14 @@ export function CardGameComponent({
         </p>
 
         <div className="mt-6 flex items-center justify-between text-sm font-medium dark:text-white">
-          <Button variant="green" size="md">
+          <Button variant="green" size="md" className="pointer-events-none">
             Available for
           </Button>
           <span className="flex-1 text-right">{platform}</span>
         </div>
 
         <div className="mt-3 flex items-center justify-between text-sm font-medium dark:text-white">
-          <Button variant="blue" size="md">
+          <Button variant="blue" size="md" className="pointer-events-none">
             Release
           </Button>
           <span className="flex-1 text-right text-neutral-900 dark:text-neutral-100">
