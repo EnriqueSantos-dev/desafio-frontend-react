@@ -9,36 +9,36 @@ export const api = axios.create({
   },
 });
 
-// setup for intercept axios responses
-api.interceptors.response.use(
-  (res) => {
-    return res;
-  },
-  (error) => {
-    if (!isAxiosError(error)) {
-      return Promise.reject(error);
-    }
+export const apiInternal = axios.create();
 
-    if (error.code === AxiosError.ECONNABORTED) {
-      error.message = getErrorMessage("timeout_error");
-      return Promise.reject(error);
-    }
+// Função para reutilizar o interceptor
+const responseInterceptor = (error: any) => {
+  if (!isAxiosError(error)) {
+    return Promise.reject(error);
+  }
 
-    const hasStatusCode = error.response?.status;
+  if (error.code === AxiosError.ECONNABORTED) {
+    error.message = getErrorMessage("timeout_error");
+    return Promise.reject(error);
+  }
 
-    if (!hasStatusCode) {
-      error.message = getErrorMessage("generic_error");
-      return Promise.reject(error);
-    }
+  const hasStatusCode = error.response?.status;
 
-    const isServerError = serverErrorStatus.includes(error.response?.status!);
-
-    if (isServerError) {
-      error.message = getErrorMessage("internal_error");
-      return Promise.reject(error);
-    }
-
+  if (!hasStatusCode) {
     error.message = getErrorMessage("generic_error");
     return Promise.reject(error);
   }
-);
+
+  const isServerError = serverErrorStatus.includes(error.response?.status!);
+
+  if (isServerError) {
+    error.message = getErrorMessage("internal_error");
+    return Promise.reject(error);
+  }
+
+  error.message = getErrorMessage("generic_error");
+  return Promise.reject(error);
+};
+
+api.interceptors.response.use((res) => res, responseInterceptor);
+apiInternal.interceptors.response.use((res) => res, responseInterceptor);
