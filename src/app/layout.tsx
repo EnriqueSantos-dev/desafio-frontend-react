@@ -4,7 +4,6 @@ import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { cookies } from "next/headers";
 
-import { Header } from "@/components/header";
 import { Providers } from "@/components/providers";
 
 import { seoConfig } from "@/config/site";
@@ -33,7 +32,6 @@ export default async function RootLayout({
           hasSession={!!session}
           hasCookieSession={!!cookieSession?.value}
         >
-          <Header />
           {children}
         </Providers>
       </body>
