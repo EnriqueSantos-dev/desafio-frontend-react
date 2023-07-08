@@ -12,7 +12,7 @@ export const buttonsVariants = cva(
         red: "bg-red-500 text-white ring-red-500 hover:bg-red-600 dark:bg-red-600 dark:ring-offset-neutral-900 dark:hover:bg-red-700",
         blue: "bg-blue-500 text-white shadow-[inset_0px_0px_0px_1px_rgb(96,165,250)] ring-blue-600 ring-offset-blue-300 hover:bg-blue-600 dark:bg-blue-600 dark:shadow-[inset_0px_0px_0px_1px_rgb(59,130,246)] dark:ring-blue-600 dark:ring-offset-neutral-900 dark:hover:bg-blue-700",
         green:
-          "bg-green-200 text-neutral-900 shadow-[inset_0px_0px_0px_1px_rgb(134,239,172)] ring-green-500 ring-offset-green-300 dark:bg-green-600 dark:text-white dark:shadow-[inset_0px_0px_0px_1px_rgb(21,128,61)] dark:ring-offset-neutral-900",
+          "bg-green-200 text-neutral-900 shadow-[inset_0px_0px_0px_1px_rgb(134,239,172)] ring-green-500 ring-offset-green-300 dark:bg-green-600 dark:text-white dark:shadow-[inset_0px_0px_0px_1px_rgb(21,128,61)] dark:ring-offset-neutral-900 dark:hover:bg-green-700",
       },
       size: {
         md: "h-10 px-4 py-2",
