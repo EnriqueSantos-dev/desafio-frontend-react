@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { SESSION_COOKIE_NAME } from "@/constants/session-cookie";
+
 import { env } from "@/env.mjs";
 import { adminAuth } from "@/config/firebase/server";
 
@@ -25,7 +27,7 @@ export async function POST(request: NextRequest) {
     const newHeaders = new Headers(request.headers);
     newHeaders.set(
       "Set-Cookie",
-      `session=${sessionCookie}; HttpOnly; SameSite=Strict; Max-Age=${expiresIn}; Path=/; ${
+      `${SESSION_COOKIE_NAME}=${sessionCookie}; HttpOnly; SameSite=Strict; Max-Age=${expiresIn}; Path=/; ${
         isProduction ? "Secure" : ""
       }`
     );
