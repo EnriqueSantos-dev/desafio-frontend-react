@@ -20,6 +20,28 @@ module.exports = {
         innerShadowLight: "inset 0px 0px 0px 1px rgb(229, 229, 229)",
       },
     },
+    animation: {
+      heartbeat: "heartbeat 1s ease-in-out infinite",
+    },
+    keyframes: {
+      heartbeat: {
+        "0%": {
+          transform: { scale: "1" },
+        },
+        "25%": {
+          transform: { scale: "0.8" },
+        },
+        "50%": {
+          transform: "scale(1)",
+        },
+        "75%": {
+          transform: "scale(0.8)",
+        },
+        "100%": {
+          transform: "scale(1)",
+        },
+      },
+    },
   },
   plugins: [require("tailwindcss-animate")],
 };
