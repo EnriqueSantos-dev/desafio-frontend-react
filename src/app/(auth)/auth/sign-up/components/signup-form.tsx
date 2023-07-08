@@ -1,33 +1,32 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { z } from "zod";
+import { Eye, EyeOff, Loader } from "lucide-react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, Loader } from "lucide-react";
 
 import { LabelText } from "@/components/shared/label-text";
 import { Button } from "@/components/shared/ui/button";
 import { TextField } from "@/components/shared/ui/text-input";
 
-import { useLogin } from "@/hooks/useLogin";
+import { useCreateUser } from "@/hooks/useCreateUser";
 import { useToast } from "@/hooks/useToast";
 
 const formSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(1),
+  password: z.string().min(6),
 });
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function FormLogin() {
+export function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { success, error } = useToast();
-  const mutation = useLogin();
+  const mutation = useCreateUser();
   const router = useRouter();
   const {
     handleSubmit,
@@ -53,7 +52,7 @@ export function FormLogin() {
 
   useEffect(() => {
     if (mutation.isSuccess) {
-      success("Login successfully, redirecting...");
+      success("Account created, redirecting to home..");
       router.push("/");
     }
   }, [mutation.isSuccess, router, success]);
@@ -111,7 +110,7 @@ export function FormLogin() {
             {mutation.isLoading ? (
               <Loader size={20} className="animate-spin" />
             ) : (
-              "Login"
+              "Create account"
             )}
           </Button>
         </div>
@@ -119,9 +118,9 @@ export function FormLogin() {
 
       <div className="mt-8 text-center">
         <p className="text-sm font-medium">
-          No have account?&nbsp;
-          <Link href="/auth/sign-up" className="text-blue-500 underline">
-            Create account
+          Already have account?&nbsp;
+          <Link href="/auth/login" className="text-blue-500 underline">
+            Login
           </Link>
         </p>
       </div>

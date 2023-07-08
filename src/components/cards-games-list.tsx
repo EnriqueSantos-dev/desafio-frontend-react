@@ -1,16 +1,20 @@
 "use client";
 
-import { useGetGames } from "@/hooks/useGetGames";
-import { Games } from "@/types";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo } from "react";
-import { toast } from "react-hot-toast";
+import { useSearchParams } from "next/navigation";
+
+import { Games } from "@/types";
+
+import { useGetGames } from "@/hooks/useGetGames";
+
 import { CardGame } from "./card-game";
 import { CardGameSkeleton } from "./card-game-skeleton";
+import { useToast } from "@/hooks/useToast";
 
 export function CardsGamesList() {
   const { data: games, error, isLoading } = useGetGames();
+  const { error: toastError } = useToast();
   const searchParams = useSearchParams();
 
   const filteredGames = useMemo(() => {
@@ -41,9 +45,9 @@ export function CardsGamesList() {
 
   useEffect(() => {
     if (error) {
-      toast.error(error.message);
+      toastError(error.message);
     }
-  }, [error]);
+  }, [error, toastError]);
 
   return (
     <section>
