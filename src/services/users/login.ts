@@ -23,7 +23,7 @@ export async function loginUser({
 
     const idToken = await user.getIdToken();
 
-    await apiInternal.post("/api/auth/login", null, {
+    await apiInternal.post("/api/auth/sessions", null, {
       headers: {
         Authorization: `Bearer ${idToken}`,
       },
