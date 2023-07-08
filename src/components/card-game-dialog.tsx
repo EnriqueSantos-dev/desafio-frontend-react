@@ -29,7 +29,7 @@ export function CardGameDialog({
     <Dialog>
       <DialogTrigger asChild>
         <Button aria-label={`view details for game ${title}`}>
-          view details
+          View details
           <ArrowUpRight size={18} />
         </Button>
       </DialogTrigger>
