@@ -4,6 +4,7 @@ import Link from "next/link";
 import { memo } from "react";
 import { CardGameDialog } from "./card-game-dialog";
 import { Button } from "./shared/ui/button";
+import BadgeGamePlatform from "@/components/badge-game-plataform";
 
 type CardGameProps = Game;
 
@@ -67,7 +68,7 @@ export function CardGameComponent({
           >
             Available for
           </Button>
-          <span className="flex-1 text-right">{platform}</span>
+          <BadgeGamePlatform platform={platform} />
         </div>
 
         <div className="mt-3 flex items-center justify-between text-sm font-medium dark:text-white">
@@ -80,7 +81,9 @@ export function CardGameComponent({
             Release
           </Button>
           <span className="flex-1 text-right text-neutral-900 dark:text-neutral-100">
-            {release_date}
+            {Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(
+              new Date(release_date)
+            )}
           </span>
         </div>
       </div>
