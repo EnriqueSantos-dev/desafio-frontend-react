@@ -16,6 +16,7 @@ import {
 import { SearchGamesInput } from "@/components/search-games-input";
 
 import { useGetGames } from "@/hooks/useGetGames";
+import { LabelText } from "@/components/shared/label-text";
 
 type SearchParamsKeys = "search" | "genre";
 
@@ -58,12 +59,9 @@ export function ContainerInputs() {
         onSubmit={handleSubmit}
       >
         <fieldset className="flex w-full flex-col gap-2">
-          <label
-            htmlFor="search"
-            className="text-neutra-900 inline-block cursor-pointer font-medium dark:text-neutral-100"
-          >
-            Search
-          </label>
+          <LabelText.Root>
+            <LabelText.Label htmlFor="search">Search</LabelText.Label>
+          </LabelText.Root>
           <SearchGamesInput
             id="search"
             onValueChange={(value) => handleChangeValue("search", value)}
