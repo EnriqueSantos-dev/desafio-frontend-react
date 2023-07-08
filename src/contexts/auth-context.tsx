@@ -1,22 +1,40 @@
-import { ReactNode, createContext, useContext } from "react";
+import { useAlertExpiredSessionStore } from "@/hooks/useAlertExpiredSessionStore";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+} from "react";
 
 type AuthContextProps = {
   hasSession: boolean;
+  hasCookieSession: boolean;
 };
 
 const AuthContext = createContext({} as AuthContextProps);
 
 export const AuthContextProvider = ({
   children,
-  hasSession,
+  values,
 }: {
   children: ReactNode;
-  hasSession: boolean;
+  values: { hasSession: boolean; hasCookieSession: boolean };
 }) => {
+  const setIsExpiredSession = useAlertExpiredSessionStore(
+    (state) => state.setIsExpired
+  );
+
+  useEffect(() => {
+    if (values.hasCookieSession && !values.hasSession) {
+      setIsExpiredSession(true);
+    }
+  }, [values.hasCookieSession, values.hasSession, setIsExpiredSession]);
+
+  const valuesMemo = useMemo(() => values, [values]);
+
   return (
-    <AuthContext.Provider value={{ hasSession }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={valuesMemo}>{children}</AuthContext.Provider>
   );
 };
 
