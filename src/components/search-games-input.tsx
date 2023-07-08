@@ -2,6 +2,8 @@ import { useRef, useEffect } from "react";
 
 import { Search } from "lucide-react";
 
+import { cn } from "@/lib/utils";
+
 import { TextField } from "@/components/shared/ui/text-input";
 import {
   TooltipProvider,
@@ -44,7 +46,7 @@ export function SearchGamesInput({
   }, []);
 
   return (
-    <TextField.Root>
+    <TextField.Root disabled={disabled}>
       <TextField.Addon onClick={handleFocusInput}>
         <Search size={20} />
       </TextField.Addon>
@@ -56,16 +58,18 @@ export function SearchGamesInput({
         ref={inputRef}
         defaultValue={defaultValue}
         onChange={(ev) => onValueChange(ev.target.value.toLowerCase())}
-        disabled={disabled}
       />
 
       <TextField.Addon asChild>
         <TooltipProvider delayDuration={300}>
           <Tooltip>
-            <TooltipTrigger className="h07 flex h-7 w-7 shrink-0 items-center justify-center rounded border border-gray-200 text-lg text-neutral-300 transition-colors peer-focus-visible:hidden dark:border-neutral-800 dark:text-neutral-500 dark:hover:text-neutral-400">
+            <TooltipTrigger
+              className="h07 flex h-7 w-7 shrink-0 items-center justify-center rounded border border-gray-200 text-lg text-neutral-300 transition-colors peer-focus-visible:hidden dark:border-neutral-800 dark:text-neutral-500 dark:hover:text-neutral-400"
+              disabled={disabled}
+            >
               /
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent className={cn({ hidden: disabled })}>
               <p>Press Slash to start searching</p>
               <TooltipArrow />
             </TooltipContent>
