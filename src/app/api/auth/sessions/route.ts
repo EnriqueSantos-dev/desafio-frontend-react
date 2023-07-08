@@ -15,11 +15,12 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const expiresIn = env.EXPIRES_IN_SESSION;
+  const expiresInMilleSeconds = env.EXPIRES_IN_SESSION;
+  const expiresInSeconds = expiresInMilleSeconds / 1000;
 
   try {
     const sessionCookie = await adminAuth.createSessionCookie(idToken, {
-      expiresIn,
+      expiresIn: expiresInMilleSeconds,
     });
 
     const isProduction = process.env.NODE_ENV === "production";
@@ -27,7 +28,7 @@ export async function POST(request: NextRequest) {
     const newHeaders = new Headers(request.headers);
     newHeaders.set(
       "Set-Cookie",
-      `${SESSION_COOKIE_NAME}=${sessionCookie}; HttpOnly; SameSite=Strict; Max-Age=${expiresIn}; Path=/; ${
+      `${SESSION_COOKIE_NAME}=${sessionCookie}; HttpOnly; SameSite=Strict; Max-Age=${expiresInSeconds}; Path=/; ${
         isProduction ? "Secure" : ""
       }`
     );
