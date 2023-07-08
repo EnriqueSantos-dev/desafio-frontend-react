@@ -63,6 +63,7 @@ export function CardGameComponent({
             variant="green"
             size="md"
             className="pointer-events-none w-32"
+            tabIndex={-1}
           >
             Available for
           </Button>
@@ -70,7 +71,12 @@ export function CardGameComponent({
         </div>
 
         <div className="mt-3 flex items-center justify-between text-sm font-medium dark:text-white">
-          <Button variant="blue" size="md" className="pointer-events-none w-32">
+          <Button
+            variant="blue"
+            size="md"
+            className="pointer-events-none w-32"
+            tabIndex={-1}
+          >
             Release
           </Button>
           <span className="flex-1 text-right text-neutral-900 dark:text-neutral-100">
