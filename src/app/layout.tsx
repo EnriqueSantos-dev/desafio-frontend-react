@@ -10,6 +10,7 @@ import { Providers } from "@/components/providers";
 import { seoConfig } from "@/config/site";
 
 import { getAuthSession } from "@/services/users/get-auth-session";
+import { SESSION_COOKIE_NAME } from "@/constants/session-cookie";
 
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
@@ -22,7 +23,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookieSession = cookies().get("session");
+  const cookieSession = cookies().get(SESSION_COOKIE_NAME);
   const session = await getAuthSession();
 
   return (

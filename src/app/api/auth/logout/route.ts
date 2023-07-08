@@ -1,9 +1,12 @@
-import { revokeUserTokens } from "@/lib/shared-functions/revoke-user-tokens";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
+import { revokeUserTokens } from "@/lib/shared-functions/revoke-user-tokens";
+
+import { SESSION_COOKIE_NAME } from "@/constants/session-cookie";
+
 export async function POST(request: NextRequest) {
-  const cookieSession = cookies().get("session");
+  const cookieSession = cookies().get(SESSION_COOKIE_NAME);
 
   if (!cookieSession) return NextResponse.json(null);
 
