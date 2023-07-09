@@ -27,9 +27,13 @@ export function CardsGamesList({
     if (!games) return [] as GamesWithFavAndRating;
 
     if (ratingsAndFavoritesGames.length > 0) {
-      return games.map((game, i) => {
-        if (ratingsAndFavoritesGames[i]?.gameId === game.id) {
-          return { ...game, gameUserDetails: ratingsAndFavoritesGames[i] };
+      return games.map((game) => {
+        const gameFound = ratingsAndFavoritesGames.find(
+          (ratingAndFavData) => ratingAndFavData.gameId === game.id
+        );
+
+        if (gameFound) {
+          return { ...game, gameUserDetails: gameFound };
         }
 
         return game;
