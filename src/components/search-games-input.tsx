@@ -46,7 +46,7 @@ export function SearchGamesInput({
   }, []);
 
   return (
-    <TextField.Root disabled={disabled}>
+    <TextField.Root>
       <TextField.Addon onClick={handleFocusInput}>
         <Search size={20} />
       </TextField.Addon>
