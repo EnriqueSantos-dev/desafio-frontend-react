@@ -1,9 +1,14 @@
 import { api } from "@/lib/axios";
-import { Games } from "@/types";
+import { Games, GamesWithFavAndRating } from "@/types";
 
 const TIMEOUT = 5000;
 
-export async function getAllGames(): Promise<Games> {
-  const { data } = await api.get("/data", { timeout: TIMEOUT });
-  return data;
+export async function getAllGames(): Promise<GamesWithFavAndRating> {
+  const { data } = await api.get<Games>("/data", { timeout: TIMEOUT });
+  return (
+    data?.map((game) => ({
+      ...game,
+      gameUserDetails: { gameId: game.id, isFavorite: false, rating: 0 },
+    })) ?? []
+  );
 }
