@@ -17,9 +17,7 @@ type BadgeGamePlatformProps = {
   platform: string;
 };
 
-export default function BadgeGamePlatform({
-  platform,
-}: BadgeGamePlatformProps) {
+export function BadgeGamePlatform({ platform }: BadgeGamePlatformProps) {
   const platforms = platform
     .split(",")
     .map((platform) => platform.trim()) as Platforms[];
