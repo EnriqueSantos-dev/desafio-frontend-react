@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 
-import { Games } from "@/types";
+import { GameUserDetails, GamesWithFavAndRating } from "@/types";
 
 import { useGetGames } from "@/hooks/useGetGames";
 
@@ -12,13 +12,30 @@ import { CardGame } from "./card-game";
 import { CardGameSkeleton } from "./card-game-skeleton";
 import { useToast } from "@/hooks/useToast";
 
-export function CardsGamesList() {
+type CardsGamesListProps = {
+  ratingsAndFavoritesGames: GameUserDetails[];
+};
+
+export function CardsGamesList({
+  ratingsAndFavoritesGames,
+}: CardsGamesListProps) {
   const { data: games, error, isLoading } = useGetGames();
   const { error: toastError } = useToast();
   const searchParams = useSearchParams();
 
   const filteredGames = useMemo(() => {
-    if (!games) return [] as Games;
+    if (!games) return [] as GamesWithFavAndRating;
+
+    if (ratingsAndFavoritesGames.length > 0) {
+      return games.map((game, i) => {
+        if (ratingsAndFavoritesGames[i]?.gameId === game.id) {
+          return { ...game, gameUserDetails: ratingsAndFavoritesGames[i] };
+        }
+
+        return game;
+      });
+    }
+
     const searchValue = searchParams.get("search");
     const genreValue = searchParams.get("genre");
 
@@ -41,7 +58,7 @@ export function CardsGamesList() {
     }
 
     return games;
-  }, [games, searchParams]);
+  }, [games, searchParams, ratingsAndFavoritesGames]);
 
   useEffect(() => {
     if (error) {
