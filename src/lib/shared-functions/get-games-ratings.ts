@@ -1,17 +1,20 @@
 import { RatingGame } from "@/types";
+import { Database } from "firebase-admin/database";
 
 export async function getGamesRatings(
-  connection: FirebaseFirestore.Firestore,
+  connection: Database,
   userId: string
 ): Promise<RatingGame[]> {
-  const ratingsGamesRef = connection.collection("ratings");
-  const querySnapshotRatings = await ratingsGamesRef
-    .where("user_id", "==", userId)
-    .get();
+  let ratings: RatingGame[] = [];
+  const ratingsSnapshot = await connection.ref("games-details/ratings").get();
 
-  const ratingsGames: RatingGame[] = querySnapshotRatings.docs.map(
-    (doc) => doc.data() as RatingGame
-  );
+  ratingsSnapshot.forEach((data) => {
+    const rating = data.val();
 
-  return ratingsGames;
+    if (rating.user_id === userId) {
+      ratings.push(rating);
+    }
+  });
+
+  return ratings;
 }

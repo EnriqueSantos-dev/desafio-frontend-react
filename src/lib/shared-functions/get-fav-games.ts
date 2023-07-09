@@ -1,15 +1,22 @@
 import { FavoriteGame } from "@/types";
+import { Database } from "firebase-admin/database";
 
 export async function getFavoriteGames(
-  connection: FirebaseFirestore.Firestore,
+  connection: Database,
   userId: string
 ): Promise<FavoriteGame[]> {
-  const favGamesRef = connection.collection("fav_games");
-  const querySnapshot = await favGamesRef.where("user_id", "==", userId).get();
+  const favGames: FavoriteGame[] = [];
+  const favGamesSnapshot = await connection
+    .ref("games-details/favorite_games")
+    .get();
 
-  const favGames: FavoriteGame[] = querySnapshot.docs.map(
-    (doc) => doc.data() as FavoriteGame
-  );
+  favGamesSnapshot.forEach((data) => {
+    const fav = data.val();
+
+    if (fav.user_id === userId) {
+      favGames.push(fav);
+    }
+  });
 
   return favGames;
 }
