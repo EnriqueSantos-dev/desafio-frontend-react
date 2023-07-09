@@ -14,6 +14,7 @@ export const env = createEnv({
   },
   server: {
     FIREBASE_PRIVATE_KEY: z.string().min(1),
+    FIREBASE_DATABASE_URL: z.string().url(),
     FIREBASE_CLIENT_EMAIL: z.string().min(1),
     EXPIRES_IN_SESSION: z.coerce.number().positive(),
   },

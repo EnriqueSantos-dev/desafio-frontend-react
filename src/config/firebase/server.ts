@@ -11,7 +11,7 @@ if (admin.apps.length === 0) {
       privateKey: env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
       projectId: env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
     }),
-    databaseURL: "https://desafio-frontend-react-default-rtdb.firebaseio.com",
+    databaseURL: env.FIREBASE_DATABASE_URL,
   });
 }
 
