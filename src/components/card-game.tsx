@@ -1,14 +1,15 @@
-import { Game } from "@/types";
-import Image from "next/image";
-import Link from "next/link";
 import { CSSProperties, memo } from "react";
-import { CardGameDialog } from "./card-game-dialog";
-import { Button } from "./shared/ui/button";
-import BadgeGamePlatform from "@/components/badge-game-plataform";
-import { FavGame } from "@/components/fav-game";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+import Image from "next/image";
 
-type CardGameProps = Game;
+import { GameWithFavAndRating } from "@/types";
+
+import { CardGameDialog } from "@/components/card-game-dialog";
+import { Button } from "@/components/shared/ui/button";
+import { BadgeGamePlatform } from "@/components/badge-game-platform";
+import { FavGame } from "@/components/fav-game";
+
+type CardGameProps = GameWithFavAndRating;
 
 export function CardGameComponent({
   thumbnail,
@@ -18,6 +19,7 @@ export function CardGameComponent({
   short_description,
   platform,
   delayAppear: delay,
+  gameUserDetails,
   ...props
 }: CardGameProps & { delayAppear: number }) {
   const delayAppear = delay * 0.15;
@@ -50,7 +52,7 @@ export function CardGameComponent({
                 {title}
               </Link>
             </h2>
-            <FavGame isFav={Boolean(Math.trunc(Math.random() * 2))} />
+            <FavGame isFav={gameUserDetails.isFavorite} />
           </div>
 
           <CardGameDialog
