@@ -36,16 +36,29 @@ export async function Header() {
             </Link>
 
             {!session?.uid && (
-              <Link
-                href="/auth/login"
-                className={buttonsVariants({
-                  variant: "blue",
-                  className: "px-6 ml-4",
-                  size: "md",
-                })}
-              >
-                Login
-              </Link>
+              <div className="space-x-2">
+                <Link
+                  href="/auth/sign-up"
+                  className={buttonsVariants({
+                    variant: "green",
+                    className: "px-6 ml-4",
+                    size: "md",
+                  })}
+                >
+                  Sign Up
+                </Link>
+
+                <Link
+                  href="/auth/login"
+                  className={buttonsVariants({
+                    variant: "blue",
+                    className: "px-6 ml-4",
+                    size: "md",
+                  })}
+                >
+                  Login
+                </Link>
+              </div>
             )}
           </div>
         </nav>
