@@ -2,6 +2,7 @@ import admin from "firebase-admin";
 
 import { env } from "@/env.mjs";
 import { getAuth } from "firebase-admin/auth";
+import { getDatabase } from "firebase-admin/database";
 
 if (admin.apps.length === 0) {
   admin.initializeApp({
@@ -10,10 +11,11 @@ if (admin.apps.length === 0) {
       privateKey: env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
       projectId: env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
     }),
+    databaseURL: "https://desafio-frontend-react-default-rtdb.firebaseio.com",
   });
 }
 
 const adminAuth = getAuth();
-const getAdminFireStore = () => admin.firestore();
+const getDatabaseAdmin = () => getDatabase();
 
-export { adminAuth, getAdminFireStore };
+export { adminAuth, getDatabaseAdmin };
