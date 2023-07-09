@@ -12,6 +12,7 @@ import { FavGame } from "@/components/fav-game";
 type CardGameProps = GameWithFavAndRating;
 
 export function CardGameComponent({
+  id,
   thumbnail,
   title,
   release_date,
@@ -52,17 +53,18 @@ export function CardGameComponent({
                 {title}
               </Link>
             </h2>
-            <FavGame isFav={gameUserDetails.isFavorite} />
+            <FavGame gameId={id} isFav={gameUserDetails.isFavorite} />
           </div>
 
           <CardGameDialog
-            {...props}
+            id={id}
             thumbnail={thumbnail}
             short_description={short_description}
             title={title}
             release_date={release_date}
             game_url={game_url}
             platform={platform}
+            {...props}
           />
         </div>
 
@@ -100,6 +102,7 @@ export function CardGameComponent({
             )}
           </span>
         </div>
+        <span className="block">{id}</span>
       </div>
     </div>
   );
