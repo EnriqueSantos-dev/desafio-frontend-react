@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import { z } from "zod";
@@ -28,7 +27,6 @@ export function FormLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const { success, error } = useToast();
   const mutation = useLogin();
-  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -54,9 +52,10 @@ export function FormLogin() {
   useEffect(() => {
     if (mutation.isSuccess) {
       success("Login successfully, redirecting...");
-      router.push("/");
+      // reload window force layout to re-render and redirect to home page if user is logged in
+      window.location.reload();
     }
-  }, [mutation.isSuccess, router, success]);
+  }, [mutation.isSuccess, success]);
 
   return (
     <div className="space-y-4">
