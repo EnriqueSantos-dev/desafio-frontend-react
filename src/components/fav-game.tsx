@@ -1,21 +1,28 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
+
 import { useAuthContext } from "@/contexts/auth-context";
-import { useAlertUnauthorizedStore } from "@/hooks/useAlertUnauthorizedStore";
 import { ALERT_UNAUTHORIZED_USER_MESSAGES } from "@/constants/alert-unauthorized-messages";
+
+import { useAlertUnauthorizedStore } from "@/hooks/useAlertUnauthorizedStore";
+import { useFavoriteGame } from "@/hooks/useFavGame";
+import { useToast } from "@/hooks/useToast";
 
 type FavGameProps = {
   isFav: boolean;
+  gameId: number;
 };
 
-export function FavGame({ isFav }: FavGameProps) {
+export function FavGame({ isFav, gameId }: FavGameProps) {
   const [isFavGame, setIsFavGame] = useState(isFav);
   const heartRef = useRef<HTMLSpanElement>(null);
   const { hasSession } = useAuthContext();
   const { setIsAlertUnauthorized, setDescriptionAlertMessage } =
     useAlertUnauthorizedStore();
+  const { mutate, error: mutationError, isSuccess, data } = useFavoriteGame();
+  const { error, success } = useToast();
 
   const onHeartClick = () => {
     if (!hasSession) {
@@ -23,6 +30,8 @@ export function FavGame({ isFav }: FavGameProps) {
       setDescriptionAlertMessage(ALERT_UNAUTHORIZED_USER_MESSAGES.favGame);
       return;
     }
+
+    mutate({ gameId });
 
     setIsFavGame((fav) => !fav);
     if (isFavGame) return;
@@ -39,6 +48,18 @@ export function FavGame({ isFav }: FavGameProps) {
       }
     }, 1000);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      success(data.message);
+      return;
+    }
+
+    if (mutationError?.message) {
+      error(mutationError.message);
+      setIsFavGame((fav) => !fav);
+    }
+  }, [isSuccess, mutationError, error, success, setIsFavGame, data]);
 
   return (
     <button
