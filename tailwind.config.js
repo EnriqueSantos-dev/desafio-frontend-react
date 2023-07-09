@@ -23,8 +23,13 @@ module.exports = {
     animation: {
       heartbeat: "heartbeat 1s ease-in-out infinite",
       hearTranslateUp: "hearTranslateUp 1s ease-in-out",
+      cardAppear: "cardAppear 300ms ease-in-out var(--delay) backwards",
     },
     keyframes: {
+      cardAppear: {
+        from: { transform: "scale(0.9)", opacity: 0 },
+        to: { transform: "scale(1)", opacity: 1 },
+      },
       hearTranslateUp: {
         to: { transform: "translateY(-100px)", opacity: 0 },
       },
