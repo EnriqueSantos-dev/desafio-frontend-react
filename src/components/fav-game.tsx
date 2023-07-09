@@ -1,17 +1,29 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuthContext } from "@/contexts/auth-context";
+import { useAlertUnauthorizedStore } from "@/hooks/useAlertUnauthorizedStore";
+import { ALERT_UNAUTHORIZED_USER_MESSAGES } from "@/constants/alert-unauthorized-messages";
 
 type FavGameProps = {
   isFav: boolean;
 };
 
-export function FavGame({ isFav = false }: FavGameProps) {
+export function FavGame({ isFav }: FavGameProps) {
   const [isFavGame, setIsFavGame] = useState(isFav);
   const heartRef = useRef<HTMLSpanElement>(null);
+  const { hasSession } = useAuthContext();
+  const { setIsAlertUnauthorized, setDescriptionAlertMessage } =
+    useAlertUnauthorizedStore();
 
   const onHeartClick = () => {
+    if (!hasSession) {
+      setIsAlertUnauthorized(true);
+      setDescriptionAlertMessage(ALERT_UNAUTHORIZED_USER_MESSAGES.favGame);
+      return;
+    }
+
     setIsFavGame((fav) => !fav);
     if (isFavGame) return;
 
@@ -30,7 +42,12 @@ export function FavGame({ isFav = false }: FavGameProps) {
 
   return (
     <button
-      className="group relative shrink-0 p-1 text-xl before:absolute before:left-1/2 before:top-1/2 before:-z-10 before:h-[140%] before:w-[140%] before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full before:transition-colors after:absolute after:left-1/2 after:top-1/2 after:-z-10 after:h-[110%] after:w-[110%] after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:transition-colors hover:before:bg-red-300 hover:after:bg-red-200 dark:hover:before:bg-red-400 dark:hover:after:bg-red-300"
+      className={cn(
+        "group relative shrink-0 p-1 text-xl",
+        "before:absolute before:left-1/2 before:top-1/2 before:-z-10 before:h-[140%] before:w-[140%] before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full before:transition-colors",
+        "after:absolute after:left-1/2 after:top-1/2 after:-z-10 after:h-[110%] after:w-[110%] after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:transition-colors",
+        "hover:before:bg-red-300 hover:after:bg-red-200 dark:hover:before:bg-red-400 dark:hover:after:bg-red-300"
+      )}
       onClick={onHeartClick}
     >
       <span
