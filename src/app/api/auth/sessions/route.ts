@@ -4,6 +4,7 @@ import { SESSION_COOKIE_NAME } from "@/constants/session-cookie";
 
 import { env } from "@/env.mjs";
 import { adminAuth } from "@/config/firebase/server";
+import { revalidatePath } from "next/cache";
 
 export async function POST(request: NextRequest) {
   const idToken = request.headers.get("Authorization")?.replace("Bearer ", "");
@@ -33,6 +34,8 @@ export async function POST(request: NextRequest) {
       }`
     );
 
+    // revalidate the index page to get current user
+    revalidatePath("/");
     return new Response(undefined, { headers: newHeaders });
   } catch (error) {
     console.log("[POST_LOGIN]", error);
