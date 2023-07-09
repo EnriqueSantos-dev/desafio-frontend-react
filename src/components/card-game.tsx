@@ -1,10 +1,12 @@
 import { Game } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import { memo } from "react";
+import { CSSProperties, memo } from "react";
 import { CardGameDialog } from "./card-game-dialog";
 import { Button } from "./shared/ui/button";
 import BadgeGamePlatform from "@/components/badge-game-plataform";
+import { FavGame } from "@/components/fav-game";
+import { cn } from "@/lib/utils";
 
 type CardGameProps = Game;
 
@@ -15,10 +17,17 @@ export function CardGameComponent({
   game_url,
   short_description,
   platform,
+  delayAppear: delay,
   ...props
-}: CardGameProps) {
+}: CardGameProps & { delayAppear: number }) {
+  const delayAppear = delay * 0.15;
+  const styles = { "--delay": `${delayAppear}s` } as CSSProperties;
+
   return (
-    <div className="grid grid-flow-row gap-4 overflow-hidden rounded-xl border-2 border-neutral-200 dark:border-neutral-800">
+    <div
+      className="grid animate-cardAppear grid-flow-row gap-4 overflow-hidden rounded-xl border-2 border-neutral-200 dark:border-neutral-800"
+      style={styles}
+    >
       <div className="relative h-56 w-full overflow-hidden rounded-tr-lg">
         <Image
           src={thumbnail}
@@ -32,14 +41,17 @@ export function CardGameComponent({
 
       <div className="flex h-max flex-col px-4 pb-4">
         <div className="flex flex-col justify-between gap-2 border-b border-neutral-200 pb-2 pt-1 dark:border-neutral-800">
-          <h2 className="line-clamp-1 text-ellipsis text-lg font-bold text-neutral-900 hover:underline dark:text-neutral-100">
-            <Link
-              href={game_url}
-              className="hover:underline focus-visible:underline focus-visible:outline-none"
-            >
-              {title}
-            </Link>
-          </h2>
+          <div className="mb-2 flex items-center justify-between">
+            <h2 className="line-clamp-1 flex-1 text-ellipsis text-lg font-bold text-neutral-900 hover:underline dark:text-neutral-100">
+              <Link
+                href={game_url}
+                className="hover:underline focus-visible:underline focus-visible:outline-none"
+              >
+                {title}
+              </Link>
+            </h2>
+            <FavGame isFav={Boolean(Math.trunc(Math.random() * 2))} />
+          </div>
 
           <CardGameDialog
             {...props}

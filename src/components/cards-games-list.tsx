@@ -51,14 +51,16 @@ export function CardsGamesList() {
 
   return (
     <section>
-      <div className="grid grid-cols-1 items-stretch justify-center gap-4 sm:grid-cols-[80%] md:grid-cols-2 lg:grid-cols-[repeat(3,minmax(200px,380px))]">
+      <div className="grid grid-cols-[80%] items-stretch justify-center gap-4 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(360px,400px))]">
         {!error &&
           filteredGames &&
-          filteredGames.map((game) => <CardGame key={game.id} {...game} />)}
+          filteredGames.map((game, i) => (
+            <CardGame key={game.id} {...game} delayAppear={i} />
+          ))}
 
         {isLoading &&
-          Array.from({ length: 10 }).map((_, index) => (
-            <CardGameSkeleton key={index} />
+          Array.from({ length: 6 }).map((_, index) => (
+            <CardGameSkeleton key={index} delay={index} />
           ))}
       </div>
 
