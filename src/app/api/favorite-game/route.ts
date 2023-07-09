@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { NextResponse } from "next/server";
 
-import { getAdminFireStore, getDatabaseAdmin } from "@/config/firebase/server";
+import { getDatabaseAdmin } from "@/config/firebase/server";
 
 import { withAuthRoute } from "@/utils/with-auth-hoc";
 
@@ -11,7 +11,6 @@ const schema = z.object({
 });
 
 export const POST = withAuthRoute(async ({ request, user }) => {
-  const db = getAdminFireStore();
   const body = await request.json();
 
   const parsedResult = schema.safeParse(body);
