@@ -57,7 +57,7 @@ export function LoginForm() {
 
   return (
     <div className="space-y-4">
-      <h2 className="mb-8 text-center text-xl font-bold">Login</h2>
+      <h2 className="mb-6 text-center text-xl font-bold">Login</h2>
       <form
         className="flex flex-col gap-4"
         onSubmit={handleSubmit(submitHandler)}

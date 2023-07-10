@@ -27,7 +27,7 @@ export default async function LoginPage() {
         </div>
 
         <LoginForm />
-        <div className="mx-auto my-4 flex w-4/5 items-center space-x-3">
+        <div className="mx-auto my-8 flex w-4/5 items-center space-x-3">
           <span className="inline-block h-px flex-1 rounded-full bg-neutral-300" />
           <span className="text-sm font-semibold text-neutral-900">OR</span>
           <span className="inline-block h-px flex-1 rounded-full bg-neutral-300" />
