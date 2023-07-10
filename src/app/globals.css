@@ -11,3 +11,45 @@
 :is(html, body) {
   height: 100%;
 }
+
+.container-rating > div:nth-child(1):is(:hover) > label > svg {
+  fill: #facc15;
+  stroke: #facc15;
+  outline: none;
+}
+
+.container-rating:has(> div:nth-child(2):is(:hover))
+  > div:nth-child(-n + 2)
+  > label
+  > svg {
+  fill: #facc15;
+  stroke: #facc15;
+  outline: none;
+}
+
+.container-rating:has(> div:nth-child(3):is(:hover))
+  > div:nth-child(-n + 3)
+  > label
+  > svg {
+  fill: #facc15;
+  stroke: #facc15;
+  outline: none;
+}
+
+.container-rating:has(> div:nth-child(4):is(:hover))
+  > div:nth-child(-n + 4)
+  > label
+  > svg {
+  fill: #facc15;
+  stroke: #facc15;
+  outline: none;
+}
+
+.container-rating:has(> div:nth-child(5):is(:hover))
+  > div:nth-child(-n + 5)
+  > label
+  > svg {
+  fill: #facc15;
+  stroke: #facc15;
+  outline: none;
+}
