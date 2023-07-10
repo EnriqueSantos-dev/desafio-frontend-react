@@ -38,7 +38,7 @@ export async function Header() {
             {!session?.uid && (
               <div className="space-x-2">
                 <Link
-                  href="/auth/sign-up"
+                  href="/auth"
                   className={buttonsVariants({
                     variant: "green",
                     className: "px-6 ml-4",
@@ -49,7 +49,7 @@ export async function Header() {
                 </Link>
 
                 <Link
-                  href="/auth/login"
+                  href="/auth"
                   className={buttonsVariants({
                     variant: "blue",
                     className: "px-6 ml-4",
