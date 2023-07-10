@@ -8,6 +8,7 @@ import { CardGameDialog } from "@/components/card-game-dialog";
 import { Button } from "@/components/shared/ui/button";
 import { BadgeGamePlatform } from "@/components/badge-game-platform";
 import { FavGame } from "@/components/fav-game";
+import { Rating } from "@/components/rating";
 
 type CardGameProps = GameWithFavAndRating;
 
@@ -44,7 +45,7 @@ export function CardGameComponent({
 
       <div className="flex h-max flex-col px-4 pb-4">
         <div className="flex flex-col justify-between gap-2 border-b border-neutral-200 pb-2 pt-1 dark:border-neutral-800">
-          <div className="mb-2 flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <h2 className="line-clamp-1 flex-1 text-ellipsis text-lg font-bold text-neutral-900 hover:underline dark:text-neutral-100">
               <Link
                 href={game_url}
@@ -54,6 +55,10 @@ export function CardGameComponent({
               </Link>
             </h2>
             <FavGame gameId={id} isFav={gameUserDetails.isFavorite} />
+          </div>
+
+          <div className="1">
+            <Rating gameId={id} initialRating={gameUserDetails.rating} />
           </div>
 
           <CardGameDialog
@@ -87,7 +92,7 @@ export function CardGameComponent({
           <BadgeGamePlatform platform={platform} />
         </div>
 
-        <div className="mt-3 flex items-center justify-between text-sm font-medium dark:text-white">
+        <div className="mt-3 flex items-center justify-between  pb-2 text-sm font-medium dark:text-white">
           <Button
             variant="blue"
             size="md"
@@ -102,7 +107,6 @@ export function CardGameComponent({
             )}
           </span>
         </div>
-        <span className="block">{id}</span>
       </div>
     </div>
   );
