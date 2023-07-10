@@ -1,6 +1,8 @@
 "use client";
 
 import { ReactNode } from "react";
+
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 
@@ -19,6 +21,7 @@ export function Providers({
 }) {
   return (
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools />
       <AuthContextProvider values={{ hasCookieSession, hasSession }}>
         <Toaster
           position="top-right"
