@@ -33,13 +33,13 @@ const updateSearchParams = (key: SearchParamsKeys, value: string) => {
 };
 
 export function ContainerInputs() {
-  const { data: games, isLoading } = useGetGames([]);
+  const { data: games, isLoading, isError } = useGetGames([]);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const genres = new Set(games?.map((game) => game.genre));
-  const isDisableSelectGenre = !games || isLoading || !genres;
-  const isDisableSearchInput = !games || isLoading;
+  const isDisableSelectGenre = !games || isLoading || isError || !genres;
+  const isDisableSearchInput = !games || isLoading || isError;
   const defaultSearchValue = searchParams.get("search") ?? "";
   const defaultGenreValue = searchParams.get("genre") ?? "";
 
