@@ -22,7 +22,7 @@ export default function ToggleTheme() {
           <Switch.Root
             aria-label="Switch between dark and light mode"
             className={cn(
-              "relative flex h-6 w-12 overflow-hidden items-start ring-amber-500  ring-offset-neutral-300 dark:focus-visible:ring-offset-neutral-950 dark:border-neutral-800 border dark:hover:bg-neutral-800 dark:hover:border-neutral-700 hover:bg-neutral-100 transition-colors dark:bg-neutral-950/50 focus-state"
+              "relative flex h-6 w-12 overflow-hidden items-start ring-neutral-300 dark:ring-neutral-800 ring-offset-neutral-50 dark:focus-visible:ring-offset-neutral-950 dark:border-neutral-800 border dark:hover:bg-neutral-800 dark:hover:border-neutral-700 hover:bg-neutral-100 transition-colors dark:bg-neutral-950/50 focus-state"
             )}
             style={{ borderRadius: 9999 }}
             onCheckedChange={() => toggleTheme()}
@@ -30,9 +30,10 @@ export default function ToggleTheme() {
             <Switch.Thumb
               asChild
               className={cn(
-                "transition-transform flex h-4/5 p-px w-5 items-center justify-center rounded-full bg-gradient-to-r from-red-500 ml-[3px] shadow-sm to-amber-500 absolute top-1/2 -translate-y-1/2 text-white",
+                "transition-transform flex h-4/5 p-0.5 w-5 items-center justify-center rounded-full ml-[3px] absolute top-1/2 -translate-y-1/2",
                 {
-                  "translate-x-full": isDark,
+                  "translate-x-full bg-neutral-700 text-neutral-100": isDark,
+                  "bg-neutral-200 text-neutral-500": !isDark,
                 }
               )}
             >
