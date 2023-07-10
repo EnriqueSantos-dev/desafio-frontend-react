@@ -59,14 +59,16 @@ export function SignUpForm() {
 
   return (
     <div className="space-y-4">
+      <h2 className="mb-8 text-center text-xl font-bold">Create Account</h2>
       <form
         className="flex flex-col gap-4"
         onSubmit={handleSubmit(submitHandler)}
       >
         <LabelText.Root>
-          <LabelText.Label htmlFor="email">Email</LabelText.Label>
+          <LabelText.Label htmlFor="signup-email">Email</LabelText.Label>
           <TextField.Root>
             <TextField.Field
+              id="signup-email"
               type="email"
               placeholder="email@gmail.com"
               {...register("email")}
@@ -80,15 +82,17 @@ export function SignUpForm() {
         </LabelText.Root>
 
         <LabelText.Root>
-          <LabelText.Label htmlFor="password">Password</LabelText.Label>
+          <LabelText.Label htmlFor="signup-password">Password</LabelText.Label>
           <TextField.Root>
             <TextField.Field
+              id="signup-password"
               type={showPassword ? "text" : "password"}
               {...register("password")}
               placeholder="********"
             />
             <TextField.Addon
               type="button"
+              aria-label="toggle visibility password"
               onClick={() => setShowPassword((prev) => !prev)}
             >
               {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
@@ -106,6 +110,7 @@ export function SignUpForm() {
             type="submit"
             className="w-full"
             disabled={mutation.isLoading}
+            variant="green"
           >
             {mutation.isLoading ? (
               <Loader size={20} className="animate-spin" />
@@ -115,15 +120,6 @@ export function SignUpForm() {
           </Button>
         </div>
       </form>
-
-      <div className="mt-8 text-center">
-        <p className="text-sm font-medium">
-          Already have account?&nbsp;
-          <Link href="/auth/login" className="text-blue-500 underline">
-            Login
-          </Link>
-        </p>
-      </div>
     </div>
   );
 }

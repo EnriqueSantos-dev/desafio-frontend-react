@@ -59,17 +59,20 @@ export function FormLogin() {
 
   return (
     <div className="space-y-4">
+      <h2 className="mb-8 text-center text-xl font-bold">Login</h2>
       <form
         className="flex flex-col gap-4"
         onSubmit={handleSubmit(submitHandler)}
       >
         <LabelText.Root>
-          <LabelText.Label htmlFor="email">Email</LabelText.Label>
+          <LabelText.Label htmlFor="login-email">Email</LabelText.Label>
           <TextField.Root>
             <TextField.Field
+              id="login-email"
               type="email"
               placeholder="email@gmail.com"
               {...register("email")}
+              autoComplete="email"
             />
           </TextField.Root>
           {errors.email && (
@@ -80,15 +83,18 @@ export function FormLogin() {
         </LabelText.Root>
 
         <LabelText.Root>
-          <LabelText.Label htmlFor="password">Password</LabelText.Label>
+          <LabelText.Label htmlFor="login-password">Password</LabelText.Label>
           <TextField.Root>
             <TextField.Field
+              id="login-password"
               type={showPassword ? "text" : "password"}
               {...register("password")}
               placeholder="********"
+              autoComplete="current-password"
             />
             <TextField.Addon
               type="button"
+              aria-label="toggle visibility password"
               onClick={() => setShowPassword((prev) => !prev)}
             >
               {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
@@ -115,15 +121,6 @@ export function FormLogin() {
           </Button>
         </div>
       </form>
-
-      <div className="mt-8 text-center">
-        <p className="text-sm font-medium">
-          No have account?&nbsp;
-          <Link href="/auth/sign-up" className="text-blue-500 underline">
-            Create account
-          </Link>
-        </p>
-      </div>
     </div>
   );
 }
