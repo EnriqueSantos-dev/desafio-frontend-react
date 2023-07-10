@@ -31,7 +31,7 @@ export function FavGame({ isFav, gameId }: FavGameProps) {
       return;
     }
 
-    mutate({ gameId });
+    mutate({ gameId, isFav: !isFavGame });
 
     setIsFavGame((fav) => !fav);
     if (isFavGame) return;
@@ -55,11 +55,16 @@ export function FavGame({ isFav, gameId }: FavGameProps) {
       return;
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, data]);
+
+  useEffect(() => {
     if (mutationError?.message) {
       error(mutationError.message);
       setIsFavGame((fav) => !fav);
     }
-  }, [isSuccess, mutationError, error, success, setIsFavGame, data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mutationError, setIsFavGame]);
 
   return (
     <button
