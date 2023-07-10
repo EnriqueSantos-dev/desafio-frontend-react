@@ -48,14 +48,16 @@ export function SignUpForm() {
     if (mutation.error) {
       error(mutation.error.message);
     }
-  }, [mutation.error, error]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mutation.error]);
 
   useEffect(() => {
     if (mutation.isSuccess) {
       success("Account created, redirecting to home..");
       router.push("/");
     }
-  }, [mutation.isSuccess, router, success]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mutation.isSuccess, router]);
 
   return (
     <div className="space-y-4">

@@ -45,7 +45,8 @@ export function LoginForm() {
     if (mutation.error) {
       error(mutation.error.message);
     }
-  }, [mutation.error, error]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mutation.error]);
 
   useEffect(() => {
     if (mutation.isSuccess) {
