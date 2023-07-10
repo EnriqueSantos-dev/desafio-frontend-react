@@ -23,7 +23,7 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function FormLogin() {
+export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { success, error } = useToast();
   const mutation = useLogin();

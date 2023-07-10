@@ -2,8 +2,8 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 
 import { getAuthSession } from "@/services/users/get-auth-session";
-import { FormLogin } from "./login/components/form-login";
-import { SignUpForm } from "@/app/(auth)/auth/sign-up/components/signup-form";
+import { LoginForm } from "./components/login-form";
+import { SignUpForm } from "./components/signup-form";
 
 export default async function LoginPage() {
   const session = await getAuthSession();
@@ -26,14 +26,12 @@ export default async function LoginPage() {
           </p>
         </div>
 
-        <FormLogin />
-
+        <LoginForm />
         <div className="mx-auto my-4 flex w-4/5 items-center space-x-3">
           <span className="inline-block h-px flex-1 rounded-full bg-neutral-300" />
           <span className="text-sm font-semibold text-neutral-900">OR</span>
           <span className="inline-block h-px flex-1 rounded-full bg-neutral-300" />
         </div>
-
         <SignUpForm />
       </div>
 
