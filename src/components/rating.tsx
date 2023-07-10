@@ -8,6 +8,9 @@ import { useRatingGame } from "@/hooks/useRatingGame";
 import { useToast } from "@/hooks/useToast";
 
 import { cn } from "@/lib/utils";
+import { useAuthContext } from "@/contexts/auth-context";
+import { useAlertUnauthorizedStore } from "@/hooks/useAlertUnauthorizedStore";
+import { ALERT_UNAUTHORIZED_USER_MESSAGES } from "@/constants/alert-unauthorized-messages";
 
 type RatingProps = {
   gameId: number;
@@ -18,10 +21,24 @@ const MAX_RATING = 5;
 
 export function Rating({ gameId, initialRating }: RatingProps) {
   const [rating, setRating] = useState(initialRating);
+  const { hasSession } = useAuthContext();
   const { success, error } = useToast();
   const mutation = useRatingGame();
+  const setIsAlertUnauthorized = useAlertUnauthorizedStore(
+    (state) => state.setIsAlertUnauthorized
+  );
+  const setDescriptionAlertUnauthorized = useAlertUnauthorizedStore(
+    (state) => state.setDescriptionAlertMessage
+  );
 
   const handleRating = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!hasSession) {
+      setIsAlertUnauthorized(true);
+      setDescriptionAlertUnauthorized(
+        ALERT_UNAUTHORIZED_USER_MESSAGES.ratingGame
+      );
+      return;
+    }
     const parsedRating = parseInt(e.target.value);
     const ratingToSet = rating === 1 && parsedRating === 1 ? 0 : parsedRating;
 
