@@ -33,7 +33,7 @@ const updateSearchParams = (key: SearchParamsKeys, value: string) => {
 };
 
 export function ContainerInputs() {
-  const { data: games, isLoading } = useGetGames();
+  const { data: games, isLoading } = useGetGames([]);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

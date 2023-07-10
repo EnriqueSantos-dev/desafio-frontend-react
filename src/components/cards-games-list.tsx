@@ -19,26 +19,16 @@ type CardsGamesListProps = {
 export function CardsGamesList({
   ratingsAndFavoritesGames,
 }: CardsGamesListProps) {
-  const { data: games, error, isLoading } = useGetGames();
+  const {
+    data: games,
+    error,
+    isLoading,
+  } = useGetGames(ratingsAndFavoritesGames);
   const { error: toastError } = useToast();
   const searchParams = useSearchParams();
 
   const filteredGames = useMemo(() => {
     if (!games) return [] as GamesWithFavAndRating;
-
-    if (ratingsAndFavoritesGames.length > 0) {
-      return games.map((game) => {
-        const gameFound = ratingsAndFavoritesGames.find(
-          (ratingAndFavData) => ratingAndFavData.gameId === game.id
-        );
-
-        if (gameFound) {
-          return { ...game, gameUserDetails: gameFound };
-        }
-
-        return game;
-      });
-    }
 
     const searchValue = searchParams.get("search");
     const genreValue = searchParams.get("genre");
@@ -62,7 +52,7 @@ export function CardsGamesList({
     }
 
     return games;
-  }, [games, searchParams, ratingsAndFavoritesGames]);
+  }, [games, searchParams]);
 
   useEffect(() => {
     if (error) {
