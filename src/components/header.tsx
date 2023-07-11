@@ -15,7 +15,7 @@ export async function Header() {
   const session = await getAuthSession();
 
   return (
-    <header className="fixed top-0 z-50 flex h-auto w-full flex-col gap-12 bg-neutral-50 dark:bg-neutral-900">
+    <header className="fixed top-0 z-50 flex h-auto w-full flex-col gap-8 bg-neutral-50 dark:bg-neutral-900">
       <div className="border-b border-neutral-200 dark:border-neutral-800">
         <nav className="container flex h-16 items-center justify-between">
           <Link
