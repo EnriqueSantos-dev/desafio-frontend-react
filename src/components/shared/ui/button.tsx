@@ -10,7 +10,7 @@ export const buttonsVariants = cva(
         neutral:
           "bg-neutral-950 text-neutral-100 ring-neutral-950 ring-offset-2 ring-offset-neutral-50 hover:bg-neutral-900 focus-visible:ring-2 dark:bg-neutral-100 dark:text-neutral-900 dark:ring-offset-neutral-900 dark:hover:bg-neutral-200 dark:focus-visible:ring-neutral-100",
         red: "bg-red-500 text-white ring-red-500 hover:bg-red-600 dark:bg-red-600 dark:ring-offset-neutral-900 dark:hover:bg-red-700",
-        blue: "bg-blue-500 text-white shadow-[inset_0px_0px_0px_1px_rgb(96,165,250)] ring-blue-600 ring-offset-blue-300 hover:bg-blue-600 dark:bg-blue-600 dark:shadow-[inset_0px_0px_0px_1px_rgb(59,130,246)] dark:ring-blue-600 dark:ring-offset-neutral-900 dark:hover:bg-blue-700",
+        blue: "bg-blue-500 text-white ring-blue-600 ring-offset-blue-300 hover:bg-blue-600 dark:bg-blue-600 dark:ring-blue-600 dark:ring-offset-neutral-900 dark:hover:bg-blue-700",
         green:
           "bg-green-200 text-neutral-900 shadow-[inset_0px_0px_0px_1px_rgb(134,239,172)] ring-green-500 ring-offset-green-300 hover:bg-green-300 dark:bg-green-600 dark:text-white dark:shadow-[inset_0px_0px_0px_1px_rgb(21,128,61)] dark:ring-offset-neutral-900 dark:hover:bg-green-700",
       },

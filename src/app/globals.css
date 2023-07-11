@@ -8,8 +8,15 @@
   }
 }
 
-:is(html, body) {
-  height: 100%;
+@layer base {
+  html,
+  body {
+    @apply h-full;
+  }
+
+  html {
+    @apply antialiased;
+  }
 }
 
 input:-webkit-autofill,
