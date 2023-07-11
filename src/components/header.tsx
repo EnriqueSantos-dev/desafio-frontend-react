@@ -63,7 +63,7 @@ export async function Header() {
           </div>
         </nav>
       </div>
-      <ContainerInputs />
+      <ContainerInputs hasSession={!!session} />
     </header>
   );
 }
