@@ -11,27 +11,28 @@ const schema = z.object({
 });
 
 export const POST = withAuthRoute(async ({ request, user }) => {
-  const body = await request.json();
-
-  const parsedResult = schema.safeParse(body);
-
-  if (!parsedResult.success) {
-    return NextResponse.json({ message: "Invalid game id" }, { status: 400 });
-  }
-
   try {
-    let existFavoriteGameKey: string | null = null;
     const refFavGames = getDatabaseAdmin().ref("games-details/favorite_games");
-    const favGames = await refFavGames.get();
+    const body = await request.json();
 
-    favGames.forEach((favGame) => {
-      if (favGame.val().game_id === parsedResult.data.gameId) {
-        existFavoriteGameKey = favGame.key;
-      }
-    });
+    const parsedResult = schema.safeParse(body);
 
-    if (existFavoriteGameKey) {
-      await refFavGames.child(existFavoriteGameKey).remove();
+    if (!parsedResult.success) {
+      return NextResponse.json({ message: "Invalid game id" }, { status: 400 });
+    }
+
+    const { gameId } = parsedResult.data;
+    const existFavoriteGameKey = await refFavGames
+      .orderByChild("game_user_id")
+      .equalTo(`${gameId}_${user.uid}`)
+      .once("value");
+
+    if (existFavoriteGameKey.exists()) {
+      existFavoriteGameKey.forEach((child) => {
+        if (child.key) {
+          refFavGames.child(child.key).remove();
+        }
+      });
 
       return NextResponse.json(
         { message: "Game removed from your favorites" },
@@ -42,6 +43,7 @@ export const POST = withAuthRoute(async ({ request, user }) => {
     refFavGames.push({
       game_id: parsedResult.data.gameId,
       user_id: user.uid,
+      game_user_id: `${gameId}_${user.uid}`,
     });
 
     return NextResponse.json(
