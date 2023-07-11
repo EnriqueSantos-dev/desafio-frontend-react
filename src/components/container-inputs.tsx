@@ -36,7 +36,11 @@ const updateSearchParams = (key: SearchParamsKeys, value: string) => {
   return newSearchParams.toString();
 };
 
-export function ContainerInputs() {
+type ContainerInputsProps = {
+  hasSession?: boolean;
+};
+
+export function ContainerInputs({ hasSession = false }: ContainerInputsProps) {
   const { data: games, isLoading, isError } = useGetGames([]);
   const router = useRouter();
   const pathname = usePathname();
@@ -61,13 +65,12 @@ export function ContainerInputs() {
   return (
     <div className="container border-b border-neutral-200 py-3 dark:border-neutral-800">
       <form
-        className="grid grid-flow-row gap-y-4 lg:grid-cols-[60%_1fr] lg:grid-rows-2 lg:items-end lg:gap-y-0 xl:grid-cols-[40%_1fr_1fr] xl:grid-rows-none"
+        className="flex flex-col gap-3 xl:flex-1 xl:flex-row xl:items-end"
         onSubmit={handleSubmit}
       >
         <fieldset
           className={cn(
-            "flex w-full flex-col gap-2 md:justify-self-end",
-            isLoading && "col-span-full"
+            "flex flex-col gap-2 md:justify-self-end xl:flex-1 xl:max-w-2xl"
           )}
         >
           <LabelText.Root>
@@ -83,7 +86,7 @@ export function ContainerInputs() {
 
         <div
           className={cn(
-            "h-fit md:justify-self-end xl:justify-self-start xl:pl-6",
+            "md:flex-1 xl:flex-grow-0 justify-end flex",
             isLoading && "hidden"
           )}
         >
@@ -118,22 +121,15 @@ export function ContainerInputs() {
           )}
         </div>
 
-        <div className="flex items-center justify-end gap-3 lg:col-span-full lg:row-span-2 lg:h-full lg:justify-self-auto xl:col-auto xl:row-auto xl:h-auto xl:justify-self-end xl:pb-1">
-          <MustAvailable
-            defaultMustAvailableValue={defaultSortValue}
-            handleToggleMustAvailable={(value) =>
-              handleChangeValue("sort", value)
-            }
-            disabled={isError || isLoading}
-          />
+        <div className="ml-auto flex items-center gap-2 xl:pb-1">
+          <MustAvailable disabled={isError || isLoading || !hasSession} />
           <ButtonFavorites
             handleSelectFavorites={(value) =>
               handleChangeValue("favorites", value)
             }
             defaultFavoritesValue={defaultFavoritesValue}
-            disabled={isError || isLoading}
+            disabled={isError || isLoading || !hasSession}
           />
-
           <ClearFiltersButton />
         </div>
       </form>

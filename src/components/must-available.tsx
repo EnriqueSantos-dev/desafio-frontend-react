@@ -5,16 +5,9 @@ import * as Toggle from "@radix-ui/react-toggle";
 import { ChevronDown } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-type MustAvailableProps = {
-  defaultMustAvailableValue: string;
-  handleToggleMustAvailable: (value: string) => void;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+type MustAvailableProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function MustAvailable({
-  defaultMustAvailableValue,
-  handleToggleMustAvailable,
-  ...props
-}: MustAvailableProps) {
+export function MustAvailable({ ...props }: MustAvailableProps) {
   const searchParams = useSearchParams();
   const sort = searchParams.get("sort");
   const order = searchParams.get("order");
