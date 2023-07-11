@@ -11,6 +11,7 @@ import { useGetGames } from "@/hooks/useGetGames";
 import { CardGame } from "./card-game";
 import { CardGameSkeleton } from "./card-game-skeleton";
 import { useToast } from "@/hooks/useToast";
+import { useFilteredGameList } from "@/hooks/useFilteredGameList";
 
 type CardsGamesListProps = {
   ratingsAndFavoritesGames: GameUserDetails[];
@@ -25,34 +26,7 @@ export function CardsGamesList({
     isLoading,
   } = useGetGames(ratingsAndFavoritesGames);
   const { error: toastError } = useToast();
-  const searchParams = useSearchParams();
-
-  const filteredGames = useMemo(() => {
-    if (!games) return [] as GamesWithFavAndRating;
-
-    const searchValue = searchParams.get("search");
-    const genreValue = searchParams.get("genre");
-
-    if (searchValue && genreValue) {
-      return games.filter(
-        (game) =>
-          game.title.toLowerCase().includes(searchValue) &&
-          game.genre === genreValue
-      );
-    }
-
-    if (searchValue && !genreValue) {
-      return games.filter((game) =>
-        game.title.toLowerCase().includes(searchValue)
-      );
-    }
-
-    if (!searchValue && genreValue) {
-      return games.filter((game) => game.genre === genreValue);
-    }
-
-    return games;
-  }, [games, searchParams]);
+  const { filteredGames } = useFilteredGameList(games);
 
   useEffect(() => {
     if (error) {
@@ -62,7 +36,7 @@ export function CardsGamesList({
 
   return (
     <section>
-      <div className="grid grid-cols-[80%] items-stretch justify-center gap-4 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(360px,400px))]">
+      <div className="grid grid-cols-[minmax(300px,380px)] items-stretch justify-center gap-4 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(360px,400px))]">
         {!error &&
           filteredGames &&
           filteredGames.map((game, i) => (
