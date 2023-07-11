@@ -1,3 +1,10 @@
+import { UserRecord } from "firebase-admin/auth";
+
+export type SessionData = Pick<
+  UserRecord,
+  "uid" | "email" | "displayName" | "photoURL"
+>;
+
 export type Game = {
   id: number;
   title: string;

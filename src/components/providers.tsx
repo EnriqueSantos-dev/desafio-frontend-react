@@ -6,23 +6,18 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 
-import { AuthContextProvider } from "@/contexts/auth-context";
+import { AuthContextProps, AuthContextProvider } from "@/contexts/auth-context";
 
 const queryClient = new QueryClient();
 
 export function Providers({
   children,
-  hasSession,
-  hasCookieSession,
-}: {
-  hasSession: boolean;
-  hasCookieSession: boolean;
-  children: ReactNode;
-}) {
+  ...props
+}: { children: ReactNode } & Omit<AuthContextProps, "hasSession">) {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
-      <AuthContextProvider values={{ hasCookieSession, hasSession }}>
+      <AuthContextProvider values={{ ...props }}>
         <Toaster
           position="top-right"
           toastOptions={{

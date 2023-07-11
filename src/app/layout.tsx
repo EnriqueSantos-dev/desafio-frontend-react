@@ -29,8 +29,8 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-neutral-50 dark:bg-neutral-900`}>
         <Providers
-          hasSession={!!session}
           hasCookieSession={!!cookieSession?.value}
+          sessionData={session}
         >
           {children}
         </Providers>
