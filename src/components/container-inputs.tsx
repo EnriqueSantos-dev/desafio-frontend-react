@@ -22,7 +22,7 @@ import { MustAvailable } from "@/components/must-available";
 import { ClearFiltersButton } from "@/components/clear-filters-button";
 import { cn } from "@/lib/utils";
 
-type SearchParamsKeys = "search" | "genre" | "favorites" | "sort";
+type SearchParamsKeys = "search" | "genre" | "filter" | "sort";
 
 const updateSearchParams = (key: SearchParamsKeys, value: string) => {
   const newSearchParams = new URLSearchParams(window.location.search);
@@ -50,7 +50,7 @@ export function ContainerInputs({ hasSession = false }: ContainerInputsProps) {
   const isDisableSearchInput = !games || isLoading || isError;
   const defaultSearchValue = searchParams.get("search") ?? "";
   const defaultGenreValue = searchParams.get("genre") ?? "";
-  const defaultFavoritesValue = searchParams.get("favorites") ?? "";
+  const defaultFavoritesValue = searchParams.get("filter") ?? "";
 
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault();
@@ -124,7 +124,7 @@ export function ContainerInputs({ hasSession = false }: ContainerInputsProps) {
           <MustAvailable disabled={isError || isLoading || !hasSession} />
           <ButtonFavorites
             handleSelectFavorites={(value) =>
-              handleChangeValue("favorites", value)
+              handleChangeValue("filter", value)
             }
             defaultFavoritesValue={defaultFavoritesValue}
             disabled={isError || isLoading || !hasSession}

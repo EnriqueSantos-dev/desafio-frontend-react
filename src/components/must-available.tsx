@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 
 import * as Toggle from "@radix-ui/react-toggle";
 
@@ -20,12 +20,18 @@ export function MustAvailable({ ...props }: MustAvailableProps) {
   const pathname = usePathname();
 
   const handlePress = () => {
+    const newSearchParams = new URLSearchParams(window.location.search);
+
     if (sort === "rating" && order === "desc") {
       setIsSelected(false);
-      router.push(`${pathname}?sort=rating&order=asc`);
+      newSearchParams.set("sort", "rating");
+      newSearchParams.set("order", "asc");
+      router.push(`${pathname}?${newSearchParams.toString()}`);
     } else {
       setIsSelected(true);
-      router.push(`${pathname}?sort=rating&order=desc`);
+      newSearchParams.set("sort", "rating");
+      newSearchParams.set("order", "desc");
+      router.push(`${pathname}?${newSearchParams.toString()}`);
     }
   };
 

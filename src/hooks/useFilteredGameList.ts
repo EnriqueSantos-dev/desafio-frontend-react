@@ -14,7 +14,7 @@ export const useFilteredGameList = (
   const orderParam = searchParams.get("order") ?? "";
   const searchParam = searchParams.get("search") ?? "";
   const genreParam = searchParams.get("genre") ?? "";
-  const favoriteParam = searchParams.get("favorites") ?? "";
+  const favoriteParam = searchParams.get("filter") ?? "";
 
   const filteredGames = useMemo(() => {
     if (!query.data) return [] as GamesWithFavAndRating;
@@ -25,7 +25,7 @@ export const useFilteredGameList = (
         searchParam === "";
       const genreMatch = game.genre === genreParam || genreParam === "";
       const favoriteMatch =
-        (favoriteParam === "active" && game.gameUserDetails.isFavorite) ||
+        (favoriteParam === "favorites" && game.gameUserDetails.isFavorite) ||
         favoriteParam === "";
 
       return searchMatch && genreMatch && favoriteMatch;

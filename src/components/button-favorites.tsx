@@ -16,7 +16,7 @@ export function ButtonFavorites({
   ...props
 }: ButtonFavoritesProps) {
   const [favorites, setFavorites] = useState(
-    defaultFavoritesValue === "active"
+    defaultFavoritesValue === "favorites"
   );
 
   const handleClick = (value: string) => {
@@ -30,7 +30,7 @@ export function ButtonFavorites({
       variant="blue"
       size="md"
       {...props}
-      onClick={() => handleClick("active")}
+      onClick={() => handleClick("favorites")}
       className={cn(
         favorites
           ? "bg-blue-600 hover:bg-blue-700"
