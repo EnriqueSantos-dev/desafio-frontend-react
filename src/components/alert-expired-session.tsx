@@ -33,7 +33,7 @@ export function AlertExpiredSession() {
 
   useEffect(() => {
     if (mutation.isSuccess) {
-      router.push("/auth/login");
+      router.push("/auth");
     }
   }, [mutation.isSuccess, router]);
 

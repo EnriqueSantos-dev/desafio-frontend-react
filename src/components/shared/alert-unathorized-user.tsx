@@ -43,7 +43,7 @@ export function AlertUnauthorizedUser() {
 
         <div className="mx-auto mt-4 w-1/2">
           <Link
-            href="/auth/login"
+            href="/auth"
             onClick={() => setIsAlertUnauthorized(false)}
             className={buttonsVariants({
               variant: "neutral",
