@@ -10,13 +10,11 @@ import { CardGameSkeleton } from "./card-game-skeleton";
 import { useToast } from "@/hooks/useToast";
 import { useFilteredGameList } from "@/hooks/useFilteredGameList";
 
-type CardsGamesListProps = {
+type GamesListProps = {
   ratingsAndFavoritesGames: GameUserDetails[];
 };
 
-export function CardsGamesList({
-  ratingsAndFavoritesGames,
-}: CardsGamesListProps) {
+export function GamesList({ ratingsAndFavoritesGames }: GamesListProps) {
   const {
     data: filteredGames,
     error,
