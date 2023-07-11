@@ -51,7 +51,6 @@ export function ContainerInputs({ hasSession = false }: ContainerInputsProps) {
   const defaultSearchValue = searchParams.get("search") ?? "";
   const defaultGenreValue = searchParams.get("genre") ?? "";
   const defaultFavoritesValue = searchParams.get("favorites") ?? "";
-  const defaultSortValue = searchParams.get("ratings") ?? "";
 
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault();
