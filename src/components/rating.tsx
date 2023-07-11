@@ -17,7 +17,7 @@ type RatingProps = {
   initialRating: number;
 };
 
-const MAX_RATING = 5;
+const MAX_RATING = 4;
 
 export function Rating({ gameId, initialRating }: RatingProps) {
   const [rating, setRating] = useState(initialRating);
@@ -52,13 +52,15 @@ export function Rating({ gameId, initialRating }: RatingProps) {
     if (mutation.isSuccess && mutation.data) {
       success(mutation.data.message);
     }
-  }, [mutation.isSuccess, mutation.data, success]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mutation.data, mutation.isSuccess]);
 
   useEffect(() => {
     if (mutation.error) {
       error(mutation.error.message);
     }
-  }, [mutation.error, error]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mutation.error]);
 
   return (
     <div className="container-rating mb-2 space-x-2">
