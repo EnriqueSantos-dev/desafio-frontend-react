@@ -10,6 +10,7 @@ import ToggleTheme from "@/components/toggle-theme";
 import { buttonsVariants } from "@/components/shared/ui/button";
 
 import { ContainerInputs } from "./container-inputs";
+import { AvatarProfile } from "@/components/avatar-popover";
 
 export async function Header() {
   const session = await getAuthSession();
@@ -35,7 +36,7 @@ export async function Header() {
               <GithubIcon size={20} />
             </Link>
 
-            {!session?.uid && (
+            {!session ? (
               <div className="space-x-2">
                 <Link
                   href="/auth"
@@ -59,6 +60,8 @@ export async function Header() {
                   Login
                 </Link>
               </div>
+            ) : (
+              <AvatarProfile sessionData={session} />
             )}
           </div>
         </nav>
