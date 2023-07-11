@@ -1,12 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
-import { GameUserDetails, GamesWithFavAndRating } from "@/types";
-
-import { useGetGames } from "@/hooks/useGetGames";
+import { GameUserDetails } from "@/types";
 
 import { CardGame } from "./card-game";
 import { CardGameSkeleton } from "./card-game-skeleton";
@@ -21,12 +18,11 @@ export function CardsGamesList({
   ratingsAndFavoritesGames,
 }: CardsGamesListProps) {
   const {
-    data: games,
+    data: filteredGames,
     error,
     isLoading,
-  } = useGetGames(ratingsAndFavoritesGames);
+  } = useFilteredGameList(ratingsAndFavoritesGames);
   const { error: toastError } = useToast();
-  const { filteredGames } = useFilteredGameList(games);
 
   useEffect(() => {
     if (error) {

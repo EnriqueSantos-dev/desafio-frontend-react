@@ -2,11 +2,13 @@ import { useMemo } from "react";
 
 import { useSearchParams } from "next/navigation";
 
-import { GamesWithFavAndRating } from "@/types";
+import { GameUserDetails, GamesWithFavAndRating } from "@/types";
+import { useGetGames } from "@/hooks/useGetGames";
 
 export const useFilteredGameList = (
-  games: GamesWithFavAndRating | undefined
+  favGamesAndRating: GameUserDetails[] = []
 ) => {
+  const query = useGetGames(favGamesAndRating);
   const searchParams = useSearchParams();
   const sortParam = searchParams.get("sort") ?? "";
   const orderParam = searchParams.get("order") ?? "";
@@ -15,9 +17,9 @@ export const useFilteredGameList = (
   const favoriteParam = searchParams.get("favorites") ?? "";
 
   const filteredGames = useMemo(() => {
-    if (!games) return [] as GamesWithFavAndRating;
+    if (!query.data) return [] as GamesWithFavAndRating;
 
-    const gamesList = games.filter((game) => {
+    const gamesList = query.data.filter((game) => {
       const searchMatch =
         game.title.toLowerCase().includes(searchParam.toLowerCase()) ||
         searchParam === "";
@@ -41,7 +43,14 @@ export const useFilteredGameList = (
       );
 
     return gamesList;
-  }, [games, sortParam, orderParam, searchParam, genreParam, favoriteParam]);
+  }, [
+    query.data,
+    sortParam,
+    orderParam,
+    searchParam,
+    genreParam,
+    favoriteParam,
+  ]);
 
-  return { filteredGames };
+  return { ...query, data: filteredGames };
 };
