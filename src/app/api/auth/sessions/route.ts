@@ -34,9 +34,7 @@ export async function POST(request: NextRequest) {
       }`
     );
 
-    // revalidate the index page to get current user
-    revalidatePath("/");
-    return new Response(undefined, { headers: newHeaders });
+    return NextResponse.json({}, { headers: newHeaders });
   } catch (error) {
     console.log("[POST_LOGIN]", error);
     return NextResponse.json({ message: "internal server error" });
