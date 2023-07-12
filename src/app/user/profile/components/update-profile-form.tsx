@@ -188,7 +188,7 @@ export function FormUpdateProfile({ defaultValues }: FormProps) {
         </LabelText.ErrorMessage>
       </LabelText.Root>
 
-      <p className="text-center text-sm font-medium text-neutral-800">
+      <p className="text-center text-sm font-medium text-neutral-800 dark:text-neutral-400">
         <span className="text-lg">🔒</span>Security Notice: Your password has
         not been autofilled for security reasons.
       </p>
