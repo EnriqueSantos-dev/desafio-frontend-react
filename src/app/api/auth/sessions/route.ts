@@ -4,7 +4,6 @@ import { SESSION_COOKIE_NAME } from "@/constants/session-cookie";
 
 import { env } from "@/env.mjs";
 import { adminAuth } from "@/config/firebase/server";
-import { revalidatePath } from "next/cache";
 
 export async function POST(request: NextRequest) {
   const idToken = request.headers.get("Authorization")?.replace("Bearer ", "");
