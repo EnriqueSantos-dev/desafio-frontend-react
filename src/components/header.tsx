@@ -9,7 +9,6 @@ import { socialLinks } from "@/constants/links";
 import ToggleTheme from "@/components/toggle-theme";
 import { buttonsVariants } from "@/components/shared/ui/button";
 
-import { ContainerInputs } from "./container-inputs";
 import { AvatarProfile } from "@/components/avatar-popover";
 
 export async function Header() {
@@ -66,7 +65,6 @@ export async function Header() {
           </div>
         </nav>
       </div>
-      <ContainerInputs hasSession={!!session} />
     </header>
   );
 }

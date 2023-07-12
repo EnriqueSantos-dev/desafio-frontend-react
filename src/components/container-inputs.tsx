@@ -21,6 +21,7 @@ import { ButtonFavorites } from "@/components/button-favorites";
 import { MustAvailable } from "@/components/must-available";
 import { ClearFiltersButton } from "@/components/clear-filters-button";
 import { cn } from "@/lib/utils";
+import { useAuthContext } from "@/contexts/auth-context";
 
 type SearchParamsKeys = "search" | "genre" | "filter" | "sort";
 
@@ -36,12 +37,9 @@ const updateSearchParams = (key: SearchParamsKeys, value: string) => {
   return newSearchParams.toString();
 };
 
-type ContainerInputsProps = {
-  hasSession?: boolean;
-};
-
-export function ContainerInputs({ hasSession = false }: ContainerInputsProps) {
+export function ContainerInputs() {
   const { data: games, isLoading, isError } = useGetGames([]);
+  const { hasSession } = useAuthContext();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -62,7 +60,7 @@ export function ContainerInputs({ hasSession = false }: ContainerInputsProps) {
   };
 
   return (
-    <div className="container border-b border-neutral-200 py-3 dark:border-neutral-800">
+    <div className="container fixed inset-x-0 top-16 z-10 border-b border-neutral-200 bg-neutral-50 py-3 pt-12 dark:border-neutral-800 dark:bg-neutral-900">
       <form
         className="flex flex-col gap-3 xl:flex-1 xl:flex-row xl:items-end"
         onSubmit={handleSubmit}
