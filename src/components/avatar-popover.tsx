@@ -50,7 +50,7 @@ export function AvatarProfile({ sessionData }: { sessionData: SessionData }) {
         )}
       </PopoverTrigger>
 
-      <PopoverContent className="w-full max-w-xs px-0">
+      <PopoverContent className="px-0 pb-0">
         <div className="flex items-center gap-4 px-6">
           <div>
             {photoURL ? (
