@@ -2,7 +2,11 @@ import { UserRecord } from "firebase-admin/auth";
 
 export type SessionData = Pick<
   UserRecord,
-  "uid" | "email" | "displayName" | "photoURL"
+  "uid" | "email" | "displayName" | "photoURL" | "passwordHash"
+>;
+
+export type UpdateUserProfile = Partial<
+  Pick<SessionData, "email" | "passwordHash" | "displayName">
 >;
 
 export type Game = {
