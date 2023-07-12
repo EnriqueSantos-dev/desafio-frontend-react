@@ -7,13 +7,21 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/shared/ui/tooltip";
-import useTheme from "@/hooks/useTheme";
 import { cn } from "@/lib/utils";
 import * as Switch from "@radix-ui/react-switch";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function ToggleTheme() {
-  const [theme, toggleTheme] = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
   const isDark = theme === "dark";
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
 
   return (
     <TooltipProvider>
@@ -25,7 +33,9 @@ export default function ToggleTheme() {
               "relative flex h-6 w-12 overflow-hidden items-start ring-neutral-300 dark:ring-neutral-800 ring-offset-neutral-50 dark:focus-visible:ring-offset-neutral-950 dark:border-neutral-800 border dark:hover:bg-neutral-800 dark:hover:border-neutral-700 hover:bg-neutral-100 transition-colors dark:bg-neutral-950/50 focus-state"
             )}
             style={{ borderRadius: 9999 }}
-            onCheckedChange={() => toggleTheme()}
+            onCheckedChange={() =>
+              setTheme(theme === "dark" ? "light" : "dark")
+            }
           >
             <Switch.Thumb
               asChild
