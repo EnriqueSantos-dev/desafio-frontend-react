@@ -22,6 +22,11 @@ const responseInterceptor = (error: any) => {
     return Promise.reject(error);
   }
 
+  if (error.response?.data.from === "route_handler") {
+    error.message = error.response?.data.message;
+    return Promise.reject(error);
+  }
+
   const hasStatusCode = error.response?.status;
 
   if (!hasStatusCode) {
