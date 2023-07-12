@@ -5,10 +5,13 @@ import { useEffect } from "react";
 
 import { GameUserDetails } from "@/types";
 
-import { CardGame } from "./card-game";
-import { CardGameSkeleton } from "./card-game-skeleton";
 import { useToast } from "@/hooks/useToast";
 import { useFilteredGameList } from "@/hooks/useFilteredGameList";
+
+import { ErrorGamesList } from "@/components/error-games-list";
+
+import { CardGame } from "./card-game";
+import { CardGameSkeleton } from "./card-game-skeleton";
 
 type GamesListProps = {
   ratingsAndFavoritesGames: GameUserDetails[];
@@ -43,21 +46,7 @@ export function GamesList({ ratingsAndFavoritesGames }: GamesListProps) {
           ))}
       </div>
 
-      {error && (
-        <div className="grid place-items-center">
-          <div className="flex flex-col items-center gap-20 dark:text-neutral-100">
-            <p className="text-3xl font-bold">Let&apos; go, reload page.</p>
-            <Image
-              src="/error-img.png"
-              alt="indicates error on get games"
-              width={400}
-              height={400}
-              priority
-              className="inline-block drop-shadow-errorShadow"
-            />
-          </div>
-        </div>
-      )}
+      {error && <ErrorGamesList />}
 
       {!error && !isLoading && filteredGames.length === 0 && (
         <div className="grid place-items-center">
