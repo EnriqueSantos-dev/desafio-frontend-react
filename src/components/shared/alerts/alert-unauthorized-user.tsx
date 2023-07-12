@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 import { buttonsVariants } from "@/components/shared/ui/button";
 import {
@@ -19,15 +16,6 @@ export function AlertUnauthorizedUser() {
     descriptionAlertMessage,
     setIsAlertUnauthorized,
   } = useAlertUnauthorizedStore();
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  // avoid hydration mismatch
-  if (!isMounted) return null;
-
   return (
     <Dialog open={isAlertUnauthorized} onOpenChange={setIsAlertUnauthorized}>
       <DialogContent>
