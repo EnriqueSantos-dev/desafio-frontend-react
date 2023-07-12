@@ -14,6 +14,7 @@ import { useLogout } from "@/hooks/useLogout";
 import { useToast } from "@/hooks/useToast";
 import { SessionData } from "@/types";
 import { useEffect } from "react";
+import Link from "next/link";
 
 export function AvatarProfile({ sessionData }: { sessionData: SessionData }) {
   const { displayName, email, photoURL } = sessionData;
@@ -49,8 +50,8 @@ export function AvatarProfile({ sessionData }: { sessionData: SessionData }) {
         )}
       </PopoverTrigger>
 
-      <PopoverContent className="w-full max-w-xs">
-        <div className="flex items-center gap-4">
+      <PopoverContent className="w-full max-w-xs px-0">
+        <div className="flex items-center gap-4 px-6">
           <div>
             {photoURL ? (
               <button>
@@ -68,7 +69,7 @@ export function AvatarProfile({ sessionData }: { sessionData: SessionData }) {
 
           <div className="flex flex-col overflow-hidden">
             <p className="flex-1 overflow-hidden text-ellipsis text-[15px] font-semibold">
-              {displayName ?? email?.substring(0, email.indexOf("@"))}
+              {displayName || email?.substring(0, email.indexOf("@"))}
             </p>
             <small className="flex-1 overflow-hidden text-ellipsis">
               {email}
@@ -77,13 +78,13 @@ export function AvatarProfile({ sessionData }: { sessionData: SessionData }) {
         </div>
         <ul className="mt-4">
           <li>
-            <button
-              type="button"
+            <Link
+              href="/user/profile"
               className="flex w-full items-center gap-4 bg-neutral-100 px-6 py-3 text-[13px] transition-colors hover:bg-neutral-200"
             >
               <Settings size={18} className="w-11" />
               <span>Update profile</span>
-            </button>
+            </Link>
           </li>
           <li>
             <button
