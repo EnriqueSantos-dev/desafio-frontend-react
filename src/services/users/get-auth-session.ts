@@ -1,5 +1,3 @@
-import { UserRecord } from "firebase-admin/auth";
-
 import { cookies } from "next/headers";
 
 import { adminAuth } from "@/config/firebase/server";
