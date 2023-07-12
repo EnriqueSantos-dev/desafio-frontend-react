@@ -21,7 +21,7 @@ export function Providers({
         <Toaster
           position="top-right"
           toastOptions={{
-            duration: 5000,
+            duration: 3000,
             className:
               "bg-neutral-200 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100",
           }}
