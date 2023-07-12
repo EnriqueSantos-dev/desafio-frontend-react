@@ -1,19 +1,14 @@
-import { getAuthSession } from "@/services/users/get-auth-session";
-import { UserRecord } from "firebase-admin/auth";
 import { NextRequest, NextResponse } from "next/server";
 
-type HandleFunctionData<TParams extends { params: Record<string, unknown> }> = {
-  request: NextRequest;
-  params: TParams["params"];
-  user: UserRecord;
-};
+import { getAuthSession } from "@/services/users/get-auth-session";
+import { SessionData } from "@/types";
 
 type HandlerFunction<
-  TParams extends { params: Record<string, unknown> } = any
+  TParams extends { params: Record<string, string | number> } = any
 > = (data: {
   request: NextRequest;
   params: TParams["params"];
-  user: UserRecord;
+  user: SessionData;
 }) => Promise<NextResponse>;
 
 /**
