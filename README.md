@@ -17,9 +17,11 @@ Mais uma etapa concluída, agora com a implementação do Firebase, onde foi pos
 - [✅] Escolher um item para aplicar uma animação com CSS, pode ser ao favoritar, ou avaliar, ou quando os itens surgirem
 - [✅] Publicar seu projeto online para testarmos (na mesma url de antes)
 
-## Recursos e melhorias
+## Diferencias e recursos adicionais do projeto.
 
 - [✅] Opção de atualizar as informações do usuário, como nome, email e senha.
-- [✅] Opção de deslogar do sistema.
 - [✅] Opção de deletar a conta do usuário.
 - [✅] Gerenciamento de sessão via serve-side rendering e cookies HttpOnly.
+- [✅] Validação de formulários com React-Hook-Form e Zod.
+- [✅] Usando pattern de composição de componentes.
+- [✅] Firebase-Admin para gerenciamento de usuários nas route handlers do Next 13.
