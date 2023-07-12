@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import { Loader, LogOut, Settings, User } from "lucide-react";
+import { Loader, LogOut, Settings, User, UserX } from "lucide-react";
 
 import { Button } from "@/components/shared/ui/button";
 import {
@@ -15,11 +15,15 @@ import { useToast } from "@/hooks/useToast";
 import { SessionData } from "@/types";
 import { useEffect } from "react";
 import Link from "next/link";
+import { useAlertDeleteAccountStore } from "@/hooks/useAlertDeleteAccountStore";
 
 export function AvatarProfile({ sessionData }: { sessionData: SessionData }) {
   const { displayName, email, photoURL } = sessionData;
   const logoutMutation = useLogout();
   const { success, error } = useToast();
+  const showAlertDeleteAccount = useAlertDeleteAccountStore(
+    (state) => state.setIsDeleteAccountModalOpen
+  );
 
   useEffect(() => {
     if (logoutMutation.isSuccess) {
@@ -85,6 +89,17 @@ export function AvatarProfile({ sessionData }: { sessionData: SessionData }) {
               <Settings size={18} className="w-11" />
               <span>Update profile</span>
             </Link>
+          </li>
+          <li>
+            <button
+              type="button"
+              aria-label="delete account trigger modal"
+              onClick={() => showAlertDeleteAccount(true)}
+              className="flex w-full items-center gap-4 bg-neutral-100 px-6 py-3 text-[13px] transition-colors hover:bg-neutral-200"
+            >
+              <UserX size={18} className="w-11" />
+              <span>Delete account</span>
+            </button>
           </li>
           <li>
             <button
