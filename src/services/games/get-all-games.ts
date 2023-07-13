@@ -8,7 +8,11 @@ export async function getAllGames(): Promise<GamesWithFavAndRating> {
   return (
     data?.map((game) => ({
       ...game,
-      gameUserDetails: { gameId: game.id, isFavorite: false, rating: 0 },
+      gameUserDetails: {
+        gameId: game.id,
+        isFavorite: undefined,
+        rating: undefined,
+      },
     })) ?? []
   );
 }

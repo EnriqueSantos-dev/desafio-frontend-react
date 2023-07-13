@@ -25,10 +25,33 @@ export const useGetGames = (
       );
 
       if (gameFound) {
-        return { ...game, gameUserDetails: gameFound };
+        const defaultRating = game.gameUserDetails?.rating
+          ? game.gameUserDetails.rating
+          : gameFound.rating ?? 0;
+        const defaultIsFavorite = game.gameUserDetails?.isFavorite
+          ? game.gameUserDetails.isFavorite
+          : gameFound.isFavorite ?? false;
+
+        console.log(defaultRating, defaultIsFavorite);
+
+        return {
+          ...game,
+          gameUserDetails: {
+            gameId: game.id,
+            isFavorite: defaultIsFavorite,
+            rating: defaultRating,
+          },
+        };
       }
 
-      return game;
+      return {
+        ...game,
+        gameUserDetails: {
+          gameId: game.id,
+          isFavorite: game.gameUserDetails?.isFavorite ?? false,
+          rating: game.gameUserDetails?.rating ?? 0,
+        },
+      };
     }),
   } as UseQueryResult<GamesWithFavAndRating, ApiError>;
 };
