@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 import { GameUserDetails } from "@/types";
 
@@ -12,17 +12,15 @@ import { ErrorGamesList } from "@/components/error-games-list";
 
 import { CardGame } from "./card-game";
 import { CardGameSkeleton } from "./card-game-skeleton";
+import { useAuthContext } from "@/contexts/auth-context";
 
-type GamesListProps = {
-  ratingsAndFavoritesGames: GameUserDetails[];
-};
-
-export function GamesList({ ratingsAndFavoritesGames }: GamesListProps) {
+export function GamesList() {
+  const { userFavoritesGames } = useAuthContext();
   const {
     data: filteredGames,
     error,
     isLoading,
-  } = useFilteredGameList(ratingsAndFavoritesGames);
+  } = useFilteredGameList(userFavoritesGames);
   const { error: toastError } = useToast();
 
   useEffect(() => {
