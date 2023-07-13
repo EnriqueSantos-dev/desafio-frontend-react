@@ -36,8 +36,8 @@ export type FavoriteGame = {
 
 export type GameUserDetails = {
   gameId: number;
-  isFavorite: boolean;
-  rating: number;
+  isFavorite: undefined | boolean;
+  rating: undefined | number;
 };
 
 export type Games = Game[];
