@@ -21,26 +21,15 @@ export const PUT = withAuthRoute(async ({ request, user }) => {
     }
 
     const ratingsRef = getDatabaseAdmin().ref(
-      `games/users/${user.uid}/ratings`
+      `games/users/${user.uid}/ratings_and_favorites`
     );
 
-    const gameRating = await ratingsRef
-      .child(`id_${parsedBody.data.gameId}`)
-      .get();
-
-    if (gameRating.exists()) {
-      gameRating.ref.set(parsedBody.data.rating);
-
-      return NextResponse.json(
-        { message: "Rating updated successfully." },
-        { status: 201 }
-      );
-    }
-
-    gameRating.ref.set(parsedBody.data.rating);
+    ratingsRef.child(`id_${parsedBody.data.gameId}`).update({
+      rating: parsedBody.data.rating,
+    });
 
     return NextResponse.json(
-      { message: "Rating created successfully." },
+      { message: "Rating updated successfully." },
       { status: 201 }
     );
   } catch (error) {

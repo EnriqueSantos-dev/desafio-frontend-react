@@ -24,12 +24,12 @@ export const POST = withAuthRoute(async ({ request, user }) => {
     const { gameId, isFav } = parsedResult.data;
 
     const refFavGames = getDatabaseAdmin().ref(
-      `games/users/${user.uid}/favorites`
+      `games/users/${user.uid}/ratings_and_favorites`
     );
 
-    const favGameRef = await refFavGames.child(`id_${gameId}`).get();
-
-    favGameRef.ref.set(isFav);
+    refFavGames.child(`id_${gameId}`).update({
+      isFavorite: isFav,
+    });
 
     return NextResponse.json(
       { message: "Favorite status updated" },
