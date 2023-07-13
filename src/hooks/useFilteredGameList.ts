@@ -34,12 +34,14 @@ export const useFilteredGameList = (
     if (!sortParam || sortParam !== "rating") return gamesList;
     if (orderParam === "asc")
       return gamesList.sort(
-        (a, b) => a.gameUserDetails.rating - b.gameUserDetails.rating
+        // force non-null assertion because we know that the rating is defined in query.data to default value
+        (a, b) => a.gameUserDetails.rating! - b.gameUserDetails.rating!
       );
 
     if (orderParam === "desc")
       return gamesList.sort(
-        (a, b) => b.gameUserDetails.rating - a.gameUserDetails.rating
+        // force non-null assertion because we know that the rating is defined in query.data to default value
+        (a, b) => b.gameUserDetails.rating! - a.gameUserDetails.rating!
       );
 
     return gamesList;
