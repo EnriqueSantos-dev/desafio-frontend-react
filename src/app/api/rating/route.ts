@@ -20,22 +20,16 @@ export const PUT = withAuthRoute(async ({ request, user }) => {
       );
     }
 
-    const ratingsRef = getDatabaseAdmin().ref("games-details/ratings");
+    const ratingsRef = getDatabaseAdmin().ref(
+      `games/users/${user.uid}/ratings`
+    );
 
     const gameRating = await ratingsRef
-      .orderByChild("game_user_id")
-      .equalTo(`${parsedBody.data.gameId}_${user.uid}`)
-      .once("value");
+      .child(`id_${parsedBody.data.gameId}`)
+      .get();
 
     if (gameRating.exists()) {
-      gameRating.forEach((rating) => {
-        if (rating.key) {
-          const ratingRef = ratingsRef.child(rating.key);
-          ratingRef.update({
-            rating: parsedBody.data.rating,
-          });
-        }
-      });
+      gameRating.ref.set(parsedBody.data.rating);
 
       return NextResponse.json(
         { message: "Rating updated successfully." },
@@ -43,20 +37,13 @@ export const PUT = withAuthRoute(async ({ request, user }) => {
       );
     }
 
-    ratingsRef.push({
-      game_id: parsedBody.data.gameId,
-      user_id: user.uid,
-      game_user_id: `${parsedBody.data.gameId}_${user.uid}`,
-      rating: parsedBody.data.rating,
-    });
+    gameRating.ref.set(parsedBody.data.rating);
 
     return NextResponse.json(
       { message: "Rating created successfully." },
       { status: 201 }
     );
   } catch (error) {
-    console.log(error);
-
     return NextResponse.json(
       { message: "Ops! Something went wrong." },
       { status: 500 }

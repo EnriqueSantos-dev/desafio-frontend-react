@@ -5,18 +5,21 @@ export async function getFavoriteGames(
   connection: Database,
   userId: string
 ): Promise<FavoriteGame[]> {
-  const favGames: FavoriteGame[] = [];
+  let favGames: FavoriteGame[] = [];
   const favGamesSnapshot = await connection
-    .ref("games-details/favorite_games")
+    .ref(`games/users/${userId}/favorites`)
     .get();
 
-  favGamesSnapshot.forEach((data) => {
-    const fav = data.val();
-
-    if (fav.user_id === userId) {
-      favGames.push(fav);
-    }
-  });
+  if (favGamesSnapshot.exists()) {
+    Object.entries(favGamesSnapshot.val())
+      .filter(([_, value]) => value)
+      .forEach(([key]) => {
+        favGames.push({
+          game_id: parseInt(key.replace("id_", "")),
+          user_id: userId,
+        });
+      });
+  }
 
   return favGames;
 }

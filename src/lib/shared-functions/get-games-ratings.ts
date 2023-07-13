@@ -6,15 +6,19 @@ export async function getGamesRatings(
   userId: string
 ): Promise<RatingGame[]> {
   let ratings: RatingGame[] = [];
-  const ratingsSnapshot = await connection.ref("games-details/ratings").get();
+  const ratingsSnapshot = await connection
+    .ref(`games/users/${userId}/ratings`)
+    .get();
 
-  ratingsSnapshot.forEach((data) => {
-    const rating = data.val();
-
-    if (rating.user_id === userId) {
-      ratings.push(rating);
-    }
-  });
+  if (ratingsSnapshot.exists()) {
+    Object.entries(ratingsSnapshot.val()).forEach(([key, value]) => {
+      ratings.push({
+        game_id: parseInt(key.replace("id_", "")),
+        rating: Number(value),
+        user_id: userId,
+      });
+    });
+  }
 
   return ratings;
 }
