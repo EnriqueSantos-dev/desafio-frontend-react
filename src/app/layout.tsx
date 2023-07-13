@@ -10,6 +10,8 @@ import { seoConfig } from "@/config/site";
 
 import { getAuthSession } from "@/services/users/get-auth-session";
 import { SESSION_COOKIE_NAME } from "@/constants/session-cookie";
+import { GameUserDetails } from "@/types";
+import { getFavAndRatingsGames } from "@/lib/shared-functions/get-fav-and-ratings-games";
 
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
@@ -25,12 +27,19 @@ export default async function RootLayout({
   const cookieSession = cookies().get(SESSION_COOKIE_NAME);
   const session = await getAuthSession();
 
+  let userFavoritesGames: GameUserDetails[] = [];
+
+  if (session) {
+    userFavoritesGames = await getFavAndRatingsGames();
+  }
+
   return (
     <html lang="en">
       <body className={`${inter.className} bg-neutral-50 dark:bg-neutral-900`}>
         <Providers
           hasCookieSession={!!cookieSession?.value}
           sessionData={session}
+          userFavoritesGames={userFavoritesGames}
         >
           {children}
         </Providers>
