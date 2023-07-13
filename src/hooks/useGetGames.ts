@@ -9,8 +9,6 @@ import { ApiError } from "@/types/api-error";
 type ResultQuery = UseQueryResult<GamesWithFavAndRating, ApiError>;
 
 export const useGetGames = (favGamesAndRatings: GameUserDetails[]) => {
-  const [isMounted, setIsMounted] = useState(false);
-
   const query = useQuery({
     queryKey: ["games"] as const,
     queryFn: getAllGames,
@@ -18,14 +16,6 @@ export const useGetGames = (favGamesAndRatings: GameUserDetails[]) => {
     refetchOnWindowFocus: false,
     staleTime: Infinity,
   });
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return { ...query } as ResultQuery;
-  }
 
   return {
     ...query,
