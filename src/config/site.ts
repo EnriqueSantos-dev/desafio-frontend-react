@@ -2,6 +2,13 @@ import { socialLinks } from "@/constants/links";
 import { Metadata } from "next";
 
 export const seoConfig: Metadata = {
+  metadataBase: new URL("https://desafio-frontend-react.vercel.app"),
+  alternates: {
+    languages: {
+      "pt-BR": "/pt-br",
+      "en-US": "/en-us",
+    },
+  },
   title: "Challenge Frontend React - Enrique Santos",
   description:
     "Pick your favorite movie, filter results and see details and more...",
