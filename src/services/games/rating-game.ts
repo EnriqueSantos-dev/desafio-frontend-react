@@ -13,6 +13,9 @@ export async function ratingGame({
   gameId,
   rating,
 }: RatingGameInput): Promise<RatingGameResponse> {
-  const { data } = await apiInternal.put("/api/rating", { gameId, rating });
+  const { data } = await apiInternal.put("/api/games/rating", {
+    gameId,
+    rating,
+  });
   return data;
 }

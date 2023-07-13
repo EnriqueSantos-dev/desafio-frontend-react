@@ -14,7 +14,7 @@ export async function favGame({
   isFav,
 }: FavGameInput): Promise<FavGameResponse> {
   const { data } = await apiInternal.post<FavGameResponse>(
-    "/api/favorite-game",
+    "/api/games/favorite",
     {
       gameId,
       isFav,

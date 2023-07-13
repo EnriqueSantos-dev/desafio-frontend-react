@@ -10,7 +10,7 @@ export type UpdateUserProfileResponse = {
 export async function updateUserProfile(
   input: UpdateUserProfileInput
 ): Promise<UpdateUserProfileResponse> {
-  const { data } = await apiInternal.put("/api/auth//users/profile", input);
+  const { data } = await apiInternal.put("/api/auth/users/profile", input);
 
   return data;
 }
