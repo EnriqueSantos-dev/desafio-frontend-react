@@ -7,17 +7,19 @@ import {
 } from "react";
 
 import { useAlertExpiredSessionStore } from "@/hooks/useAlertExpiredSessionStore";
-import { SessionData } from "@/types";
+import { GameUserDetails, SessionData } from "@/types";
 
 export type AuthContextType = {
   hasSession: boolean;
   hasCookieSession: boolean;
   sessionData: SessionData | null;
+  userFavoritesGames: GameUserDetails[];
 };
 
 export type AuthContextProps = {
   hasCookieSession: boolean;
   sessionData: SessionData | null;
+  userFavoritesGames: GameUserDetails[];
 };
 
 const AuthContext = createContext({} as AuthContextType);
@@ -40,7 +42,11 @@ export const AuthContextProvider = ({
   }, [values.hasCookieSession, values.sessionData, setIsExpiredSession]);
 
   const valuesMemo = useMemo(
-    () => ({ ...values, hasSession: !!values.sessionData }),
+    () => ({
+      ...values,
+      hasSession: !!values.sessionData,
+      userFavoritesGames: values.userFavoritesGames,
+    }),
     [values]
   );
 
