@@ -6,52 +6,39 @@ import { GamesWithFavAndRating, GameUserDetails } from "@/types";
 import { ApiError } from "@/types/api-error";
 
 export const useGetGames = (
-  favGames: GameUserDetails[]
+  favGamesAndRatings: GameUserDetails[]
 ): UseQueryResult<GamesWithFavAndRating, ApiError> => {
-  const query = useQuery({
+  return useQuery({
     queryKey: ["games"] as const,
-    queryFn: getAllGames,
-    retry: false,
-    refetchOnWindowFocus: false,
-    staleTime: Infinity,
-    // cache forever
-  });
+    queryFn: async () => {
+      const games = await getAllGames();
 
-  return {
-    ...query,
-    data: query.data?.map((game) => {
-      const gameFound = favGames.find(
-        (ratingAndFavData) => ratingAndFavData.gameId === game.id
-      );
+      return games.map((game) => {
+        const gameFound = favGamesAndRatings.find(
+          (favGameAndRating) => favGameAndRating.gameId === game.id
+        );
 
-      if (gameFound) {
-        const defaultRating = game.gameUserDetails?.rating
-          ? game.gameUserDetails.rating
-          : gameFound.rating ?? 0;
-        const defaultIsFavorite = game.gameUserDetails?.isFavorite
-          ? game.gameUserDetails.isFavorite
-          : gameFound.isFavorite ?? false;
-
-        console.log(defaultRating, defaultIsFavorite);
+        if (gameFound) {
+          return {
+            ...game,
+            gameUserDetails: {
+              isFavorite: gameFound.isFavorite,
+              rating: gameFound.rating,
+            },
+          };
+        }
 
         return {
           ...game,
           gameUserDetails: {
-            gameId: game.id,
-            isFavorite: defaultIsFavorite,
-            rating: defaultRating,
+            isFavorite: false,
+            rating: 0,
           },
         };
-      }
-
-      return {
-        ...game,
-        gameUserDetails: {
-          gameId: game.id,
-          isFavorite: game.gameUserDetails?.isFavorite ?? false,
-          rating: game.gameUserDetails?.rating ?? 0,
-        },
-      };
-    }),
-  } as UseQueryResult<GamesWithFavAndRating, ApiError>;
+      });
+    },
+    retry: false,
+    refetchOnWindowFocus: false,
+    staleTime: Infinity,
+  });
 };
