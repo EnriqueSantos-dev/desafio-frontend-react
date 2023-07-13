@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 
 export function CardGameSkeleton({ delay }: { delay: number }) {
-  const delayAppear = delay * 0.15;
+  const delayAppear = delay * 0.1;
   const styles = { "--delay": `${delayAppear}s` } as CSSProperties;
 
   return (

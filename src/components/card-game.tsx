@@ -24,7 +24,7 @@ export function CardGameComponent({
   gameUserDetails,
   ...props
 }: CardGameProps & { delayAppear: number }) {
-  const delayAppear = delay * 0.15;
+  const delayAppear = delay * 0.1;
   const styles = { "--delay": `${delayAppear}s` } as CSSProperties;
 
   return (
@@ -54,11 +54,11 @@ export function CardGameComponent({
                 {title}
               </Link>
             </h2>
-            <FavGame gameId={id} isFav={gameUserDetails.isFavorite} />
+            <FavGame gameId={id} isFav={!!gameUserDetails.isFavorite} />
           </div>
 
           <div className="1">
-            <Rating gameId={id} initialRating={gameUserDetails.rating} />
+            <Rating gameId={id} initialRating={gameUserDetails.rating ?? 0} />
           </div>
 
           <CardGameDialog
