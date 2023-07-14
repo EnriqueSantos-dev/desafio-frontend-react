@@ -13,6 +13,7 @@ import { ErrorGamesList } from "@/components/error-games-list";
 import { CardGame } from "./card-game";
 import { CardGameSkeleton } from "./card-game-skeleton";
 import { useAuthContext } from "@/contexts/auth-context";
+import { useRouter } from "next/navigation";
 
 export function GamesList() {
   const { userFavoritesGames } = useAuthContext();
@@ -22,12 +23,19 @@ export function GamesList() {
     isLoading,
   } = useFilteredGameList(userFavoritesGames);
   const { error: toastError } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     if (error) {
       toastError(error.message);
     }
   }, [error, toastError]);
+
+  useEffect(() => {
+    router.refresh();
+    // this is necessary to get updated cookies once when page is loaded
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <section>
