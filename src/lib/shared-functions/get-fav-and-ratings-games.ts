@@ -25,7 +25,7 @@ export async function getFavAndRatingsGames() {
       rantingsAndFavGames.push({
         gameId: parseInt(childSnapshot!.key!.replace("id_", "")),
         isFavorite: data.isFavorite,
-        rating: data.rating,
+        rating: data.rating ?? 0,
       });
     });
   }
