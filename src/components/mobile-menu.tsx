@@ -127,7 +127,6 @@ export function MobileMenu({ hasSession }: MobileMenuProps) {
                     href={socialLinks.github}
                     className={buttonsVariants({
                       variant: "neutral",
-                      size: "md",
                       className: "w-full",
                     })}
                   >
