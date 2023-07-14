@@ -4,6 +4,7 @@ import { Heart } from "lucide-react";
 import { Button } from "@/components/shared/ui/button";
 
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 type ButtonFavoritesProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   defaultFavoritesValue: string;
@@ -15,6 +16,7 @@ export function ButtonFavorites({
   handleSelectFavorites,
   ...props
 }: ButtonFavoritesProps) {
+  const router = useRouter();
   const [favorites, setFavorites] = useState(
     defaultFavoritesValue === "favorites"
   );
@@ -22,6 +24,7 @@ export function ButtonFavorites({
   const handleClick = (value: string) => {
     setFavorites(!favorites);
     handleSelectFavorites(favorites ? "" : value);
+    router.refresh();
   };
 
   return (

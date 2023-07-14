@@ -97,8 +97,8 @@ export function FormUpdateProfile({ defaultValues }: FormProps) {
 
   useEffect(() => {
     if (mutation.isSuccess && mutation.data) {
+      router.refresh();
       toastSuccess(mutation.data.message);
-      router.push("/auth");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mutation.isSuccess, mutation.data]);
