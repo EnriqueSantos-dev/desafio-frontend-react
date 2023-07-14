@@ -9,7 +9,7 @@ export default async function ProfilePage() {
   if (!sessionData) redirect("/auth");
 
   return (
-    <div className="w-full pt-10 text-neutral-900 dark:text-neutral-100">
+    <div className="w-full py-12 text-neutral-900 dark:text-neutral-100">
       <h1 className="text-2xl font-bold">Update Profile</h1>
 
       <p className="pb-1 text-sm text-neutral-600  dark:text-neutral-400">

@@ -13,7 +13,7 @@ export default function UserLayout({
   return (
     <>
       <Header />
-      <main className="container pt-20">{children}</main>
+      <main className="container pt-16">{children}</main>
     </>
   );
 }
