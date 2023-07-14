@@ -1,8 +1,12 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { Loader, LogOut, Settings, User, UserX } from "lucide-react";
+
+import { SessionData } from "@/types";
 
 import { Button } from "@/components/shared/ui/button";
 import {
@@ -12,9 +16,6 @@ import {
 } from "@/components/shared/ui/popover";
 import { useLogout } from "@/hooks/useLogout";
 import { useToast } from "@/hooks/useToast";
-import { SessionData } from "@/types";
-import { useEffect } from "react";
-import Link from "next/link";
 import { useAlertDeleteAccountStore } from "@/hooks/useAlertDeleteAccountStore";
 
 export function AvatarProfile({ sessionData }: { sessionData: SessionData }) {
@@ -43,32 +44,29 @@ export function AvatarProfile({ sessionData }: { sessionData: SessionData }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        {photoURL ? (
-          <button>
+        <Button
+          variant="outline"
+          aria-label="open popover user details"
+          className="relative h-10 w-10 overflow-hidden rounded-full p-0"
+        >
+          {photoURL ? (
             <Image src={photoURL} alt="user profile avatar" fill priority />
-          </button>
-        ) : (
-          <Button size="md" className="ml-4 h-10 w-10 rounded-full p-0">
+          ) : (
             <User className="h-4 w-4 shrink-0" />
-          </Button>
-        )}
+          )}
+        </Button>
       </PopoverTrigger>
 
       <PopoverContent className="px-0 pb-0">
         <div className="flex items-center gap-4 px-6">
           <div>
-            {photoURL ? (
-              <button>
+            <Button className="pointer-events-none relative inline-block h-11 w-11 overflow-hidden rounded-full">
+              {photoURL ? (
                 <Image src={photoURL} alt="user profile avatar" fill priority />
-              </button>
-            ) : (
-              <Button
-                size="md"
-                className="pointer-events-none h-11 w-11 rounded-full p-0 dark:bg-neutral-200"
-              >
+              ) : (
                 <User className="h-4 w-4 shrink-0" />
-              </Button>
-            )}
+              )}
+            </Button>
           </div>
 
           <div className="flex flex-col overflow-hidden">
