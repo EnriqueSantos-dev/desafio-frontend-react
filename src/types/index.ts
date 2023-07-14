@@ -5,9 +5,12 @@ export type SessionData = Pick<
   "uid" | "email" | "displayName" | "photoURL" | "passwordHash"
 >;
 
-export type UpdateUserProfile = Partial<
-  Pick<SessionData, "email" | "passwordHash" | "displayName">
->;
+export type UpdateUserProfile = {
+  avatar?: string;
+  name?: string;
+  password?: string;
+  email?: string;
+};
 
 export type Game = {
   id: number;
