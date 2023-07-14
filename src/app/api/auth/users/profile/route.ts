@@ -30,7 +30,6 @@ export const PUT = withAuthRoute(async ({ request, user }) => {
     }
 
     const { email, displayName, passwordHash } = parsedBody.data;
-    console.log("PUT_UPDATE_PROFILE", parsedBody.data);
 
     await adminAuth.updateUser(user.uid, {
       displayName,
@@ -38,7 +37,11 @@ export const PUT = withAuthRoute(async ({ request, user }) => {
       password: passwordHash,
     });
 
-    cookies().set(SESSION_COOKIE_NAME, "", { maxAge: -1 });
+    // changes email require user to reauthenticate, because firebase revoke the cookie session
+    if (email && email !== user.email) {
+      cookies().set(SESSION_COOKIE_NAME, "", { maxAge: -1 });
+    }
+
     return NextResponse.json({ message: "Profile updated successfully" });
   } catch (error) {
     console.log("PUT_UPDATE_PROFILE_ERROR", error);
