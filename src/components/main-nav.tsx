@@ -42,10 +42,10 @@ export async function MainNav() {
           </Link>
         </div>
 
-        <MobileMenu />
+        <MobileMenu hasSession={!!session} />
 
         {!session ? (
-          <div className="space-x-2">
+          <div className="hidden space-x-2 lg:block">
             <Link
               href="/auth"
               className={buttonsVariants({

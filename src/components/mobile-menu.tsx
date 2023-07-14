@@ -16,7 +16,11 @@ import { createPortal } from "react-dom";
 import { socialLinks } from "@/constants/links";
 import { buttonsVariants } from "@/components/shared/ui/button";
 
-export function MobileMenu() {
+type MobileMenuProps = {
+  hasSession: boolean;
+};
+
+export function MobileMenu({ hasSession }: MobileMenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -85,18 +89,44 @@ export function MobileMenu() {
         >
           <Link
             href="/"
-            className="mx-auto mb-10 block text-center text-lg font-semibold"
+            className="mx-auto mb-6 block text-center text-lg font-semibold"
           >
             Pick Your Game
           </Link>
-          <nav className="mx-auto flex w-full max-w-xs flex-1 flex-col justify-between gap-4 md:max-w-sm">
-            <div className="flex flex-col gap-3">
+          <nav className="mx-auto flex w-full max-w-xs flex-1 flex-col justify-end gap-4 md:max-w-sm">
+            {!hasSession && (
+              <div className="flex w-full flex-col justify-center gap-2">
+                <Link
+                  href="/auth"
+                  className={buttonsVariants({
+                    variant: "green",
+                    className: "w-full",
+                    size: "md",
+                  })}
+                >
+                  Sign Up
+                </Link>
+
+                <Link
+                  href="/auth"
+                  className={buttonsVariants({
+                    variant: "blue",
+                    className: "w-full",
+                    size: "md",
+                  })}
+                >
+                  Login
+                </Link>
+              </div>
+            )}
+
+            <div className="flex flex-1 flex-col justify-end gap-4">
               <ul className="space-y-4 text-sm text-neutral-900 dark:text-neutral-100">
                 <li>
                   <Link
                     href={socialLinks.github}
                     className={buttonsVariants({
-                      variant: "outline",
+                      variant: "neutral",
                       size: "md",
                       className: "w-full",
                     })}
@@ -106,14 +136,14 @@ export function MobileMenu() {
                   </Link>
                 </li>
               </ul>
-            </div>
 
-            <div className="flex items-center justify-between rounded-md border border-neutral-200 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-950">
-              <span className="text-sm font-medium text-neutral-900 dark:text-neutral-300">
-                Appearance
-              </span>
+              <div className="flex items-center justify-between rounded-md border border-neutral-200 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-950">
+                <span className="text-sm font-medium text-neutral-900 dark:text-neutral-300">
+                  Appearance
+                </span>
 
-              <ToggleTheme />
+                <ToggleTheme />
+              </div>
             </div>
           </nav>
         </div>,
