@@ -69,7 +69,9 @@ export async function MainNav() {
             </Link>
           </div>
         ) : (
-          <AvatarProfile sessionData={session} />
+          <div className="ml-4">
+            <AvatarProfile sessionData={session} />
+          </div>
         )}
       </div>
     </nav>
