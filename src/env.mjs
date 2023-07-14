@@ -17,6 +17,10 @@ export const env = createEnv({
     FIREBASE_DATABASE_URL: z.string().url(),
     FIREBASE_CLIENT_EMAIL: z.string().min(1),
     EXPIRES_IN_SESSION: z.coerce.number().positive(),
+    CLOUDINARY_CLOUD_NAME: z.string().min(1),
+    CLOUDINARY_API_KEY: z.string().min(1),
+    CLOUNDINARY_API_SECRET: z.string().min(1),
+    CLOUDINARY_FOLDER: z.string().min(1),
   },
   experimental__runtimeEnv: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
