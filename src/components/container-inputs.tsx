@@ -16,7 +16,7 @@ import {
 import { SearchGamesInput } from "@/components/search-games-input";
 
 import { useGetGames } from "@/hooks/useGetGames";
-import { LabelText } from "@/components/shared/label-text";
+import { LabelText } from "@/components/shared/ui/label-text";
 import { ButtonFavorites } from "@/components/button-favorites";
 import { MustAvailable } from "@/components/must-available";
 import { ClearFiltersButton } from "@/components/clear-filters-button";

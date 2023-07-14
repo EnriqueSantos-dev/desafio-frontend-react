@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Eye, EyeOff, Loader, Loader2 } from "lucide-react";
 
-import { LabelText } from "@/components/shared/label-text";
+import { LabelText } from "@/components/shared/ui/label-text";
 import { Button } from "@/components/shared/ui/button";
 import { TextField } from "@/components/shared/ui/text-input";
 
