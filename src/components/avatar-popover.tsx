@@ -47,12 +47,12 @@ export function AvatarProfile({ sessionData }: { sessionData: SessionData }) {
         <Button
           variant="outline"
           aria-label="open popover user details"
-          className="relative h-10 w-10 overflow-hidden rounded-full p-0"
+          className="relative h-11 w-11 overflow-hidden rounded-full p-0"
         >
           {photoURL ? (
             <Image src={photoURL} alt="user profile avatar" fill priority />
           ) : (
-            <User className="h-4 w-4 shrink-0" />
+            <User className="h-5 w-5 shrink-0" strokeWidth={3} />
           )}
         </Button>
       </PopoverTrigger>
