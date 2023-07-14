@@ -3,7 +3,6 @@ import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { getAllGames } from "@/services/games/get-all-games";
 
 import { GameUserDetails, GamesWithFavAndRating } from "@/types";
-import { useEffect, useState } from "react";
 import { ApiError } from "@/types/api-error";
 
 type ResultQuery = UseQueryResult<GamesWithFavAndRating, ApiError>;
