@@ -1,5 +1,4 @@
 import { GamesList } from "@/components/games-list";
-import { getFavAndRatingsGames } from "@/lib/shared-functions/get-fav-and-ratings-games";
 
 export default async function Home() {
   return (

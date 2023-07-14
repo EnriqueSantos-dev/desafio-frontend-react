@@ -31,6 +31,7 @@ export function AlertDeleteAccount() {
 
   useEffect(() => {
     if (mutation.isError) {
+      setIsDeleteAccountModalOpen(false);
       error(mutation.error.message);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -55,14 +56,19 @@ export function AlertDeleteAccount() {
           </DialogDescription>
         </DialogHeader>
 
-        <div className="max-w-2/4 mx-auto mt-4 flex justify-center gap-4">
-          <Button variant="green" size="md">
+        <div className="mx-auto mt-4 flex justify-center gap-4">
+          <Button
+            variant="green"
+            size="md"
+            className="w-24"
+            disabled={mutation.isLoading}
+          >
             Cancel
           </Button>
           <Button
             variant="red"
             size="md"
-            className="w-full text-white"
+            className="w-24 text-white"
             disabled={mutation.isLoading}
             onClick={() => mutation.mutate({})}
           >
