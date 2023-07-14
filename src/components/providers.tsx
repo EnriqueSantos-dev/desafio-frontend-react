@@ -27,6 +27,7 @@ export function Providers({
         <ReactQueryDevtools />
         <AuthContextProvider values={{ ...props }}>
           <Toaster
+            reverseOrder
             position="top-right"
             toastOptions={{
               duration: 3000,
