@@ -25,3 +25,4 @@ Mais uma etapa concluída, agora com a implementação do Firebase, onde foi pos
 - [✅] Validação de formulários com React-Hook-Form e Zod.
 - [✅] Usando pattern de composição de componentes.
 - [✅] Firebase-Admin para gerenciamento de usuários nas route handlers do Next 13.
+- [✅] Upload de arquivos com Cloudinary (Avatar do usuário)
