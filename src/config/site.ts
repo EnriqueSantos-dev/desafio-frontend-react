@@ -32,7 +32,7 @@ export const seoConfig: Metadata = {
       "Pick your favorite movie, filter results and see details and more...",
     images: [
       {
-        url: "https://desafio-frontend-react.vercel.app/facebook-img.png",
+        url: "https://desafio-frontend-react.vercel.app/og.png",
         width: 1200,
         height: 630,
         alt: "Pick Your Game",
@@ -47,7 +47,7 @@ export const seoConfig: Metadata = {
       "Pick your favorite movie, filter results and see details and more...",
     images: [
       {
-        url: "https://desafio-frontend-react.vercel.app/twitter-image.png",
+        url: "https://desafio-frontend-react.vercel.app/og.png",
         alt: "Pick Your Game",
       },
     ],
