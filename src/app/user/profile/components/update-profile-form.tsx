@@ -6,11 +6,12 @@ import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Eye, EyeOff, Loader, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader } from "lucide-react";
 
 import { LabelText } from "@/components/shared/ui/label-text";
 import { Button } from "@/components/shared/ui/button";
 import { TextField } from "@/components/shared/ui/text-input";
+import { UploadImage } from "@/components/upload-image";
 
 import { useToast } from "@/hooks/useToast";
 import { useUpdateUserProfile } from "@/hooks/useUpdateUserProfile";
@@ -19,6 +20,7 @@ const formSchema = z
   .object({
     name: z.string().trim().max(50).optional(),
     email: z.string().email().optional(),
+    avatar: z.any().optional(),
     password: z
       .string()
       .min(6)
@@ -67,17 +69,24 @@ export function FormUpdateProfile({ defaultValues }: FormProps) {
   const {
     register,
     handleSubmit,
+    resetField,
+    setValue,
     formState: { errors },
   } = useForm<FormSchema>({
-    defaultValues: { ...defaultValues, password: "", confirmPassword: "" },
+    defaultValues: {
+      ...defaultValues,
+      password: "",
+      confirmPassword: "",
+    },
     resolver: zodResolver(formSchema),
   });
 
   const submitHandler: SubmitHandler<FormSchema> = async (values) => {
     mutation.mutate({
+      avatar: values.avatar,
       email: values.email,
-      displayName: values.name,
-      passwordHash: values.password,
+      name: values.name,
+      password: values.password,
     });
   };
 
@@ -97,6 +106,7 @@ export function FormUpdateProfile({ defaultValues }: FormProps) {
 
   useEffect(() => {
     if (mutation.isSuccess && mutation.data) {
+      resetField("avatar");
       router.refresh();
       toastSuccess(mutation.data.message);
     }
@@ -108,6 +118,13 @@ export function FormUpdateProfile({ defaultValues }: FormProps) {
       className="flex flex-col gap-4"
       onSubmit={handleSubmit(submitHandler, (e) => console.log(e))}
     >
+      <UploadImage
+        {...register("avatar")}
+        onChangeValue={(value) => setValue("avatar", value)}
+        onResetField={() => resetField("avatar")}
+        defaultFileUrl={defaultValues.avatar}
+      />
+
       <LabelText.Root>
         <LabelText.Label htmlFor="name">Name</LabelText.Label>
         <TextField.Root>
