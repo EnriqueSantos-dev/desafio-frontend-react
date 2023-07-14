@@ -72,10 +72,10 @@ export function AvatarProfile({ sessionData }: { sessionData: SessionData }) {
           </div>
 
           <div className="flex flex-col overflow-hidden">
-            <p className="flex-1 overflow-hidden text-ellipsis text-[15px] font-semibold">
+            <p className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-[15px] font-semibold">
               {displayName || email?.substring(0, email.indexOf("@"))}
             </p>
-            <small className="flex-1 overflow-hidden text-ellipsis">
+            <small className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
               {email}
             </small>
           </div>
