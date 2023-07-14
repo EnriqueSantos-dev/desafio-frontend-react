@@ -18,11 +18,12 @@ export default async function ProfilePage() {
       <div className="mb-8 h-px w-full bg-neutral-200 dark:bg-neutral-800" />
 
       <div className="mx-auto max-w-xl">
-        <h2 className="mb-8 text-center text-xl font-semibold">User info</h2>
+        <h2 className="mb-8 text-xl font-semibold">Profile</h2>
         <FormUpdateProfile
           defaultValues={{
             email: sessionData?.email,
             name: sessionData?.displayName,
+            avatar: sessionData?.photoURL,
           }}
         />
       </div>
