@@ -108,7 +108,7 @@ export function FormUpdateProfile({ defaultValues }: FormProps) {
     if (mutation.isSuccess && mutation.data) {
       toastSuccess(mutation.data.message);
       router.refresh();
-      resetField("avatar");
+      resetField("avatar", { defaultValue: defaultValues.avatar });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mutation.isSuccess, mutation.data]);
