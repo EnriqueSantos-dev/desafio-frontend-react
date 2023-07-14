@@ -1,20 +1,23 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 import { FirebaseError } from "firebase/app";
 
 import { z } from "zod";
 
 import { adminAuth } from "@/config/firebase/server";
+import { uploadImage } from "@/lib/cloudinary";
+import { withAuthRoute } from "@/utils/with-auth-hoc";
 
 import { getFirebaseClientMessages } from "@/utils/get-firebase-client-messages";
-import { withAuthRoute } from "@/utils/with-auth-hoc";
-import { cookies } from "next/headers";
 import { SESSION_COOKIE_NAME } from "@/constants/session-cookie";
 
 const schema = z.object({
-  displayName: z.string().optional(),
+  // File api is not allowed in server side
+  avatar: z.string().optional(),
+  name: z.string().optional(),
   email: z.string().email().optional(),
-  passwordHash: z.string().min(6).optional(),
+  password: z.string().min(6).optional(),
 });
 
 export const PUT = withAuthRoute(async ({ request, user }) => {
@@ -29,13 +32,27 @@ export const PUT = withAuthRoute(async ({ request, user }) => {
       );
     }
 
-    const { email, displayName, passwordHash } = parsedBody.data;
+    const { email, name, password, avatar } = parsedBody.data;
+    let avatarUrl: string | null = null;
+    const isAvatarChanged = avatar !== user.photoURL;
 
-    await adminAuth.updateUser(user.uid, {
-      displayName,
+    if (
+      avatar &&
+      new RegExp(/^data:image\/(png|jpe?g|gif);base64,/).test(avatar) &&
+      isAvatarChanged
+    ) {
+      const { secure_url } = await uploadImage(avatar);
+      avatarUrl = secure_url;
+    }
+
+    const objectToUpdate = {
+      displayName: name,
       email,
-      password: passwordHash,
-    });
+      password,
+      [isAvatarChanged ? "photoURL" : ""]: avatarUrl,
+    };
+
+    await adminAuth.updateUser(user.uid, objectToUpdate);
 
     // changes email require user to reauthenticate, because firebase revoke the cookie session
     if (email && email !== user.email) {
@@ -44,8 +61,6 @@ export const PUT = withAuthRoute(async ({ request, user }) => {
 
     return NextResponse.json({ message: "Profile updated successfully" });
   } catch (error) {
-    console.log("PUT_UPDATE_PROFILE_ERROR", error);
-
     if (error instanceof FirebaseError) {
       return NextResponse.json(
         { message: getFirebaseClientMessages(error.code) },
