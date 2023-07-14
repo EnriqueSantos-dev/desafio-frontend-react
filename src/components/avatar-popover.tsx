@@ -52,7 +52,7 @@ export function AvatarProfile({ sessionData }: { sessionData: SessionData }) {
           {photoURL ? (
             <Image src={photoURL} alt="user profile avatar" fill priority />
           ) : (
-            <User className="h-5 w-5 shrink-0" strokeWidth={3} />
+            <User className="h-5 w-5 shrink-0" />
           )}
         </Button>
       </PopoverTrigger>
