@@ -14,10 +14,10 @@ export default async function LoginPage() {
 
   return (
     <>
-      <div className="mx-auto flex w-full flex-col items-stretch justify-center rounded-2xl px-6 text-neutral-900 dark:text-neutral-100 md:w-4/5 xl:w-full xl:px-28 2xl:px-48">
+      <div className="mx-auto flex w-full max-w-lg flex-col items-stretch justify-center rounded-2xl px-6 text-neutral-900 dark:text-neutral-100">
         <div>
-          <h1 className="text-center text-3xl/10 font-bold">Welcome</h1>
-          <p className="mb-12 mt-1 text-center text-sm font-medium text-neutral-600 dark:text-neutral-300 xl:mx-auto xl:w-3/5">
+          <h1 className="text-center text-2xl/8 font-bold">Welcome</h1>
+          <p className="mb-12 mt-1 text-center text-sm font-medium text-neutral-600 dark:text-neutral-300">
             Discover your favorite game, rate it, share your favorites with
             friends, and have fun.
           </p>
