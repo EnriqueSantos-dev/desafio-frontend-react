@@ -24,7 +24,7 @@ export default function ToggleTheme() {
   if (!isMounted) return null;
 
   return (
-    <TooltipProvider>
+    <TooltipProvider delayDuration={300}>
       <TooltipPrimitive>
         <TooltipTrigger asChild>
           <Switch.Root
