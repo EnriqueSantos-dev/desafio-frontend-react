@@ -52,7 +52,6 @@ export function FavGame({ isFav, gameId }: FavGameProps) {
   useEffect(() => {
     if (isSuccess) {
       success(data.message);
-      return;
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

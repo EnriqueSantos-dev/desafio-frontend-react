@@ -43,6 +43,7 @@ export default async function RootLayout({
         >
           {children}
         </Providers>
+        <div id="portal" />
       </body>
     </html>
   );
