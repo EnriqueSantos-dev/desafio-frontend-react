@@ -4,6 +4,7 @@ import * as Toggle from "@radix-ui/react-toggle";
 
 import { ChevronDown } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Button, buttonsVariants } from "@/components/shared/ui/button";
 
 type MustAvailableProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -37,10 +38,14 @@ export function MustAvailable({ ...props }: MustAvailableProps) {
 
   return (
     <Toggle.Root
+      {...props}
       defaultPressed={isSelected}
       onPressedChange={handlePress}
-      className="group flex h-10 items-center space-x-2 rounded-md border border-neutral-200 px-4 py-2 text-sm text-neutral-900 shadow-sm hover:bg-neutral-100/10 data-[state=off]:bg-neutral-100 data-[state=on]:bg-neutral-400/10"
-      {...props}
+      className={buttonsVariants({
+        variant: "outline",
+        size: "md",
+        className: "group",
+      })}
     >
       <span>Sort by rating</span>{" "}
       <ChevronDown
