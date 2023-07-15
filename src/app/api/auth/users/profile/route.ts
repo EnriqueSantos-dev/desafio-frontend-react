@@ -20,6 +20,10 @@ const schema = z.object({
   password: z.string().min(6).optional(),
 });
 
+const isEmpty = (value: string | null | undefined) => {
+  return value === null || value === undefined || value === "";
+};
+
 export const PUT = withAuthRoute(async ({ request, user }) => {
   try {
     const body = await request.json();
@@ -36,11 +40,7 @@ export const PUT = withAuthRoute(async ({ request, user }) => {
     let avatarUrl: string | null = null;
     const isAvatarChanged = avatar !== user.photoURL;
 
-    if (
-      avatar &&
-      new RegExp(/^data:image\/(png|jpe?g|gif);base64,/).test(avatar) &&
-      isAvatarChanged
-    ) {
+    if (avatar && !isEmpty(avatar) && isAvatarChanged) {
       const { secure_url } = await uploadImage(avatar);
       avatarUrl = secure_url;
     }
@@ -59,7 +59,10 @@ export const PUT = withAuthRoute(async ({ request, user }) => {
       cookies().set(SESSION_COOKIE_NAME, "", { maxAge: -1 });
     }
 
-    return NextResponse.json({ message: "Profile updated successfully" });
+    return NextResponse.json({
+      message: "Profile updated successfully",
+      avatarUrl: isEmpty(avatar) ? null : isAvatarChanged ? avatarUrl : avatar,
+    });
   } catch (error) {
     if (error instanceof FirebaseError) {
       return NextResponse.json(

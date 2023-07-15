@@ -108,7 +108,7 @@ export function FormUpdateProfile({ defaultValues }: FormProps) {
     if (mutation.isSuccess && mutation.data) {
       toastSuccess(mutation.data.message);
       router.refresh();
-      resetField("avatar", { defaultValue: defaultValues.avatar });
+      resetField("avatar", { defaultValue: mutation.data.avatarUrl ?? "" });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mutation.isSuccess, mutation.data]);
@@ -116,7 +116,7 @@ export function FormUpdateProfile({ defaultValues }: FormProps) {
   return (
     <form
       className="flex flex-col gap-4"
-      onSubmit={handleSubmit(submitHandler, (e) => console.log(e))}
+      onSubmit={handleSubmit(submitHandler)}
     >
       <UploadImage
         {...register("avatar")}

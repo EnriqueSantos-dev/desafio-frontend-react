@@ -5,6 +5,7 @@ export type UpdateUserProfileInput = UpdateUserProfile;
 
 export type UpdateUserProfileResponse = {
   message: string;
+  avatarUrl: string | null;
 };
 
 export async function updateUserProfile(

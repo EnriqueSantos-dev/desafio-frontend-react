@@ -23,7 +23,7 @@ export default async function ProfilePage() {
           defaultValues={{
             email: sessionData?.email,
             name: sessionData?.displayName,
-            avatar: sessionData?.photoURL,
+            avatar: sessionData?.photoURL ?? "",
           }}
         />
       </div>
