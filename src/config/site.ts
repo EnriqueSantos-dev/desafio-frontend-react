@@ -3,7 +3,10 @@ import { Metadata } from "next";
 
 export const seoConfig: Metadata = {
   metadataBase: new URL("https://desafio-frontend-react.vercel.app"),
-  title: "Challenge Frontend React - Enrique Santos",
+  title: {
+    default: "Pick Your Game",
+    template: "%s | Pick Your Game",
+  },
   description:
     "Pick your favorite movie, filter results and see details and more...",
   authors: [
