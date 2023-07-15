@@ -1,4 +1,11 @@
+import { Metadata } from "next";
+
 import { Heading } from "@/components/shared/ui/heading";
+
+export const metadata: Metadata = {
+  title: "Community",
+  description: "Discover the most loved and rated Items by our users",
+};
 
 export default function CommunityLayout({
   children,
