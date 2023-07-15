@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 import { Search } from "lucide-react";
 
@@ -28,6 +28,7 @@ export function SearchGamesInput({
   disabled,
   refObject,
 }: SearchGamesInputProps) {
+  const [searchValue, setSearchValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFocusInput = () => refObject?.current?.focus();
@@ -45,6 +46,14 @@ export function SearchGamesInput({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      onValueChange(searchValue);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [searchValue, onValueChange]);
+
   return (
     <TextField.Root>
       <TextField.Addon onClick={handleFocusInput}>
@@ -58,7 +67,7 @@ export function SearchGamesInput({
         ref={inputRef}
         defaultValue={defaultValue}
         onChange={(ev) =>
-          !disabled && onValueChange(ev.target.value.toLowerCase())
+          !disabled && setSearchValue(ev.target.value.toLowerCase())
         }
         disabled={disabled}
       />
