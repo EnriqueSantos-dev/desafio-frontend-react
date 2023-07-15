@@ -80,10 +80,10 @@ export function MobileMenu({ hasSession }: MobileMenuProps) {
       {createPortal(
         <div
           className={cn(
-            "w-full overflow-y-auto fixed z-10 bg-neutral-50 px-4 py-6 dark:bg-neutral-900 transition-all lg:hidden flex flex-col",
+            "w-full overflow-hidden fixed z-10 bg-neutral-50 px-4 py-6 dark:bg-neutral-900 transition-all lg:hidden flex flex-col backdrop-blur-sm shadow-md rounded-b-lg",
             {
-              "visible opacity-100 inset-0 top-16": isMenuOpen,
-              "invisible opacity-0 inset-auto": !isMenuOpen,
+              "visible opacity-100 max-h-[30dvh] h-full top-16": isMenuOpen,
+              "invisible opacity-0 inset-aut max-h-0 top-0": !isMenuOpen,
             }
           )}
         >

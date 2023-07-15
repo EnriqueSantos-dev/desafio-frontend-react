@@ -17,18 +17,27 @@ export async function MainNav() {
 
   return (
     <nav className="container flex h-16 items-center justify-between">
-      <Link
-        href="/"
-        className="flex items-center gap-3 text-xl font-bold text-neutral-900 hover:underline dark:text-neutral-100"
-      >
-        <span className="hidden lg:inline-block">Pick Your Game</span>
-        <Image
-          src="/game-card.svg"
-          alt="game controller"
-          width={40}
-          height={40}
-        />
-      </Link>
+      <div className="flex items-center space-x-6">
+        <Link
+          href="/"
+          className="flex items-center gap-3 text-xl font-bold text-neutral-900 hover:underline dark:text-neutral-100"
+        >
+          <Image
+            src="/game-card.svg"
+            alt="game controller"
+            width={40}
+            height={40}
+          />
+          <span className="hidden lg:inline-block">Pick Your Game</span>
+        </Link>
+
+        <Link
+          href="/community"
+          className="font-medium text-neutral-700 transition-colors hover:text-neutral-900 hover:underline dark:text-neutral-200 dark:hover:text-neutral-100"
+        >
+          Community
+        </Link>
+      </div>
       <div className="flex items-center">
         <div className="hidden items-center space-x-3 lg:flex">
           <ToggleTheme />
