@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { CommunityReview, GameWithFavAndRating } from "@/types";
-import { Heart } from "lucide-react";
 import { RatingPrecision } from "@/components/rating-precision";
+import { FavGame } from "@/components/fav-game";
 
 type CardGameCommunityProps = CommunityReview &
   Pick<
@@ -47,9 +47,9 @@ export function CardGameCommunity({
             </h2>
 
             {totalFavorites > 0 && (
-              <div className="flex items-center gap-2">
-                <Heart size={24} className="fill-red-500 stroke-red-500" />
-                <span className="font-medium text-neutral-900">
+              <div className="flex items-center gap-3">
+                <FavGame gameId={0} isFav={true} disabled />
+                <span className="font-medium text-neutral-900 dark:text-neutral-100">
                   {new Intl.NumberFormat("en-US", {
                     compactDisplay: "short",
                     notation: "compact",
