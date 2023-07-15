@@ -68,11 +68,13 @@ export function CardGameCommunity({
         </p>
 
         <div className="mt-4 flex items-center justify-between">
-          <RatingPrecision
-            average={avgRating}
-            totalReviews={totalReviewsSum}
-            reviewsCount={reviewsCount}
-          />
+          {avgRating > 0 && (
+            <RatingPrecision
+              average={avgRating}
+              totalReviews={totalReviewsSum}
+              reviewsCount={reviewsCount}
+            />
+          )}
         </div>
       </div>
     </div>
