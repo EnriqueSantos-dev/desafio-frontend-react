@@ -19,11 +19,12 @@ Mais uma etapa concluída, agora com a implementação do Firebase, onde foi pos
 
 ## Diferencias e recursos adicionais do projeto.
 
-- [✅] Opção de atualizar as informações do usuário, como nome, email e senha.
+- [✅] Opção de atualizar as informações do usuário, como avatar, nome, email e senha.
 - [✅] Opção de deletar a conta do usuário.
 - [✅] Gerenciamento de sessão via serve-side rendering e cookies HttpOnly.
-- [✅] Página de comunidade onde é possível ver quais o games que a comunidade mais tem curtido.
+- [✅] Página de comunidade onde é possível ver quais os games que a comunidade mais tem curtido.
 - [✅] Validação de formulários com React-Hook-Form e Zod.
 - [✅] Usando pattern de composição de componentes.
 - [✅] Firebase-Admin para gerenciamento de usuários nas route handlers do Next 13.
 - [✅] Upload de arquivos com Cloudinary (Avatar do usuário)
+- [✅] Uso de debounce para evitar filtragens desnecessárias.
