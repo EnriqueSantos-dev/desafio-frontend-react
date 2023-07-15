@@ -10,6 +10,8 @@ export const useGetCommunityReviewsAndGames = (reviews: CommunityReview[]) => {
   const query = useQuery({
     queryKey: ["community-reviews"],
     queryFn: getAllGames,
+    retry: false,
+    refetchOnWindowFocus: false,
   });
 
   return {
