@@ -38,7 +38,9 @@ export function CommunityGamesList({
         {!error &&
           games &&
           games.length > 0 &&
-          games.map((game) => <CardGameCommunity key={game.id} {...game} />)}
+          games.map((game, i) => (
+            <CardGameCommunity key={game.id} {...game} delayAppear={i} />
+          ))}
 
         {!error && games && games.length === 0 && <NotFoundResults />}
 
