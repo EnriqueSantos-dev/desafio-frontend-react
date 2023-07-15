@@ -3,13 +3,30 @@
 import { Button } from "@/components/shared/ui/button";
 import Image from "next/image";
 
-export function ErrorGamesList() {
+const DEFAULT_ERROR_MESSAGE = "We encountered an issue while loading the data.";
+
+type ErrorGamesListProps = {
+  message?: string;
+  onResetError?: () => void;
+};
+
+export function ErrorGamesList({
+  message = DEFAULT_ERROR_MESSAGE,
+  onResetError,
+}: ErrorGamesListProps) {
+  const handleResetError = () => {
+    if (onResetError) {
+      onResetError();
+      return;
+    }
+
+    window.location.reload();
+  };
+
   return (
     <div className="grid place-items-center">
       <div className="flex flex-col items-center dark:text-neutral-100">
-        <p className="text-center text-2xl font-bold">
-          We encountered an issue while loading the data.
-        </p>
+        <p className="text-center text-2xl font-bold">{message}</p>
         <Image
           src="/error.svg"
           alt="indicates error on get games"
@@ -24,7 +41,7 @@ export function ErrorGamesList() {
             variant="blue"
             size="md"
             className="px-6"
-            onClick={() => window.location.reload()}
+            onClick={handleResetError}
           >
             Try again
           </Button>
