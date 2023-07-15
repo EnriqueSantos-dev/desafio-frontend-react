@@ -16,6 +16,7 @@ export function NotFoundResults() {
         src="/not-found-results.svg"
         width={500}
         height={500}
+        priority
         alt="not found results illustration"
       />
 
