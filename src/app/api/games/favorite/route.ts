@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { NextResponse } from "next/server";
 
-import { getDatabaseAdmin } from "@/config/firebase/server";
+import { getDatabaseAdmin, getFirestoreAdmin } from "@/config/firebase/server";
 
 import { withAuthRoute } from "@/utils/with-auth-hoc";
 import { FIREBASE_REFS } from "@/utils/get-firebase-refs";
@@ -33,6 +33,27 @@ export const POST = withAuthRoute(async ({ request, user }) => {
 
     refFavGames.child(`id_${gameId}`).update({
       isFavorite: isFav,
+    });
+
+    const docRef = getFirestoreAdmin()
+      .collection(FIREBASE_REFS.communityCollection)
+      .doc(FIREBASE_REFS.communityDoc(gameId, user.uid));
+
+    const docExist = await docRef.get();
+
+    if (!docExist.exists) {
+      await docRef.set({
+        fav: isFav ? 1 : 0,
+      });
+
+      return NextResponse.json(
+        { message: "Favorite status updated" },
+        { status: 201 }
+      );
+    }
+
+    await docRef.update({
+      fav: isFav ? 1 : 0,
     });
 
     return NextResponse.json(

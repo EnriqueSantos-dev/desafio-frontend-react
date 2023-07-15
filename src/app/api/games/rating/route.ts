@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import { z } from "zod";
 
-import { getDatabaseAdmin } from "@/config/firebase/server";
+import { getDatabaseAdmin, getFirestoreAdmin } from "@/config/firebase/server";
 
 import { FIREBASE_REFS } from "@/utils/get-firebase-refs";
 import { withAuthRoute } from "@/utils/with-auth-hoc";
@@ -24,12 +24,35 @@ export const PUT = withAuthRoute(async ({ request, user }) => {
       );
     }
 
+    const { gameId, rating } = parsedBody.data;
+
     const ratingsRef = getDatabaseAdmin().ref(
       FIREBASE_REFS.userRatingsAndFavorites(user.uid)
     );
 
-    ratingsRef.child(`id_${parsedBody.data.gameId}`).update({
-      rating: parsedBody.data.rating,
+    ratingsRef.child(`id_${gameId}`).update({
+      rating: rating,
+    });
+
+    const docRef = getFirestoreAdmin()
+      .collection(FIREBASE_REFS.communityCollection)
+      .doc(FIREBASE_REFS.communityDoc(gameId, user.uid));
+
+    const docExist = await docRef.get();
+
+    if (!docExist.exists) {
+      await docRef.set({
+        rating: rating,
+      });
+
+      return NextResponse.json(
+        { message: "Rating updated successfully." },
+        { status: 201 }
+      );
+    }
+
+    await docRef.update({
+      rating: rating,
     });
 
     return NextResponse.json(
