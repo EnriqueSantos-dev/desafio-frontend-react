@@ -8,10 +8,11 @@ import { Providers } from "@/components/providers";
 
 import { seoConfig } from "@/config/site";
 
-import { getAuthSession } from "@/services/users/get-auth-session";
-import { SESSION_COOKIE_NAME } from "@/constants/session-cookie";
 import { GameUserDetails } from "@/types";
-import { getFavAndRatingsGames } from "@/lib/shared-functions/get-fav-and-ratings-games";
+import { SESSION_COOKIE_NAME } from "@/constants/session-cookie";
+
+import { getAuthSession } from "@/services/users/get-auth-session";
+import { getFavAndRatingsGames } from "@/services/games/get-fav-and-ratings-games";
 
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "700"] });
 

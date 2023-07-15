@@ -1,7 +1,11 @@
-import { getDatabaseAdmin } from "@/config/firebase/server";
-import { withAuthRoute } from "@/utils/with-auth-hoc";
 import { NextResponse } from "next/server";
+
 import { z } from "zod";
+
+import { getDatabaseAdmin } from "@/config/firebase/server";
+
+import { FIREBASE_REFS } from "@/utils/get-firebase-refs";
+import { withAuthRoute } from "@/utils/with-auth-hoc";
 
 const schema = z.object({
   gameId: z.number(),
@@ -21,7 +25,7 @@ export const PUT = withAuthRoute(async ({ request, user }) => {
     }
 
     const ratingsRef = getDatabaseAdmin().ref(
-      `games/users/${user.uid}/ratings_and_favorites`
+      FIREBASE_REFS.userRatingsAndFavorites(user.uid)
     );
 
     ratingsRef.child(`id_${parsedBody.data.gameId}`).update({

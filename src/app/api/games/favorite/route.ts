@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import { getDatabaseAdmin } from "@/config/firebase/server";
 
 import { withAuthRoute } from "@/utils/with-auth-hoc";
+import { FIREBASE_REFS } from "@/utils/get-firebase-refs";
 
 const schema = z.object({
   gameId: z.number().positive(),
@@ -18,13 +19,16 @@ export const POST = withAuthRoute(async ({ request, user }) => {
     const parsedResult = schema.safeParse(body);
 
     if (!parsedResult.success) {
-      return NextResponse.json({ message: "Invalid game id" }, { status: 400 });
+      return NextResponse.json(
+        { message: parsedResult.error.issues[0].message },
+        { status: 400 }
+      );
     }
 
     const { gameId, isFav } = parsedResult.data;
 
     const refFavGames = getDatabaseAdmin().ref(
-      `games/users/${user.uid}/ratings_and_favorites`
+      FIREBASE_REFS.userRatingsAndFavorites(user.uid)
     );
 
     refFavGames.child(`id_${gameId}`).update({
