@@ -3,7 +3,9 @@
 import { CardGameCommunity } from "@/components/card-game-community";
 import { CardGameSkeleton } from "@/components/card-game-community-skeleton";
 import { ErrorGamesList } from "@/components/error-games-list";
+
 import { useGetCommunityReviewsAndGames } from "@/hooks/useGetCommunityReviews";
+
 import { CommunityReview } from "@/types";
 
 type CommunityGamesListProps = {
