@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Eye, EyeOff, Loader } from "lucide-react";
+import { AlertTriangle, Eye, EyeOff, Loader } from "lucide-react";
 
 import { LabelText } from "@/components/shared/ui/label-text";
 import { Button } from "@/components/shared/ui/button";
@@ -206,8 +206,8 @@ export function FormUpdateProfile({ defaultValues }: FormProps) {
       </LabelText.Root>
 
       <p className="text-center text-sm font-medium text-neutral-800 dark:text-neutral-400">
-        <span className="text-lg">🔒</span>Security Notice: Your password has
-        not been autofilled for security reasons.
+        <AlertTriangle className="mb-1 mr-3 inline h-5 w-5 stroke-red-500 dark:stroke-yellow-500" />
+        Update your email or password will log you out from all devices.
       </p>
 
       <Button
