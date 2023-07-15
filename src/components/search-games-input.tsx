@@ -28,7 +28,7 @@ export function SearchGamesInput({
   disabled,
   refObject,
 }: SearchGamesInputProps) {
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState(defaultValue ?? "");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFocusInput = () => refObject?.current?.focus();
@@ -48,11 +48,12 @@ export function SearchGamesInput({
 
   useEffect(() => {
     const timeout = setTimeout(() => {
+      if (searchValue === defaultValue) return;
       onValueChange(searchValue);
     }, 1000);
 
     return () => clearTimeout(timeout);
-  }, [searchValue, onValueChange]);
+  }, [defaultValue, onValueChange, searchValue]);
 
   return (
     <TextField.Root>
@@ -65,7 +66,7 @@ export function SearchGamesInput({
         placeholder="Search your favorite game..."
         className="peer appearance-none"
         ref={inputRef}
-        defaultValue={defaultValue}
+        value={searchValue}
         onChange={(ev) =>
           !disabled && setSearchValue(ev.target.value.toLowerCase())
         }
