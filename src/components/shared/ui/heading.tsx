@@ -16,7 +16,7 @@ function Title({ children, className, ...props }: HeadingProps) {
     <Component
       {...props}
       className={cn(
-        "text-2xl font-bold text-neutral-900 dark:text-neutral-100",
+        "text-xl md:text-2xl font-bold text-neutral-900 dark:text-neutral-100",
         className
       )}
     >
