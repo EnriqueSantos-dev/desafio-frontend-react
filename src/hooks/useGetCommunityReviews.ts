@@ -15,6 +15,7 @@ export const useGetCommunityReviewsAndGames = (reviews: CommunityReview[]) => {
     queryFn: getAllGames,
     retry: false,
     refetchOnWindowFocus: false,
+    staleTime: Infinity,
   });
 
   useEffect(() => {
