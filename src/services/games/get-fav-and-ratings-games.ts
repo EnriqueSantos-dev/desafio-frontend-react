@@ -1,3 +1,5 @@
+import { FIREBASE_REFS } from "@/utils/get-firebase-refs";
+
 import { getDatabaseAdmin } from "@/config/firebase/server";
 
 import { getAuthSession } from "@/services/users/get-auth-session";
@@ -15,7 +17,7 @@ export async function getFavAndRatingsGames() {
   let rantingsAndFavGames: GameUserDetails[] = [];
 
   const snapshot = await connection
-    .ref(`games/users/${session.uid}/ratings_and_favorites`)
+    .ref(FIREBASE_REFS.userRatingsAndFavorites(session.uid))
     .get();
 
   if (snapshot.exists()) {
