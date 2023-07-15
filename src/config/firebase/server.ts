@@ -17,5 +17,6 @@ if (admin.apps.length === 0) {
 
 const adminAuth = getAuth();
 const getDatabaseAdmin = () => getDatabase();
+const getFirestoreAdmin = () => admin.firestore();
 
-export { adminAuth, getDatabaseAdmin };
+export { adminAuth, getDatabaseAdmin, getFirestoreAdmin };
