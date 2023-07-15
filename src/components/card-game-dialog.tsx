@@ -35,7 +35,7 @@ export function CardGameDialog({
       </DialogTrigger>
 
       <DialogContent className="w-full p-0 lg:max-w-[800px]">
-        <div className="relative h-72 w-full overflow-hidden rounded-t-lg">
+        <div className="relative aspect-[12/5] overflow-hidden rounded-xl">
           <Image
             src={thumbnail}
             alt="thumbnail game"
