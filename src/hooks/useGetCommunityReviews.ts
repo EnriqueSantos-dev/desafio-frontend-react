@@ -25,21 +25,12 @@ export const useGetCommunityReviewsAndGames = (reviews: CommunityReview[]) => {
   return {
     ...query,
     data: query.data
-      ?.filter((game) => {
-        return reviews.find((review) => review.gameId === game.id);
-      })
-      .map((game, i) => {
-        const { gameUserDetails, ...rest } = game;
+      ?.filter((game) => reviews.some((review) => review.gameId === game.id))
+      .map((game) => {
+        const founded = reviews.find((review) => review.gameId === game.id);
 
-        const gameReviewIndex = reviews.findIndex(
-          (review) => review.gameId === game.id
-        );
-
-        if (gameReviewIndex > -1) {
-          return {
-            ...rest,
-            ...reviews[i],
-          };
+        if (founded) {
+          return { ...game, ...founded };
         }
       }),
   } as UseQueryResult<CommunityReviewsAndGames, ApiError>;
