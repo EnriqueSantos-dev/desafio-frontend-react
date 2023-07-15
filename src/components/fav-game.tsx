@@ -13,9 +13,9 @@ import { useToast } from "@/hooks/useToast";
 type FavGameProps = {
   isFav: boolean;
   gameId: number;
-};
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function FavGame({ isFav, gameId }: FavGameProps) {
+export function FavGame({ isFav, gameId, className, ...props }: FavGameProps) {
   const [isFavGame, setIsFavGame] = useState(isFav);
   const heartRef = useRef<HTMLSpanElement>(null);
   const { hasSession } = useAuthContext();
@@ -67,11 +67,13 @@ export function FavGame({ isFav, gameId }: FavGameProps) {
 
   return (
     <button
+      {...props}
       className={cn(
         "group relative shrink-0 p-1 text-xl",
         "before:absolute before:left-1/2 before:top-1/2 before:-z-10 before:h-[140%] before:w-[140%] before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full before:transition-colors",
         "after:absolute after:left-1/2 after:top-1/2 after:-z-10 after:h-[110%] after:w-[110%] after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:transition-colors",
-        "hover:before:bg-red-300 hover:after:bg-red-200 dark:hover:before:bg-red-400 dark:hover:after:bg-red-300"
+        "hover:before:bg-red-300 hover:after:bg-red-200 dark:hover:before:bg-red-400 dark:hover:after:bg-red-300",
+        className
       )}
       onClick={onHeartClick}
     >
