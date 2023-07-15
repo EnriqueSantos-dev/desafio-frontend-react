@@ -27,6 +27,10 @@ export function CardGameComponent({
   const delayAppear = delay * 0.1;
   const styles = { "--delay": `${delayAppear}s` } as CSSProperties;
 
+  const formattedReleaseDate = new Intl.DateTimeFormat("en-US", {
+    dateStyle: "medium",
+  }).format(new Date(release_date));
+
   return (
     <div
       className="grid animate-cardAppear grid-flow-row gap-4 overflow-hidden rounded-xl border-2 border-neutral-200 dark:border-neutral-800"
@@ -66,7 +70,7 @@ export function CardGameComponent({
             thumbnail={thumbnail}
             short_description={short_description}
             title={title}
-            release_date={release_date}
+            release_date={formattedReleaseDate}
             game_url={game_url}
             platform={platform}
             {...props}
@@ -102,9 +106,7 @@ export function CardGameComponent({
             Release
           </Button>
           <span className="flex-1 text-right text-neutral-900 dark:text-neutral-100">
-            {Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(
-              new Date(release_date)
-            )}
+            {formattedReleaseDate}
           </span>
         </div>
       </div>
