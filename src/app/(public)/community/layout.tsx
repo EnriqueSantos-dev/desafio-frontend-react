@@ -6,7 +6,7 @@ export default function CommunityLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="container pt-28">
+    <main className="container pb-12 pt-28">
       <div className="mb-10">
         <Heading.Root>
           <Heading.Title>Community</Heading.Title>
