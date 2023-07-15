@@ -9,6 +9,8 @@ import { NotFoundResults } from "./not-found-results";
 import { useGetCommunityReviewsAndGames } from "@/hooks/useGetCommunityReviews";
 
 import { CommunityReview } from "@/types";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 type CommunityGamesListProps = {
   communityReviews: CommunityReview[];
@@ -17,11 +19,18 @@ type CommunityGamesListProps = {
 export function CommunityGamesList({
   communityReviews,
 }: CommunityGamesListProps) {
+  const router = useRouter();
   const {
     data: games,
     isLoading,
     error,
   } = useGetCommunityReviewsAndGames(communityReviews);
+
+  useEffect(() => {
+    // refresh segment to get updated state from firebase, once on mount
+    router.refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <section className="container">
