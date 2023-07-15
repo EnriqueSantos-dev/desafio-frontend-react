@@ -43,6 +43,15 @@ export type GameUserDetails = {
   rating: undefined | number;
 };
 
+export type CommunityReview = {
+  gameId: number;
+  totalReviewsSum: number;
+  totalFavorites: number;
+  reviewsCount: number;
+  avgRating: number;
+};
+
+export type CommunityReviewsAndGames = (CommunityReview & Game)[];
 export type Games = Game[];
 export type GameWithFavAndRating = Game & {
   gameUserDetails: GameUserDetails;
