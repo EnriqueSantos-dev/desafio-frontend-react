@@ -1,7 +1,10 @@
+import { CSSProperties } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 
 import { CommunityReview, GameWithFavAndRating } from "@/types";
+
 import { RatingPrecision } from "@/components/rating-precision";
 import { FavGame } from "@/components/fav-game";
 
@@ -20,9 +23,16 @@ export function CardGameCommunity({
   game_url,
   short_description,
   totalFavorites,
-}: CardGameCommunityProps) {
+  delayAppear: delay,
+}: CardGameCommunityProps & { delayAppear: number }) {
+  const delayAppear = delay * 0.1;
+  const styles = { "--delay": `${delayAppear}s` } as CSSProperties;
+
   return (
-    <div className="grid animate-cardAppear grid-flow-row gap-4 overflow-hidden rounded-xl border-2 border-neutral-200 dark:border-neutral-800">
+    <div
+      className="grid animate-cardAppear grid-flow-row gap-4 overflow-hidden rounded-xl border-2 border-neutral-200 dark:border-neutral-800"
+      style={styles}
+    >
       <div className="relative h-56 w-full overflow-hidden rounded-tr-lg">
         <Image
           src={thumbnail}
