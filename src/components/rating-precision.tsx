@@ -14,7 +14,7 @@ export function RatingPrecision({
     <div className="flex items-center space-x-2 text-neutral-900 dark:text-neutral-100">
       <Star size={24} className="mb-px fill-yellow-500 stroke-yellow-500" />
       <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
-        {average.toFixed(2)}
+        {average.toFixed(1)}
       </p>
 
       <span className="mx-1.5 h-1 w-1 rounded-full bg-neutral-700 dark:bg-neutral-600"></span>
