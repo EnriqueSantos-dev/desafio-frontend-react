@@ -39,7 +39,7 @@ export function GamesList() {
 
   return (
     <section>
-      <div className="grid grid-cols-[minmax(300px,380px)] items-stretch justify-center gap-4 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(360px,400px))]">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(350px,420px))] place-content-center gap-4">
         {!error &&
           filteredGames &&
           filteredGames.map((game, i) => (

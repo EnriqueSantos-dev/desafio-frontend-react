@@ -21,7 +21,7 @@ export function CommunityGamesList({
 
   return (
     <section className="container">
-      <div className="grid grid-flow-col grid-cols-[minmax(300px,400px)] place-content-center">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(350px,400px))] place-content-center gap-4">
         {!error &&
           games &&
           games.map((game) => <CardGameCommunity key={game.id} {...game} />)}
