@@ -24,9 +24,9 @@ export function ErrorGamesList({
   };
 
   return (
-    <div className="grid place-items-center">
+    <div className="grid h-full place-items-center">
       <div className="flex flex-col items-center dark:text-neutral-100">
-        <p className="text-center text-2xl font-bold">{message}</p>
+        <p className="text-center text-xl font-bold md:text-2xl">{message}</p>
         <Image
           src="/error.svg"
           alt="indicates error on get games"

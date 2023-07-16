@@ -31,19 +31,6 @@ export function MobileMenu({ hasSession }: MobileMenuProps) {
   }, []);
 
   useEffect(() => {
-    const addOverflowHiddenInWindow = () => {
-      const html = document.documentElement;
-      if (isMenuOpen) {
-        html.classList.add("overflow-hidden");
-        html.setAttribute("data-menu-open", "true");
-      } else {
-        html.classList?.remove("overflow-hidden");
-        html.setAttribute("data-menu-open", "false");
-      }
-    };
-
-    addOverflowHiddenInWindow();
-
     const onResize = () => {
       if (window.matchMedia("(min-width: 1024px)").matches && isMenuOpen) {
         setIsMenuOpen(false);
@@ -80,7 +67,7 @@ export function MobileMenu({ hasSession }: MobileMenuProps) {
       {createPortal(
         <div
           className={cn(
-            "w-full overflow-hidden fixed z-10 bg-neutral-50 px-4 py-6 dark:bg-neutral-900 transition-all lg:hidden flex flex-col backdrop-blur-sm shadow-md rounded-b-lg",
+            "w-full overflow-hidden fixed z-10 bg-neutral-50 px-4 py-6 dark:bg-neutral-900 transition-all lg:hidden flex flex-col shadow-md rounded-b-lg",
             {
               "visible opacity-100 max-h-[50dvh] h-fit top-16": isMenuOpen,
               "invisible opacity-0 inset-aut max-h-0 top-0": !isMenuOpen,

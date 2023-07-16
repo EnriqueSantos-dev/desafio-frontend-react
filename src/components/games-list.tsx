@@ -14,6 +14,7 @@ import { CardGame } from "./card-game";
 import { CardGameSkeleton } from "./card-game-skeleton";
 import { useAuthContext } from "@/contexts/auth-context";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export function GamesList() {
   const { userFavoritesGames } = useAuthContext();
@@ -38,23 +39,29 @@ export function GamesList() {
   }, []);
 
   return (
-    <section>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(350px,420px))] place-content-center gap-4">
-        {!error &&
-          filteredGames &&
-          filteredGames.map((game, i) => (
-            <CardGame key={game.id} {...game} delayAppear={i} />
-          ))}
-
-        {isLoading &&
-          Array.from({ length: 6 }).map((_, index) => (
-            <CardGameSkeleton key={index} delay={index} />
-          ))}
-      </div>
-
+    <div
+      className={cn("xl:pt-[9.3125rem] pb-12", {
+        "pt-[13.3125rem]": error || isLoading,
+        "pt-[16.3125rem]": !error && !isLoading && filteredGames.length !== 0,
+      })}
+    >
       {error && <ErrorGamesList />}
 
-      {!error && !isLoading && filteredGames.length === 0 && (
+      {!error && (
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(350px,420px))] place-content-center gap-4">
+          {filteredGames &&
+            filteredGames.map((game, i) => (
+              <CardGame key={game.id} {...game} delayAppear={i} />
+            ))}
+
+          {isLoading &&
+            Array.from({ length: 6 }).map((_, index) => (
+              <CardGameSkeleton key={index} delay={index} />
+            ))}
+        </div>
+      )}
+
+      {!isLoading && !error && filteredGames.length === 0 && (
         <div className="grid place-items-center">
           <div className="flex flex-col items-center gap-20 dark:text-neutral-100">
             <p className="text-3xl font-bold">Game not found</p>
@@ -70,6 +77,6 @@ export function GamesList() {
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
 }
