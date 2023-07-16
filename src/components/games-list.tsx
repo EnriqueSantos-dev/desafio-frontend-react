@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { useToast } from "@/hooks/useToast";
 import { useFilteredGameList } from "@/hooks/useFilteredGameList";
@@ -17,6 +18,7 @@ import { CardGameSkeleton } from "./card-game-skeleton";
 
 export function GamesList() {
   const { userFavoritesGames } = useAuthContext();
+  const router = useRouter();
   const {
     data: filteredGames,
     error,
@@ -29,6 +31,12 @@ export function GamesList() {
       toastError(error.message);
     }
   }, [error, toastError]);
+
+  useEffect(() => {
+    router.refresh();
+    // this is necessary to get updated cookies once when page is loaded
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div
