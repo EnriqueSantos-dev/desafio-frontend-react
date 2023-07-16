@@ -53,31 +53,20 @@ export async function MainNav() {
 
         <MobileMenu hasSession={!!session} />
 
-        {!session ? (
-          <div className="hidden space-x-2 lg:block">
-            <Link
-              href="/auth"
-              className={buttonsVariants({
-                variant: "green",
-                className: "px-6 ml-4",
-                size: "md",
-              })}
-            >
-              Sign Up
-            </Link>
+        {!session && (
+          <Link
+            href="/auth"
+            className={buttonsVariants({
+              variant: "blue",
+              className: "px-6 ml-4 hidden lg:block",
+              size: "md",
+            })}
+          >
+            Authenticate
+          </Link>
+        )}
 
-            <Link
-              href="/auth"
-              className={buttonsVariants({
-                variant: "blue",
-                className: "px-6 ml-4",
-                size: "md",
-              })}
-            >
-              Login
-            </Link>
-          </div>
-        ) : (
+        {session && (
           <div className="ml-4 flex items-center justify-center">
             <AvatarProfile sessionData={session} />
           </div>

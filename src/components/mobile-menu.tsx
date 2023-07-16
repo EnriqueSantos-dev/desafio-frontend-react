@@ -82,29 +82,16 @@ export function MobileMenu({ hasSession }: MobileMenuProps) {
           </Link>
           <nav className="mx-auto flex w-full max-w-xs flex-1 flex-col justify-end gap-4 md:max-w-sm">
             {!hasSession && (
-              <div className="flex w-full flex-col justify-center gap-2">
-                <Link
-                  href="/auth"
-                  className={buttonsVariants({
-                    variant: "green",
-                    className: "w-full",
-                    size: "md",
-                  })}
-                >
-                  Sign Up
-                </Link>
-
-                <Link
-                  href="/auth"
-                  className={buttonsVariants({
-                    variant: "blue",
-                    className: "w-full",
-                    size: "md",
-                  })}
-                >
-                  Login
-                </Link>
-              </div>
+              <Link
+                href="/auth"
+                className={buttonsVariants({
+                  variant: "blue",
+                  className: "w-full",
+                  size: "md",
+                })}
+              >
+                Authenticate
+              </Link>
             )}
 
             <div className="flex flex-1 flex-col justify-end gap-4">
