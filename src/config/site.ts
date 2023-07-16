@@ -45,6 +45,7 @@ export const seoConfig: Metadata = {
   twitter: {
     card: "summary_large_image",
     creator: "@Enrique_S_D_O",
+    site: "@Enrique_S_D_O",
     title: "Pick Your Game - Enrique Santos",
     description:
       "Pick your favorite game, filter results, see details and more...",
