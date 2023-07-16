@@ -63,7 +63,7 @@ export function AvatarProfile({ sessionData }: { sessionData: SessionData }) {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="px-0 pb-0">
+      <PopoverContent className="overflow-hidden px-0 pb-0">
         <div className="flex items-center gap-4 px-6">
           <div>
             <Button className="pointer-events-none relative inline-block h-11 w-11 overflow-hidden rounded-full">
