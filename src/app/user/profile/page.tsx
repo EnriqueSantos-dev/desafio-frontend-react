@@ -10,7 +10,7 @@ export default async function ProfilePage() {
   if (!sessionData) redirect("/auth");
 
   return (
-    <div className="w-full py-12 text-neutral-900 dark:text-neutral-100">
+    <div className="w-full py-6 text-neutral-900 dark:text-neutral-100">
       <Heading.Root>
         <Heading.Title>Profile</Heading.Title>
         <Heading.Subtitle>Update your profile infos</Heading.Subtitle>
