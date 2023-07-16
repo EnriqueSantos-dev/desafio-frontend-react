@@ -8,7 +8,7 @@ export const seoConfig: Metadata = {
     template: "%s | Pick Your Game",
   },
   description:
-    "Pick your favorite movie, filter results and see details and more...",
+    "Pick your favorite game, filter results, see details and more...",
   authors: [
     {
       name: "Enrique Santos",
@@ -29,10 +29,10 @@ export const seoConfig: Metadata = {
   openGraph: {
     type: "website",
     url: "https://desafio-frontend-react.vercel.app",
-    title: "Challenge Frontend React - Enrique Santos",
+    title: "Pick Your Game - Enrique Santos",
     siteName: "Pick Your Game",
     description:
-      "Pick your favorite movie, filter results and see details and more...",
+      "Pick your favorite game, filter results, see details and more...",
     images: [
       {
         url: "https://desafio-frontend-react.vercel.app/og.png",
@@ -45,9 +45,9 @@ export const seoConfig: Metadata = {
   twitter: {
     card: "summary_large_image",
     creator: "@Enrique_S_D_O",
-    title: "Challenge Frontend React - Enrique Santos",
+    title: "Pick Your Game - Enrique Santos",
     description:
-      "Pick your favorite movie, filter results and see details and more...",
+      "Pick your favorite game, filter results, see details and more...",
     images: [
       {
         url: "https://desafio-frontend-react.vercel.app/og.png",
@@ -55,5 +55,4 @@ export const seoConfig: Metadata = {
       },
     ],
   },
-  robots: "index, follow",
 };
