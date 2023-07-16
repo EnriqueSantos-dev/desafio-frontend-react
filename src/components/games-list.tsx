@@ -1,20 +1,19 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
-import { useEffect, useMemo } from "react";
-
-import { GameUserDetails } from "@/types";
 
 import { useToast } from "@/hooks/useToast";
 import { useFilteredGameList } from "@/hooks/useFilteredGameList";
 
+import { useAuthContext } from "@/contexts/auth-context";
+
 import { ErrorGamesList } from "@/components/error-games-list";
+
+import { cn } from "@/lib/utils";
 
 import { CardGame } from "./card-game";
 import { CardGameSkeleton } from "./card-game-skeleton";
-import { useAuthContext } from "@/contexts/auth-context";
-import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
 
 export function GamesList() {
   const { userFavoritesGames } = useAuthContext();
@@ -24,19 +23,12 @@ export function GamesList() {
     isLoading,
   } = useFilteredGameList(userFavoritesGames);
   const { error: toastError } = useToast();
-  const router = useRouter();
 
   useEffect(() => {
     if (error) {
       toastError(error.message);
     }
   }, [error, toastError]);
-
-  useEffect(() => {
-    router.refresh();
-    // this is necessary to get updated cookies once when page is loaded
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div
@@ -47,9 +39,9 @@ export function GamesList() {
     >
       {error && <ErrorGamesList />}
 
-      {!error && (filteredGames.length > 0 || isLoading) && (
+      {(filteredGames.length > 0 || isLoading) && (
         <div className="grid grid-cols-[repeat(auto-fit,minmax(350px,420px))] place-content-center gap-4 pb-12">
-          {filteredGames &&
+          {filteredGames.length > 0 &&
             filteredGames.map((game, i) => (
               <CardGame key={game.id} {...game} delayAppear={i} />
             ))}
@@ -61,10 +53,10 @@ export function GamesList() {
         </div>
       )}
 
-      {!isLoading && !error && filteredGames.length === 0 && (
+      {filteredGames.length === 0 && !isLoading && !error && (
         <div className="grid h-full place-items-center">
-          <div className="flex flex-col items-center gap-4 dark:text-neutral-100">
-            <p className="text-3xl font-bold">Game not found</p>
+          <div className="flex flex-col items-center gap-10 dark:text-neutral-100">
+            <p className="text-xl font-bold md:text-3xl">Game not found</p>
 
             <Image
               src="/not-found-games.svg"
@@ -72,7 +64,6 @@ export function GamesList() {
               height={300}
               priority
               alt="indicates that it did not find the resources"
-              className="drop-shadow-errorShadow"
             />
           </div>
         </div>
