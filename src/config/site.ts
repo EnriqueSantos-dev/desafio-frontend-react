@@ -51,7 +51,7 @@ export const seoConfig: Metadata = {
       "Pick your favorite game, filter results, see details and more...",
     images: [
       {
-        url: "https://desafio-frontend-react.vercel.app/og.png",
+        url: "https://desafio-frontend-react.vercel.app/og.png?v1",
         alt: "Pick Your Game",
       },
     ],
