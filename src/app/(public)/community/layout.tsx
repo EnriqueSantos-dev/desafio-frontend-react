@@ -13,8 +13,8 @@ export default function CommunityLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="container pb-12 pt-28">
-      <div className="mb-10">
+    <main className="container h-full pb-6 pt-24">
+      <section className="h-full">
         <Heading.Root>
           <Heading.Title>Community</Heading.Title>
           <Heading.Subtitle>
@@ -22,8 +22,8 @@ export default function CommunityLayout({
           </Heading.Subtitle>
           <Heading.Separator />
         </Heading.Root>
-      </div>
-      {children}
+        {children}
+      </section>
     </main>
   );
 }

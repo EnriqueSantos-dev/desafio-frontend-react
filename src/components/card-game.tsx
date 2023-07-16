@@ -36,14 +36,14 @@ export function CardGameComponent({
       className="grid animate-cardAppear grid-flow-row gap-4 overflow-hidden rounded-xl border-2 border-neutral-200 dark:border-neutral-800"
       style={styles}
     >
-      <div className="relative h-56 w-full overflow-hidden rounded-tr-lg">
+      <div className="relative aspect-[4/2] max-w-full overflow-hidden md:aspect-[4/2]">
         <Image
           src={thumbnail}
           fill
           alt={title}
           sizes="200px"
-          quality={90}
-          className="transition-transform hover:scale-105"
+          quality={100}
+          className="object-fill transition-transform hover:scale-105"
         />
       </div>
 

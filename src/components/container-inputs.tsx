@@ -60,7 +60,7 @@ export function ContainerInputs() {
   };
 
   return (
-    <div className="container fixed inset-x-0 top-16 z-10 border-b border-neutral-200 bg-neutral-50 py-3 pt-12 dark:border-neutral-800 dark:bg-neutral-900">
+    <div className="container fixed inset-x-0 top-16 z-10 border-b border-neutral-200 bg-neutral-50 py-3 pt-6 dark:border-neutral-800 dark:bg-neutral-900">
       <form
         className="flex flex-col gap-3 xl:flex-1 xl:flex-row xl:items-end"
         onSubmit={handleSubmit}

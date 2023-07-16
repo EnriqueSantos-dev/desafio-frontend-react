@@ -50,7 +50,13 @@ export function AvatarProfile({ sessionData }: { sessionData: SessionData }) {
           className="relative h-11 w-11 overflow-hidden rounded-full p-0"
         >
           {photoURL ? (
-            <Image src={photoURL} alt="user profile avatar" fill priority />
+            <Image
+              src={photoURL}
+              alt="user profile avatar"
+              className="object-fill"
+              fill
+              priority
+            />
           ) : (
             <User className="h-5 w-5 shrink-0" />
           )}

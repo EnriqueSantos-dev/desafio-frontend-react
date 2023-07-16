@@ -33,24 +33,25 @@ export function CommunityGamesList({
   }, []);
 
   return (
-    <section className="container">
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(350px,400px))] place-content-center gap-4">
-        {!error &&
-          games &&
-          games.length > 0 &&
-          games.map((game, i) => (
-            <CardGameCommunity key={game.id} {...game} delayAppear={i} />
-          ))}
+    <div className="h-full">
+      {!error && (
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,400px))] place-content-center gap-4 pb-12 pt-8">
+          {games &&
+            games.length > 0 &&
+            games.map((game, i) => (
+              <CardGameCommunity key={game.id} {...game} delayAppear={i} />
+            ))}
 
-        {!error && games && games.length === 0 && <NotFoundResults />}
+          {!error && games && games.length === 0 && <NotFoundResults />}
 
-        {isLoading &&
-          Array.from({ length: 6 }).map((_, index) => (
-            <CardGameSkeleton key={index} delay={index} />
-          ))}
-      </div>
+          {isLoading &&
+            Array.from({ length: 6 }).map((_, index) => (
+              <CardGameSkeleton key={index} delay={index} />
+            ))}
+        </div>
+      )}
 
       {error && <ErrorGamesList />}
-    </section>
+    </div>
   );
 }
