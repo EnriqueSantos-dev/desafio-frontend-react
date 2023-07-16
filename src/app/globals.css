@@ -35,7 +35,7 @@ html.dark input:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-.container-rating > div:nth-child(1):is(:hover) > label > svg {
+.container-rating > div:nth-child(1):is(:hover) svg {
   fill: #facc15;
   stroke: #facc15;
   outline: none;
@@ -43,8 +43,7 @@ html.dark input:-webkit-autofill:focus {
 
 .container-rating:has(> div:nth-child(2):is(:hover))
   > div:nth-child(-n + 2)
-  > label
-  > svg {
+  svg {
   fill: #facc15;
   stroke: #facc15;
   outline: none;
@@ -52,8 +51,7 @@ html.dark input:-webkit-autofill:focus {
 
 .container-rating:has(> div:nth-child(3):is(:hover))
   > div:nth-child(-n + 3)
-  > label
-  > svg {
+  svg {
   fill: #facc15;
   stroke: #facc15;
   outline: none;
@@ -61,8 +59,7 @@ html.dark input:-webkit-autofill:focus {
 
 .container-rating:has(> div:nth-child(4):is(:hover))
   > div:nth-child(-n + 4)
-  > label
-  > svg {
+  svg {
   fill: #facc15;
   stroke: #facc15;
   outline: none;
@@ -70,8 +67,7 @@ html.dark input:-webkit-autofill:focus {
 
 .container-rating:has(> div:nth-child(5):is(:hover))
   > div:nth-child(-n + 5)
-  > label
-  > svg {
+  svg {
   fill: #facc15;
   stroke: #facc15;
   outline: none;
