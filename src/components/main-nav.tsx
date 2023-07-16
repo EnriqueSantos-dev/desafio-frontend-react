@@ -58,7 +58,7 @@ export async function MainNav() {
             href="/auth"
             className={buttonsVariants({
               variant: "blue",
-              className: "px-6 ml-4 hidden lg:block",
+              className: "px-6 ml-4 hidden lg:flex",
               size: "md",
             })}
           >
