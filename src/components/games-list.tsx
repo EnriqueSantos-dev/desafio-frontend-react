@@ -40,15 +40,15 @@ export function GamesList() {
 
   return (
     <div
-      className={cn("xl:pt-[9.3125rem] pb-12", {
+      className={cn("xl:pt-[9.3125rem] pb-12 h-full", {
         "pt-[13.3125rem]": error || isLoading,
-        "pt-[16.3125rem]": !error && !isLoading && filteredGames.length !== 0,
+        "pt-[16.3125rem]": !error && !isLoading,
       })}
     >
       {error && <ErrorGamesList />}
 
-      {!error && (
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(350px,420px))] place-content-center gap-4">
+      {!error && (filteredGames.length > 0 || isLoading) && (
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(350px,420px))] place-content-center gap-4 pb-12">
           {filteredGames &&
             filteredGames.map((game, i) => (
               <CardGame key={game.id} {...game} delayAppear={i} />
@@ -62,8 +62,8 @@ export function GamesList() {
       )}
 
       {!isLoading && !error && filteredGames.length === 0 && (
-        <div className="grid place-items-center">
-          <div className="flex flex-col items-center gap-20 dark:text-neutral-100">
+        <div className="grid h-full place-items-center">
+          <div className="flex flex-col items-center gap-4 dark:text-neutral-100">
             <p className="text-3xl font-bold">Game not found</p>
 
             <Image
