@@ -22,7 +22,7 @@ export function Providers({
         defaultTheme="light"
         attribute="class"
         storageKey={THEME_KEY}
-        disableTransitionOnChange={false}
+        disableTransitionOnChange
       >
         <ReactQueryDevtools />
         <AuthContextProvider values={{ ...props }}>
